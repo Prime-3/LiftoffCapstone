@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using backend.Data;
+using backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +17,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(
+builder.Services.AddDefaultIdentity<ApplicationUser>(
       options => options.SignIn.RequireConfirmedAccount = true)
+    .AddApiEndpoints()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+// TODO: Not sure if this is needed. Need to understand authorization 'roles',
+//   'claims' and 'policies". Hence leave it out for now.
+//builder.Services.AddAuthorization();
+
+// Swagger generator
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -46,5 +57,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+app.MapIdentityApi<ApplicationUser>();
+
+// middleware to serve Swagger UI & JSON endpoints
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();
