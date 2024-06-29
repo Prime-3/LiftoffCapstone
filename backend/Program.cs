@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims; // ClaimsPrincipal, ClaimsTypes
 using backend.Data;
 using backend.Models;
 
@@ -24,8 +25,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(
 builder.Services.AddControllersWithViews();
 
 // TODO: Not sure if this is needed. Need to understand authorization 'roles',
-//   'claims' and 'policies". Hence leave it out for now.
-//builder.Services.AddAuthorization();
+//   'claims' and 'policies".
+builder.Services.AddAuthorization();
 
 // Swagger generator
 builder.Services.AddControllers();
@@ -57,7 +58,31 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+// Add "out-of-the-box" auth endpoints, e.g.
+// - POST /register
+// - POST /login
 app.MapIdentityApi<ApplicationUser>();
+// Add auth endpoints not available "out-of-the-box".
+app.MapPost("/logout",
+    async (SignInManager<ApplicationUser> signInManager) => {
+        // Remove auth cookie (user no longer authenticated).
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }).RequireAuthorization();
+app.MapGet("/pingauth", (ClaimsPrincipal user) => {
+    // If user is logged in (.RequireAuthorization()),
+    // -> get user's email, return e-mail as plain text
+    // else,
+    // -> return not authorized error code (401? 403?).
+    // Needed for (http) cookie-based auth scheme...
+    // - Cookie exists in browser, but
+    // - React app will not have access to cookie. So,
+    // - for React app to know user is authenticated, app needs to check with
+    //   the server. If user is logged in, server tells app identity of the
+    //   user that is logged in by sending user's email back.
+    var email = user.FindFirstValue(ClaimTypes.Email);
+    return Results.Json(new {Email = email});
+}).RequireAuthorization();
 
 // middleware to serve Swagger UI & JSON endpoints
 app.UseSwagger();
