@@ -12,6 +12,6 @@ namespace backend.Controllers
         public VendorsController(ApplicationDbContext context)
         {
             _context = context;
-        }  
+        }
     }
 }
