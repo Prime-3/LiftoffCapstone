@@ -1,7 +1,9 @@
+import Header from "../Components/Header"
+
 export default function Root() {
     return (
         <>
-            <h3>root.jsx</h3>
+            <Header />
         </>
     )
 }
