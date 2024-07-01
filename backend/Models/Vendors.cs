@@ -11,6 +11,9 @@ namespace backend.Models
         public string? Description { get; set; }
         public string? Website { get; set; }
 
+        public Vendors()
+        {
+        }
         public Vendors(string shopName, string ownerName, string phoneNumber, string address, string description, string website)
         {
             ShopName = shopName;

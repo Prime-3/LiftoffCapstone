@@ -11,6 +11,9 @@ namespace backend.Models
         public DateTime Date { get; }
 
 
+        public Reviews()
+        {
+        }
         public Reviews(int vendorId, int userId, int stars, string description)
         {
             VendorId = vendorId;

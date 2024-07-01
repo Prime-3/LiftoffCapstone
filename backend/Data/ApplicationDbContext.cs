@@ -7,6 +7,8 @@ namespace backend.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
+    public DbSet<Reviews>? Reviews { get; set; }
+    public DbSet<Vendors>? Vendors { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
