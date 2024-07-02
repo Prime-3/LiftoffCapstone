@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from 'react-dom';
+
+import LoginFormModal from "../LoginFormModal";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
+   const [showModal, setShowModal] = useState(false);
    const ulRef = useRef();
 
 
@@ -33,8 +37,17 @@ const MenuButton = () => {
          <i className="fa-solid fa-bars fa-lg" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-         <li className="menu-item" onClick={closeMenu}>
-            Login
+         <li className="menu-item">
+            <button onClick={() => {
+               closeMenu()
+               setShowModal(true)
+            }}>
+               Login
+            </button>
+            {showModal && createPortal(
+               <LoginFormModal onClose={() => setShowModal(false)} />,
+               document.body
+            )}
          </li>
          <li className="menu-item" onClick={closeMenu}>
             Register
