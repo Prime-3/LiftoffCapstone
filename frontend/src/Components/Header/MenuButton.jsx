@@ -5,7 +5,8 @@ const MenuButton = () => {
    const ulRef = useRef();
 
 
-   const openMenu = () => {
+   const openMenu = (e) => {
+      console.log("HIT", showMenu)
       if (showMenu) return;
       setShowMenu(true);
    };
@@ -18,8 +19,6 @@ const MenuButton = () => {
             setShowMenu(false);
          }
       };
-
-      document.addEventListener('click', closeMenu);
 
       return () => document.removeEventListener("click", closeMenu);
    }, [showMenu]);
@@ -34,10 +33,10 @@ const MenuButton = () => {
          <i className="fa-solid fa-bars fa-lg" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-         <li className="menu-item">
+         <li className="menu-item" onClick={closeMenu}>
             Login
          </li>
-         <li className="menu-item">
+         <li className="menu-item" onClick={closeMenu}>
             Register
          </li>
       </ul>
