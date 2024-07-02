@@ -5,6 +5,37 @@ html {
   text-align: center;
 }
 
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  height: fit-content;
+  width: fit-content;
+  color: black;
+  background-color: rgba(249, 250, 239, 1);
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.modal-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /*
 .logo {
   height: 6em;
