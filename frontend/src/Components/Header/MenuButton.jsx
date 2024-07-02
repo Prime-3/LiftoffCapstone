@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from 'react-dom';
 
 import LoginFormModal from "../LoginFormModal";
+import RegisterFormModal from "../RegisterFormModal";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
    const [showModal, setShowModal] = useState(false);
+   const [modalSel, setModalSel] = useState();
    const ulRef = useRef();
 
 
@@ -40,17 +42,28 @@ const MenuButton = () => {
          <li className="menu-item">
             <button onClick={() => {
                closeMenu()
+               setModalSel("login");
                setShowModal(true)
             }}>
                Login
             </button>
-            {showModal && createPortal(
+            {(showModal && modalSel == "login") && createPortal(
                <LoginFormModal onClose={() => setShowModal(false)} />,
                document.body
             )}
          </li>
-         <li className="menu-item" onClick={closeMenu}>
-            Register
+         <li className="menu-item">
+            <button onClick={() => {
+               closeMenu()
+               setModalSel("register");
+               setShowModal(true)
+            }}>
+               Register
+            </button>
+            {(showModal && modalSel == "register") && createPortal(
+               <RegisterFormModal onClose={() => setShowModal(false)} />,
+               document.body
+            )}
          </li>
       </ul>
    </>
