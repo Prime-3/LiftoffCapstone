@@ -2,6 +2,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Fetch from './routes/fetch';
+import "./App.css";
 
 import Header from './Components/Header';
 

@@ -2,6 +2,9 @@ header {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   align-items: center;
+   background-color: rgba(209, 187, 162, 1);
+   padding: 15px;
 }
 
 #logo {
