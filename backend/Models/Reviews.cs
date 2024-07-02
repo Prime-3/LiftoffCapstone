@@ -20,6 +20,7 @@ namespace backend.Models
             UserId = userId;
             Stars = stars;
             Description = description;
+            Date = DateTime.Now;
         }
     }
 }
