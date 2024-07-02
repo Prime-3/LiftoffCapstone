@@ -18,10 +18,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(
-      options => options.SignIn.RequireConfirmedAccount = true)
-    .AddApiEndpoints()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
+    // TODO: probably a good idea require (some kind of) confirmation. Disable
+    //  'confirmation' for our MVP for now though.
+    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+})
+.AddApiEndpoints()
+.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 // TODO: Not sure if this is needed. Need to understand authorization 'roles',
@@ -29,6 +34,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization();
 
 // Swagger generator
+// TODO: see https://aka.ms/aspnetcore/swashbuckle (about configuring)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
