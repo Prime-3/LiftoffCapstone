@@ -1,4 +1,5 @@
 import "./HeaderStyle.css"
+import ProfileButton from "./ProfileButton";
 
 const Header = () => {
    return (
@@ -9,7 +10,7 @@ const Header = () => {
                <input type="text"></input>
                <button>Go</button>
             </form>
-            <button>Profile</button>
+            <ProfileButton />
          </header>
       </>
    )

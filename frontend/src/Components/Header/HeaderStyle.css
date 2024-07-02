@@ -10,3 +10,14 @@ header {
 #logo {
    max-height: 50px;
 }
+
+.profile-button {
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   width: 100px;
+   height: 42px;
+   border-radius: 40px;
+   background: rgba(71, 103, 48, 1);
+   color: white;
+}
