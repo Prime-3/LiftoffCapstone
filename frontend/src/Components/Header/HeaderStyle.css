@@ -4,20 +4,53 @@ header {
    justify-content: space-between;
    align-items: center;
    background-color: rgba(209, 187, 162, 1);
-   padding: 15px;
+   padding: 20px;
 }
 
 #logo {
    max-height: 50px;
+   margin-left: 10px;
+}
+
+input {
+   height: 25px;
+   width: 250px;
+   border-radius: 10px;
 }
 
 .profile-button {
    display: flex;
    align-items: center;
    justify-content: space-around;
-   width: 100px;
+   width: 110px;
    height: 42px;
-   border-radius: 40px;
+   border-radius: 15px;
    background: rgba(71, 103, 48, 1);
    color: white;
+}
+
+#search-button {
+   color: gray;
+   position: relative;
+   right: 25px;
+}
+
+.profile-dropdown.hidden {
+   display: none;
+}
+
+.profile-dropdown {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5px;
+   list-style-type: none;
+   border: 2px solid grey;
+   background: white;
+   position: fixed;
+   top: 61px;
+   right: 50px;
+   z-index: 1;
+   padding: 10px;
+   border-radius: 15px 0px 15px 15px;
 }
