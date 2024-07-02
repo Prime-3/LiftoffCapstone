@@ -47,4 +47,26 @@ namespace backend.Controllers;
 
             return new VendorsDTO(vendor);
         }
+
+
+        // POST: api/vendors/registration --> Posts new vendor registration info
+        [HttpPost("registration")]
+        public IActionResult RegisterVendor([FromBody] Vendors vendor) 
+        {
+            if (ModelState.IsValid)
+            {
+                //Save vendor data to database
+                context.Vendors.Add(vendor);
+                context.SaveChanges();
+                //return success message to user
+                return Ok(new {message = "Success! Registration completed."});
+            }
+            else
+            {
+                //return error message to let user know it failed registering data
+                return BadRequest(new {message = "Error! Failed registering information."});
+            }
+        }
+
+
     }
