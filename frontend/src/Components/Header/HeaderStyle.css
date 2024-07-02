@@ -43,14 +43,22 @@ input {
    display: flex;
    flex-direction: column;
    align-items: center;
+
    gap: 5px;
    list-style-type: none;
    border: 2px solid grey;
    background: white;
    position: fixed;
-   top: 61px;
-   right: 50px;
+   width: 100px;
+   top: 100px;
+   right: auto;
    z-index: 1;
    padding: 10px;
-   border-radius: 15px 0px 15px 15px;
+   border-radius: 15px;
+}
+
+#profile-button {
+   display: flex;
+   align-items: center;
+   margin-right: 15px;
 }
