@@ -1,7 +1,7 @@
 html {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
@@ -16,6 +16,12 @@ html {
   background-color: rgba(249, 250, 239, 1);
   border: 2px solid black;
   border-radius: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
 }
 
 .modal-background {
