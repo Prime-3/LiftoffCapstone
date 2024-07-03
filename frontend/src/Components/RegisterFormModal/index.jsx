@@ -10,7 +10,7 @@ function RegisterFormModal({ onClose }) {
          <div className="modal-background" onClick={onClose}></div>
          <div className="modal-content">
 
-            <form className="login-form">
+            <form className="login-form" action="/api/vendors/registration" method="post">
                <h2 className="form-title">Register Account</h2>
                <label>First Name</label>
                <input type="text" required></input>
