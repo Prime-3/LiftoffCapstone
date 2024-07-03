@@ -6,12 +6,12 @@ function LoginFormModal({ onClose }) {
          <div className="modal-content">
 
             <form className="login-form">
-               <h1>Login</h1>
+               <h2 className="form-title">Login</h2>
                <label>Username</label>
                <input type="text" required></input>
-               <lable>Password</lable>
+               <label>Password</label>
                <input type="password" required></input>
-               <button type="submit">Submit</button>
+               <button type="submit" className="submit-button">Submit</button>
             </form>
          </div>
       </div>
