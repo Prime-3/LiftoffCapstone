@@ -101,4 +101,20 @@ namespace backend.Controllers;
             //Return response
             return Ok(new {message = "Account information has successfully been updated."});
         }
+
+    // DELETE: api/vendors/{id}
+    [HttpDelete("{id}")]
+    public IActionResult DeleteVendor(int id)
+    {
+        var vendor = context.Vendors.FirstOrDefault(v => v.Id == id);
+            if (vendor == null) 
+            {
+                return NotFound();
+            }
+
+            context.Vendors.Remove(vendor);
+            context.SaveChanges();
+
+            return Ok(new {message = "Successfully removed vendor."});
     }
+}
