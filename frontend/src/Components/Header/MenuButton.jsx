@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
+import "./MenuStyle.css"
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -35,31 +36,31 @@ const MenuButton = () => {
 
    return <>
       <button className="profile-button" onClick={openMenu}>
-         <p>Login</p>
+         <p>Menu</p>
          <i className="fa-solid fa-bars fa-lg" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
          <li className="menu-item">
-            <button onClick={() => {
+            <h3 onClick={() => {
                closeMenu()
                setModalSel("login");
                setShowModal(true)
             }}>
                Login
-            </button>
+            </h3>
             {(showModal && modalSel == "login") && createPortal(
                <LoginFormModal onClose={() => setShowModal(false)} />,
                document.body
             )}
          </li>
          <li className="menu-item">
-            <button onClick={() => {
+            <h3 onClick={() => {
                closeMenu()
                setModalSel("register");
                setShowModal(true)
             }}>
                Register
-            </button>
+            </h3>
             {(showModal && modalSel == "register") && createPortal(
                <RegisterFormModal onClose={() => setShowModal(false)} />,
                document.body
