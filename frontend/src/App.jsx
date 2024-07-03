@@ -2,9 +2,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Fetch from './routes/fetch';
+import Vendors, {
+    loader as vendorsLoader
+} from "./routes/vendors";
+import ErrorPage from "./pages/error.jsx";
 import "./App.css";
-
-import Header from './Components/Header';
 
 
 const router = createBrowserRouter([
@@ -26,6 +28,12 @@ const router = createBrowserRouter([
     {
         path: "/test-fetch",
         element: <Fetch />
+    },
+    {
+        path: "/vendors",
+        element: <Vendors />,
+        errorElement: <ErrorPage />,
+        loader: vendorsLoader,
     },
 ]);
 
