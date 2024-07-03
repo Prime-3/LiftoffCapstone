@@ -8,10 +8,10 @@ function LoginFormModal({ onClose }) {
             <form className="login-form">
                <h1>Login</h1>
                <label>Username</label>
-               <input type="text"></input>
+               <input type="text" required></input>
                <lable>Password</lable>
-               <input type="password"></input>
-               <button onClick={onClose}>Close</button>
+               <input type="password" required></input>
+               <button type="submit">Submit</button>
             </form>
          </div>
       </div>
