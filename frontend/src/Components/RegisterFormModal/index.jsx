@@ -1,9 +1,14 @@
+import { useState } from "react";
 
 function RegisterFormModal({ onClose }) {
+   const [isVendor, setIsVendor] = useState(false);
+
+   const handleClick = () => setIsVendor(!isVendor)
+
    return (
-      <>
+      <div className="modal">
          <div className="modal-background" onClick={onClose}></div>
-         <div className="modal">
+         <div className="modal-content">
 
             <form className="login-form">
                <h1>Register</h1>
@@ -17,12 +22,26 @@ function RegisterFormModal({ onClose }) {
                <input type="password"></input>
                <lable>Confirm Password</lable>
                <input type="password"></input>
-               <input type="checkbox"></input>
-               <span>Vender</span>
+               <input type="checkbox" onClick={handleClick}></input>
+               <span>Vendor</span>
+               {isVendor && (
+                  <>
+                     <label>Vender Name</label>
+                     <input type="text"></input>
+                     <label>Phone #</label>
+                     <input type="text"></input>
+                     <label>Category</label>
+                     <select>
+                        <option value="test1">test1</option>
+                        <option value="test2">test2</option>
+                        <option value="test3">test3</option>
+                     </select>
+                  </>
+               )}
                <button onClick={onClose}>Close</button>
             </form>
          </div>
-      </>
+      </div>
 
    );
 }

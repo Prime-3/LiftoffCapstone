@@ -1,8 +1,9 @@
 
 function LoginFormModal({ onClose }) {
    return (
-      <>
-         <div className="modal">
+      <div className="modal">
+         <div className="modal-background" onClick={onClose}></div>
+         <div className="modal-content">
 
             <form className="login-form">
                <h1>Login</h1>
@@ -13,8 +14,7 @@ function LoginFormModal({ onClose }) {
                <button onClick={onClose}>Close</button>
             </form>
          </div>
-         <div className="modal-background" onClick={onClose}></div>
-      </>
+      </div>
    );
 }
 
