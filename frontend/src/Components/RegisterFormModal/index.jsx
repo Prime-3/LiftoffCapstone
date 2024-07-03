@@ -11,19 +11,21 @@ function RegisterFormModal({ onClose }) {
          <div className="modal-content">
 
             <form className="login-form">
-               <h1>Register</h1>
+               <h2 className="form-title">Register Account</h2>
                <label>First Name</label>
                <input type="text" required></input>
                <label>Last Name</label>
                <input type="text" required></input>
                <label>Email</label>
                <input type="email" required></input>
-               <lable>Password</lable>
+               <label>Password</label>
                <input type="password" required></input>
-               <lable>Confirm Password</lable>
+               <label>Confirm Password</label>
                <input type="password" required></input>
-               <input type="checkbox" onClick={handleClick}></input>
-               <span>Vendor</span>
+               <div id="vendor-checkbox-area">
+                  <input type="checkbox" id="vendor-checkbox" onClick={handleClick}></input>
+                  <label>Are you a vendor?</label>
+               </div>
                {isVendor && (
                   <>
                      <label>Vender Name</label>
@@ -39,7 +41,7 @@ function RegisterFormModal({ onClose }) {
                      </select>
                   </>
                )}
-               <button type="submit" >Submit</button>
+               <button type="submit" className="submit-button">Submit</button>
             </form>
          </div>
       </div>

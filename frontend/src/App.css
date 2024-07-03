@@ -53,6 +53,38 @@ html {
   gap: 10px;
 }
 
+.login-form>label {
+  display: flex;
+}
+
+.form-title {
+  margin: 0;
+}
+
+.submit-button {
+  display: flex;
+  align-self: center;
+  width: fit-content;
+  background-color: red;
+  color: white;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+#vendor-checkbox-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 250px;
+}
+
+
+#vendor-checkbox {
+  width: fit-content;
+  position: relative;
+}
+
 /*
 .logo {
   height: 6em;
