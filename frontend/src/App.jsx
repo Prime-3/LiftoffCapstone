@@ -27,6 +27,9 @@ const router = createBrowserRouter([
         path: "/test-fetch",
         element: <Fetch />
     },
+    // {
+    //     path: "/register"
+    // }
 ]);
 
 function App() {
