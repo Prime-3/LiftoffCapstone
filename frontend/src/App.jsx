@@ -1,7 +1,10 @@
 // https://reactrouter.com/en/main/start/tutorial
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Fetch from './routes/fetch';
+import "./App.css";
+
+import Header from './Components/Header';
 
 
 const router = createBrowserRouter([
@@ -27,10 +30,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
     return (
         <>
-        <h2>App.jsx</h2>
-        <RouterProvider router={router} />
+            <RouterProvider router={router} />
         </>
     )
 }

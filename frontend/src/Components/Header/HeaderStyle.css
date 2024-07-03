@@ -1,0 +1,31 @@
+header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   background-color: rgba(209, 187, 162, 1);
+   padding: 20px;
+}
+
+#logo {
+   max-height: 50px;
+   margin-left: 10px;
+}
+
+input {
+   height: 25px;
+   width: 250px;
+   border-radius: 5px;
+}
+
+select {
+   height: 25px;
+   width: 150px;
+   border-radius: 5px;
+}
+
+#search-button {
+   color: gray;
+   position: relative;
+   right: 25px;
+}
