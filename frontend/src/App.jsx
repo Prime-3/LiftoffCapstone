@@ -5,6 +5,10 @@ import Fetch from './routes/fetch';
 import Vendors, {
     loader as vendorsLoader
 } from "./routes/vendors";
+
+import Vendor, {
+    loader as vendorLoader
+} from "./routes/vendor";
 import ErrorPage from "./pages/error.jsx";
 import "./App.css";
 
@@ -34,6 +38,12 @@ const router = createBrowserRouter([
         element: <Vendors />,
         errorElement: <ErrorPage />,
         loader: vendorsLoader,
+    },
+    {
+        path: "/vendors/:vendorId",
+        element: <Vendor />,
+        errorElement: <ErrorPage />,
+        loader: vendorLoader,
     },
 ]);
 

@@ -1,4 +1,6 @@
 // https://reactrouter.com/en/main/start/tutorial
+// https://reactrouter.com/en/main/components/link
+// -> <Link to>... resolves relative to parent route
 import {useLoaderData, Link} from "react-router-dom";
 import {getVendors} from "../utils/vendors";
 
@@ -12,7 +14,7 @@ export default function Vendors () {
 
     const vendorsJSX = vendors.map(vendor => {
         return (
-            <Link to="/" key={vendor.id}>
+            <Link to={`${vendor.id}`} key={vendor.id}>
                 <p>{vendor.shopName}</p>
             </Link>
         );
