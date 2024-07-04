@@ -9,7 +9,10 @@ import Vendors, {
 import Vendor, {
     loader as vendorLoader
 } from "./routes/vendor";
-import ErrorPage from "./pages/error.jsx";
+import ErrorPage from "./pages/error";
+import Login from "./pages/Login";
+import AuthorizeView, {AuthorizedUser} from "./Components/AuthorizeView";
+import LogoutLink from "./Components/LogoutLink";
 import "./App.css";
 
 
@@ -41,10 +44,20 @@ const router = createBrowserRouter([
     },
     {
         path: "/vendors/:vendorId",
-        element: <Vendor />,
+        element: (
+            // https://www.youtube.com/watch?v=eYiLt2gQuME
+            <AuthorizeView>
+                <LogoutLink>Logout<AuthorizedUser value="email"/></LogoutLink>
+                <Vendor />
+            </AuthorizeView>
+        ),
         errorElement: <ErrorPage />,
         loader: vendorLoader,
     },
+    {
+        path: "/login",
+        element: <Login />
+    }
 ]);
 
 function App() {
