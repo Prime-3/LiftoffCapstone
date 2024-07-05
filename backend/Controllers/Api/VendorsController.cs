@@ -30,22 +30,12 @@ namespace backend.Controllers;
         [HttpGet("{id}")]
         public async Task<ActionResult<VendorsDTO>> GetVendors(int id)
         {
-            // Check for empty collection
-            var vendor = await context.Vendors.FirstOrDefaultAsync();
-            if (vendor == null) {
-                return NotFound();
+            try {
+                var vendor = await context.Vendors.SingleAsync(v => id == v.Id);
+                return new VendorsDTO(vendor);
+            } catch (InvalidOperationException e) {
+                return NotFound(e.ToString());
             }
-
-            // Look for vendor with 'id'
-            vendor = await context
-                .Vendors
-                .SingleAsync(v => id == v.Id);
-            if (vendor == null)
-            {
-                return NotFound();
-            }
-
-            return new VendorsDTO(vendor);
         }
 
 
