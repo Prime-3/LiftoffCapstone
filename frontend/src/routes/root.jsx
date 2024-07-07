@@ -7,7 +7,30 @@ export default function Root() {
     return (
         <>
             <Header />
-            <SearchCard />
+            <div id="cards">
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+            </div>
+            <div id="cards">
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+            </div>
+            <div id="cards">
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+            </div>
+            <div id="cards">
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+                <SearchCard />
+            </div>
         </>
     )
 }
