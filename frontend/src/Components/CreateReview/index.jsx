@@ -1,14 +1,16 @@
 import { useState } from "react";
+import "./CreateReview.css"
 
 function CreateReview() {
    const [stars, setStars] = useState(0)
    const [hover, setHover] = useState(0)
 
    return (
-      <div className="create-review">
-         <form>
-            <div id="title-stars">
-               <input type="text"></input>
+      <form className="form-create-review">
+         <label className="review-label">Review Title</label>
+         <div id="form-title-stars">
+            <input id="form-review-title" type="text"></input>
+            <div id="star-container">
                <div className="stars">
                   <i
                      className={(stars >= 1 || hover >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
@@ -41,11 +43,13 @@ function CreateReview() {
                      onMouseLeave={(e) => setHover(0)}
                   ></i>
                </div>
+               <span>stars</span>
             </div>
-            <textarea></textarea>
-            <button type="submit">Submit</button>
-         </form>
-      </div>
+         </div>
+         <label className="review-label">Comment</label>
+         <textarea id="form-review-comment"></textarea>
+         <button className="submit-button" type="submit">Submit</button>
+      </form>
    )
 }
 

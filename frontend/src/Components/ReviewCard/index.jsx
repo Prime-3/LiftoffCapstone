@@ -1,7 +1,8 @@
 import "./ReviewCard.css"
 
-function ReviewCard() {
-   // TODO: Add parms to pass review data into card
+function ReviewCard(/* reviewTitle, stars, reviewedBy, reviewComment */) {
+
+   // Hard coded for now. Need data passed in from a parent component though commented out params.
    let reviewTitle = "This place is awesome!"
    let stars = 3;
    let reviewedBy = "Joe Schmoe"
@@ -13,19 +14,19 @@ function ReviewCard() {
             <h3>{reviewTitle}</h3>
             <div className="stars">
                <i
-                  className={(stars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  className={(stars >= 1) ? "fa-solid fa-star" : "hidden"}
                ></i>
                <i
-                  className={(stars >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  className={(stars >= 2) ? "fa-solid fa-star" : "hidden"}
                ></i>
                <i
-                  className={(stars >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  className={(stars >= 3) ? "fa-solid fa-star" : "hidden"}
                ></i>
                <i
-                  className={(stars >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  className={(stars >= 4) ? "fa-solid fa-star" : "hidden"}
                ></i>
                <i
-                  className={(stars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                  className={(stars >= 5) ? "fa-solid fa-star" : "hidden"}
                ></i>
             </div>
          </div>
