@@ -8,8 +8,8 @@ export default function Root() {
     return (
         <>
             <Header />
-            <CreateReview />
-            <ReviewCard />
+            {/* <CreateReview />
+            <ReviewCard /> */}
         </>
     )
 }

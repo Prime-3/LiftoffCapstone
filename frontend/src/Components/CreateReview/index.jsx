@@ -14,33 +14,33 @@ function CreateReview() {
                <div className="stars">
                   <i
                      className={(stars >= 1 || hover >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={(e) => setStars(1)}
-                     onMouseOver={(e) => setHover(1)}
-                     onMouseLeave={(e) => setHover(0)}
+                     onClick={() => setStars(1)}
+                     onMouseOver={() => setHover(1)}
+                     onMouseLeave={() => setHover(0)}
                   ></i>
                   <i
                      className={(stars >= 2 || hover >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={(e) => setStars(2)}
-                     onMouseOver={(e) => setHover(2)}
-                     onMouseLeave={(e) => setHover(0)}
+                     onClick={() => setStars(2)}
+                     onMouseOver={() => setHover(2)}
+                     onMouseLeave={() => setHover(0)}
                   ></i>
                   <i
                      className={(stars >= 3 || hover >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={(e) => setStars(3)}
-                     onMouseOver={(e) => setHover(3)}
-                     onMouseLeave={(e) => setHover(0)}
+                     onClick={() => setStars(3)}
+                     onMouseOver={() => setHover(3)}
+                     onMouseLeave={() => setHover(0)}
                   ></i>
                   <i
                      className={(stars >= 4 || hover >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={(e) => setStars(4)}
-                     onMouseOver={(e) => setHover(4)}
-                     onMouseLeave={(e) => setHover(0)}
+                     onClick={() => setStars(4)}
+                     onMouseOver={() => setHover(4)}
+                     onMouseLeave={() => setHover(0)}
                   ></i>
                   <i
                      className={(stars >= 5 || hover >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={(e) => setStars(5)}
-                     onMouseOver={(e) => setHover(5)}
-                     onMouseLeave={(e) => setHover(0)}
+                     onClick={() => setStars(5)}
+                     onMouseOver={() => setHover(5)}
+                     onMouseLeave={() => setHover(0)}
                   ></i>
                </div>
                <span>stars</span>
