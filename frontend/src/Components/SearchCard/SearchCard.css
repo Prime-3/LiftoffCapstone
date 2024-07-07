@@ -1,0 +1,17 @@
+.search-card {
+   width: fit-content;
+   border: 1px solid black;
+}
+
+#vendor-photo {
+   width: 250px;
+}
+
+#vendor-title {
+   display: flex;
+   margin: 0;
+}
+
+#vendor-category {
+   display: flex;
+}
