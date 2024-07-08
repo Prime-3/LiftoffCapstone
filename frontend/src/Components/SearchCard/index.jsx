@@ -1,6 +1,6 @@
 import "./SearchCard.css"
 
-function SearchCard() {
+function SearchCard(/* vendorPhoto, vendorName, vendorCategory, stars */) {
    let vendorPhoto = "images/dummy-image-square.png"
    let vendorName = "Vendor Name"
    let vendorCategory = "Vendor Category"
