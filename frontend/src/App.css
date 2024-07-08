@@ -85,7 +85,10 @@ html {
   position: relative;
 }
 
-
+#cards {
+  display: flex;
+  justify-content: center;
+}
 
 /*
 .logo {
