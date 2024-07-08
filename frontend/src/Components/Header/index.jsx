@@ -11,7 +11,7 @@ const Header = () => {
             <form>
                <input type="text"></input>
                <a href="/" id="search-button">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                </a>
             </form>
             <div id="profile-button">
