@@ -8,7 +8,11 @@ export default function Root() {
     return (
         <>
             <Header />
-            {/* <CreateReview />
+            {/* For testing review cards
+            <CreateReview />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
             <ReviewCard /> */}
         </>
     )
