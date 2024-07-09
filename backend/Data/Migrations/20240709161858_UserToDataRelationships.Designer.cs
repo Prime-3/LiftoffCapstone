@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709161858_UserToDataRelationships")]
+    partial class UserToDataRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +249,7 @@ namespace backend.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("backend.Models.Review", b =>
+            modelBuilder.Entity("backend.Models.Reviews", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,9 +293,6 @@ namespace backend.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Logo")
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
@@ -378,15 +378,13 @@ namespace backend.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("backend.Models.Review", b =>
+            modelBuilder.Entity("backend.Models.Reviews", b =>
                 {
-                    b.HasOne("backend.Models.ApplicationUser", "Reviewer")
+                    b.HasOne("backend.Models.ApplicationUser", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Reviewer");
                 });
 
             modelBuilder.Entity("backend.Models.Shop", b =>

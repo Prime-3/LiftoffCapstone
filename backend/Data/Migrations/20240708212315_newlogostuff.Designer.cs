@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708212315_newlogostuff")]
+    partial class newlogostuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace backend.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("ApplicationUserShop", b =>
-                {
-                    b.Property<int>("FavoritesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LikesId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("FavoritesId", "LikesId");
-
-                    b.HasIndex("LikesId");
-
-                    b.ToTable("FavoritesAndLikes", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -192,12 +180,6 @@ namespace backend.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("longtext");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -224,9 +206,6 @@ namespace backend.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ShopId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -246,7 +225,7 @@ namespace backend.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("backend.Models.Review", b =>
+            modelBuilder.Entity("backend.Models.Reviews", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,27 +233,24 @@ namespace backend.Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
-
-                    b.Property<int>("ShopId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Stars")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.Property<int>("VendorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("backend.Models.Shop", b =>
+            modelBuilder.Entity("backend.Models.Vendors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,14 +261,13 @@ namespace backend.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Logo")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OwnerName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
@@ -306,25 +281,7 @@ namespace backend.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
-
-                    b.ToTable("Shops");
-                });
-
-            modelBuilder.Entity("ApplicationUserShop", b =>
-                {
-                    b.HasOne("backend.Models.Shop", null)
-                        .WithMany()
-                        .HasForeignKey("FavoritesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("LikesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Vendors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -376,35 +333,6 @@ namespace backend.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("backend.Models.Review", b =>
-                {
-                    b.HasOne("backend.Models.ApplicationUser", "Reviewer")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Reviewer");
-                });
-
-            modelBuilder.Entity("backend.Models.Shop", b =>
-                {
-                    b.HasOne("backend.Models.ApplicationUser", "Owner")
-                        .WithOne("Shop")
-                        .HasForeignKey("backend.Models.Shop", "ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("backend.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Reviews");
-
-                    b.Navigation("Shop");
                 });
 #pragma warning restore 612, 618
         }
