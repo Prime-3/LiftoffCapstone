@@ -28,7 +28,7 @@ public class ReviewsController : ControllerBase
       }
       else
       {
-         return BadRequest(new { message = "Error! Failed submiting review." });
+         return BadRequest(new { message = "Error! Failed submitting review." });
       }
    }
 
