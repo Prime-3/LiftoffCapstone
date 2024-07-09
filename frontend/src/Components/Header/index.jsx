@@ -9,7 +9,7 @@ const Header = () => {
                <img id="logo" src="images/STLmarkets.png" />
             </a>
             <form>
-               <input type="text"></input>
+               <input id="search-bar" type="text"></input>
                <a href="/" id="search-button">
                   <i class="fa-solid fa-magnifying-glass"></i>
                </a>

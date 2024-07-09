@@ -1,0 +1,43 @@
+.form-create-review {
+   display: flex;
+   flex-direction: column;
+   width: 50%;
+   min-width: fit-content;
+   margin: 20px;
+   padding: 10px;
+   gap: 3px;
+
+}
+
+#form-title-stars {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+}
+
+#form-review-comment {
+   width: auto;
+   height: 125px;
+   border: 2px solid black;
+   border-radius: 5px;
+   resize: none;
+}
+
+.review-label {
+   display: flex;
+}
+
+#star-container {
+   display: flex;
+   flex-direction: column;
+}
+
+#star-container>span {
+   display: flex;
+   justify-content: end;
+   font-size: xx-small;
+}
+
+.form-create-review>button {
+   align-self: self-end;
+}
