@@ -10,11 +10,12 @@ namespace backend.Models
         public string? Address { get; set; }
         public string? Description { get; set; }
         public string? Website { get; set; }
+        public string? Logo { get; set; }
 
         public Vendors()
         {
         }
-        public Vendors(string shopName, string ownerName, string phoneNumber, string address, string description, string website)
+        public Vendors(string shopName, string ownerName, string phoneNumber, string address, string description, string website, string logo)
         {
             ShopName = shopName;
             OwnerName = ownerName;
@@ -22,6 +23,7 @@ namespace backend.Models
             Address = address;
             Description = description;
             Website = website;
+            Logo = logo;
         }
     }
 }

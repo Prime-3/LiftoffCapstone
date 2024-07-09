@@ -9,6 +9,7 @@ public class VendorsDTO
         public string? Address { get; set; }
         public string? Description { get; set; }
         public string? Website { get; set; }
+        public string? Logo { get; set; }
 
 
         public VendorsDTO(Vendors vendors)
@@ -20,5 +21,6 @@ public class VendorsDTO
             Address = vendors.Address;
             Description = vendors.Description;
             Website = vendors.Website;
+            Logo = vendors.Logo;
         }
 }

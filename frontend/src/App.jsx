@@ -19,6 +19,8 @@ import Login from "./pages/Login";
 import AuthorizeView, {AuthorizedUser} from "./Components/AuthorizeView";
 import LogoutLink from "./Components/LogoutLink";
 import "./App.css";
+import Favorited from './Components/Favorite';
+import VendorDetailsPage from './Components/VendorPage';
 
 
 
@@ -43,13 +45,13 @@ const router = createBrowserRouter([
         element: <Fetch />
     },
     {
-        path: "/vendors",
+        path: "/outbacks",
         element: <Vendors />,
         errorElement: <ErrorPage />,
         loader: vendorsLoader,
     },
     {
-        path: "/vendors/:vendorId",
+        path: "/outbacks/:vendorId",
         element: (
             // https://www.youtube.com/watch?v=eYiLt2gQuME
             <AuthorizeView>
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login />
+    },
+    {
+        path: "/favorites",
+        element: <Favorited />
+    },
+    {
+        path: "/vendorpage/:vendorId",
+        element: <VendorDetailsPage />
     }
 ]);
 
