@@ -32,7 +32,7 @@ namespace backend.Controllers;
         public async Task<ActionResult<ShopDTO>> GetShop(int id)
         {
             try {
-                var shop = await context.Shops.SingleAsync(v => id == v.Id);
+                var shop = await context.Shops.Include(s => s.Owner).SingleAsync(v => id == v.Id);
                 return new ShopDTO(shop);
             } catch (InvalidOperationException e) {
                 return NotFound(e.ToString());
