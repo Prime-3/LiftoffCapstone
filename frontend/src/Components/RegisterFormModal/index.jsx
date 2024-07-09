@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+
 function RegisterFormModal({ onClose }) {
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
@@ -51,18 +52,25 @@ function RegisterFormModal({ onClose }) {
       })
 
 
-      // if (isVendor) {
-      //    fetch("/api/vendors"), {
-      //       method: "POST",
-      //       headers: {
-      //          "Content-Type": "application/json"
-      //       },
-      //       body: JSON.stringify({
-      //          shopName: shopName,
-      //          ownerId:
-      //       })
-      //    }
-      // }
+
+      if (isVendor) {
+         fetch("/api/vendors"), {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+               shopName: shopName,
+               ownerName: email,
+               phoneNumber: phoneNum,
+               address: null,
+               description: null,
+               website: null
+            }).then((resp) => {
+               console.log(resp)
+            })
+         }
+      }
    }
 
 
