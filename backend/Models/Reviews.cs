@@ -4,8 +4,9 @@ namespace backend.Models
     public class Reviews
     {
         public int Id { get; set; }
-        public int VendorId { get; set; }
-        public int UserId { get; set; }
+        public int ShopId { get; set; }
+        // Id in aspnetusers
+        public string ApplicationUserId { get; set; }
         public int Stars { get; set; }
         public string? Description { get; set; }
         public DateTime Date { get; }
@@ -14,10 +15,10 @@ namespace backend.Models
         public Reviews()
         {
         }
-        public Reviews(int vendorId, int userId, int stars, string description)
+        public Reviews(int shopId, string applicationUserId, int stars, string description)
         {
-            VendorId = vendorId;
-            UserId = userId;
+            ShopId = shopId;
+            ApplicationUserId = applicationUserId;
             Stars = stars;
             Description = description;
             Date = DateTime.Now;

@@ -1,6 +1,6 @@
 namespace backend.Models;
 
-public class VendorsDTO
+public class ShopDTO
 {
         public int Id { get; set; }
         public string? ShopName { get; set; }
@@ -12,15 +12,16 @@ public class VendorsDTO
         public string? Logo { get; set; }
 
 
-        public VendorsDTO(Vendors vendors)
+        public ShopDTO(Shop shop)
         {
-            Id = vendors.Id;
-            ShopName = vendors.ShopName;
-            OwnerName = vendors.OwnerName;
-            PhoneNumber = vendors.PhoneNumber;
-            Address = vendors.Address;
-            Description = vendors.Description;
-            Website = vendors.Website;
-            Logo = vendors.Logo;
+
+            Id = shop.Id;
+            ShopName = shop.ShopName;
+            OwnerName = shop.Owner.ToString();
+            PhoneNumber = shop.PhoneNumber;
+            Address = shop.Address;
+            Description = shop.Description;
+            Website = shop.Website;
+            Logo = shop.Logo;
         }
 }

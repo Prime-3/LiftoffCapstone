@@ -1,24 +1,30 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace backend.Models
 {
-    public class Vendors
+    public class Shop
     {
         public int Id { get; set; }
         public string? ShopName { get; set; }
-        public string? OwnerName { get; set; }
+        // Id in aspnetusers
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public ApplicationUser? Owner { get;set; }
+        public List<ApplicationUser>? Likes { get; set;}
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
         public string? Description { get; set; }
         public string? Website { get; set; }
         public string? Logo { get; set; }
 
-        public Vendors()
+        public Shop()
         {
         }
-        public Vendors(string shopName, string ownerName, string phoneNumber, string address, string description, string website, string logo)
+
+        public Shop(string shopName, string applicationUserId, string phoneNumber, string address, string description, string website, string logo)
         {
             ShopName = shopName;
-            OwnerName = ownerName;
+            ApplicationUserId = applicationUserId;
             PhoneNumber = phoneNumber;
             Address = address;
             Description = description;
