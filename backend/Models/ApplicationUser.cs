@@ -11,7 +11,7 @@ public class ApplicationUser: IdentityUser
     public int? ShopId {get; set;}
     public Shop? Shop {get; set;}
     public List<Shop> Favorites {get; set;}
-    public List<Reviews> Reviews {get; set;}
+    public List<Review> Reviews {get; set;}
 
     // Constructor(s)
     public ApplicationUser()

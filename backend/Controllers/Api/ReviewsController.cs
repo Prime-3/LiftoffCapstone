@@ -16,8 +16,9 @@ public class ReviewsController : ControllerBase
       context = dbContext;
    }
 
+   // POST /api/reviews
    [HttpPost]
-   public IActionResult CreateReview([FromBody] Reviews review)
+   public IActionResult CreateReview([FromBody] Review review)
    {
       if (ModelState.IsValid)
       {
@@ -32,15 +33,16 @@ public class ReviewsController : ControllerBase
       }
    }
 
-   [HttpGet("vendor/{id}")]
-   public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByVendorId(int id)
+   // GET /api/reviews/shop/{id}
+   [HttpGet("shop/{id}")]
+   public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviewByShopId(int id)
    {
       try
       {
          return await context
          .Reviews
-         .Where(r => id == r.VendorId)
-         .Select(r => new ReviewsDTO(r))
+         .Where(r => id == r.ShopId)
+         .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
       catch (InvalidOperationException e)
@@ -49,15 +51,16 @@ public class ReviewsController : ControllerBase
       }
    }
 
+   // GET /api/reviews/user/{id}
    [HttpGet("user/{id}")]
-   public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByUserId(int id)
+   public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviewByUserId(string id)
    {
       try
       {
          return await context
          .Reviews
-         .Where(r => id == r.UserId)
-         .Select(r => new ReviewsDTO(r))
+         .Where(r => id == r.ApplicationUserId)
+         .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
       catch (InvalidOperationException e)
@@ -66,6 +69,7 @@ public class ReviewsController : ControllerBase
       }
    }
 
+   // DELETE /api/reviews/{id}
    [HttpDelete("{id}")]
    public IActionResult DeleteReview(int id)
    {
