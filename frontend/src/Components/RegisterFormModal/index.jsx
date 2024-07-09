@@ -29,12 +29,11 @@ function RegisterFormModal({ onClose }) {
       if (name === "lastName") setLastName(value);
       if (name === "email") setEmail(value);
       if (name === "password") setPassword(value);
+      if (name === "isVendor") setIsVendor(value);
       if (name === "shopName") setShopName(value);
       if (name === "phoneNum") setPhoneNum(value);
       if (name === "category") setCategory(value);
    };
-
-   const handleCheck = () => setIsVendor(!isVendor)
 
    const handleSubmit = (e) => {
       e.preventDefault()
@@ -51,10 +50,8 @@ function RegisterFormModal({ onClose }) {
          console.log(resp)
       })
 
-
-
       if (isVendor) {
-         fetch("/api/vendors"), {
+         fetch("/api/vendors", {
             method: "POST",
             headers: {
                "Content-Type": "application/json"
@@ -66,10 +63,8 @@ function RegisterFormModal({ onClose }) {
                address: null,
                description: null,
                website: null
-            }).then((resp) => {
-               console.log(resp)
             })
-         }
+         });
       }
    }
 
@@ -108,7 +103,7 @@ function RegisterFormModal({ onClose }) {
                <label>Confirm Password</label>
                <input type="password" required></input>
                <div id="vendor-checkbox-area">
-                  <input type="checkbox" id="vendor-checkbox" onClick={handleCheck}></input>
+                  <input type="checkbox" id="vendor-checkbox" onChange={handleChange}></input>
                   <label>Are you a vendor?</label>
                </div>
                {isVendor && (
