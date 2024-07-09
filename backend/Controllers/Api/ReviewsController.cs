@@ -32,17 +32,39 @@ public class ReviewsController : ControllerBase
       }
    }
 
-   // [HttpGet("{id}")]
-   // public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByVendorId(int id)
-   // {
-   //    try
-   //    {
-   //       var reviews = await context.Reviews.Where(r => id == r.VendorId).ToListAsync();
+   [HttpGet("vendor/{id}")]
+   public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByVendorId(int id)
+   {
+      try
+      {
+         return await context
+         .Reviews
+         .Where(r => id == r.VendorId)
+         .Select(r => new ReviewsDTO(r))
+         .ToListAsync();
+      }
+      catch (InvalidOperationException e)
+      {
+         return NotFound(e.ToString());
+      }
+   }
 
-   //    }
-   //    catch (InvalidOperationException e)
-   //    {
-   //       return NotFound(e.ToString());
-   //    }
-   // }
+   [HttpGet("user/{id}")]
+   public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByUserId(int id)
+   {
+      try
+      {
+         return await context
+         .Reviews
+         .Where(r => id == r.UserId)
+         .Select(r => new ReviewsDTO(r))
+         .ToListAsync();
+      }
+      catch (InvalidOperationException e)
+      {
+         return NotFound(e.ToString());
+      }
+   }
+
+
 }
