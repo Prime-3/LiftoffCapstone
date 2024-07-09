@@ -1,3 +1,6 @@
+import Header from "../Components/Header";
+import ReviewCard from "../Components/ReviewCard";
+import CreateReview from "../Components/CreateReview";
 import Header from "../Components/Header"
 import SearchCard from "../Components/SearchCard";
 import { useState, useEffect } from "react";
@@ -7,6 +10,13 @@ export default function Root() {
     return (
         <>
             <Header />
+            {/* For testing review cards
+            <CreateReview />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard /> */}
+
             {/* Uncomment to test
             <div id="cards">
                 <SearchCard />
