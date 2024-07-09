@@ -23,13 +23,14 @@ function RegisterFormModal({ onClose }) {
       "Other"
    ]
 
+   const handleCheck = () => setIsVendor(!isVendor);
+
    const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === "firstName") setFirstName(value);
       if (name === "lastName") setLastName(value);
       if (name === "email") setEmail(value);
       if (name === "password") setPassword(value);
-      if (name === "isVendor") setIsVendor(value);
       if (name === "shopName") setShopName(value);
       if (name === "phoneNum") setPhoneNum(value);
       if (name === "category") setCategory(value);
@@ -103,7 +104,7 @@ function RegisterFormModal({ onClose }) {
                <label>Confirm Password</label>
                <input type="password" required></input>
                <div id="vendor-checkbox-area">
-                  <input type="checkbox" id="vendor-checkbox" onChange={handleChange}></input>
+                  <input type="checkbox" id="vendor-checkbox" onClick={handleCheck}></input>
                   <label>Are you a vendor?</label>
                </div>
                {isVendor && (
@@ -126,9 +127,7 @@ function RegisterFormModal({ onClose }) {
                         name="category"
                         required>
                         <option value="">Select One</option>
-                        <option value="test1">test1</option>
-                        <option value="test2">test2</option>
-                        <option value="test3">test3</option>
+                        {categories.map(c => <option value={c}>{c}</option>)}
                      </select>
                   </>
                )}
