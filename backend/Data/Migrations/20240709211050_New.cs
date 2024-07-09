@@ -44,7 +44,6 @@ namespace backend.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LastName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShopId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -335,8 +334,7 @@ namespace backend.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Shops_ApplicationUserId",
                 table: "Shops",
-                column: "ApplicationUserId",
-                unique: true);
+                column: "ApplicationUserId");
         }
 
         /// <inheritdoc />

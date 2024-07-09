@@ -20,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
             .UsingEntity(e => e.ToTable("FavoritesAndLikes"));
         builder.Entity<Shop>()
             .HasOne(v => v.Owner)
-            .WithOne(u => u.Shop);
+            .WithMany(u => u.Shops);
         base.OnModelCreating(builder);
     }
 }

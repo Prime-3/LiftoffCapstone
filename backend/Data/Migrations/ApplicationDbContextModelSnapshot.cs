@@ -224,9 +224,6 @@ namespace backend.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ShopId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -306,8 +303,7 @@ namespace backend.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId")
-                        .IsUnique();
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Shops");
                 });
@@ -392,8 +388,8 @@ namespace backend.Data.Migrations
             modelBuilder.Entity("backend.Models.Shop", b =>
                 {
                     b.HasOne("backend.Models.ApplicationUser", "Owner")
-                        .WithOne("Shop")
-                        .HasForeignKey("backend.Models.Shop", "ApplicationUserId")
+                        .WithMany("Shops")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -404,7 +400,7 @@ namespace backend.Data.Migrations
                 {
                     b.Navigation("Reviews");
 
-                    b.Navigation("Shop");
+                    b.Navigation("Shops");
                 });
 #pragma warning restore 612, 618
         }
