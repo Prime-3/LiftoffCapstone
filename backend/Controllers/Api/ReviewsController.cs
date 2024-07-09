@@ -11,17 +11,38 @@ public class ReviewsController : ControllerBase
 {
    private readonly ApplicationDbContext context;
 
-   public VendorsController(ApplicationDbContext dbContext)
+   public ReviewsController(ApplicationDbContext dbContext)
    {
       context = dbContext;
    }
 
-   [HttpGet]
-   public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByVendorId()
+   [HttpPost]
+   public IActionResult CreateReview([FromBody] Reviews review)
    {
-      return await context
-          .Reviews
-          .Select(v => new ReviewssDTO(v))
-          .ToListAsync();
+      if (ModelState.IsValid)
+      {
+         context.Reviews.Add(review);
+         context.SaveChanges();
+
+         return Ok(new { message = "Success! Review Submitted." });
+      }
+      else
+      {
+         return BadRequest(new { message = "Error! Failed submiting review." });
+      }
    }
+
+   // [HttpGet("{id}")]
+   // public async Task<ActionResult<IEnumerable<ReviewsDTO>>> GetReviewByVendorId(int id)
+   // {
+   //    try
+   //    {
+   //       var reviews = await context.Reviews.Where(r => id == r.VendorId).ToListAsync();
+
+   //    }
+   //    catch (InvalidOperationException e)
+   //    {
+   //       return NotFound(e.ToString());
+   //    }
+   // }
 }

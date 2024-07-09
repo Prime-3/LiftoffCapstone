@@ -3,17 +3,17 @@ namespace backend.Models;
 public class ReviewsDTO
 {
    public int Id { get; set; }
-   public string? VendorId { get; set; }
-   public string? UserId { get; set; }
-   public string? Stars { get; set; }
+   public int? VendorId { get; set; }
+   public int? UserId { get; set; }
+   public int? Stars { get; set; }
    public string? Description { get; set; }
 
 
-   public VendorsDTO(Vendors vendors)
+   public ReviewsDTO(Reviews reviews)
    {
-      VendorId = vendorId;
-      UserId = userId;
-      Stars = stars;
-      Description = description;
+      VendorId = reviews.VendorId;
+      UserId = reviews.UserId;
+      Stars = reviews.Stars;
+      Description = reviews.Description;
    }
 }
