@@ -90,6 +90,11 @@ html {
   justify-content: center;
 }
 
+.error {
+  color: red;
+  font-size: small;
+}
+
 /*
 .logo {
   height: 6em;
