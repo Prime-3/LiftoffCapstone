@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; // provides DbSet.Include()
+using Microsoft.EntityFrameworkCore;
 using backend.Data;
 using backend.Models;
 
@@ -66,5 +66,18 @@ public class ReviewsController : ControllerBase
       }
    }
 
+   [HttpDelete("{id}")]
+   public IActionResult DeleteReview(int id)
+   {
+      var review = context.Reviews.FirstOrDefault(r => r.Id == id);
+      if (review == null)
+      {
+         return NotFound();
+      }
 
+      context.Reviews.Remove(review);
+      context.SaveChanges();
+
+      return Ok(new { message = "Successfully removed review." });
+   }
 }

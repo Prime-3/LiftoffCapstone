@@ -11,6 +11,7 @@ public class ReviewsDTO
 
    public ReviewsDTO(Reviews reviews)
    {
+      Id = reviews.Id;
       VendorId = reviews.VendorId;
       UserId = reviews.UserId;
       Stars = reviews.Stars;
