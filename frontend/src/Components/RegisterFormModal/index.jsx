@@ -11,6 +11,9 @@ function RegisterFormModal({ onClose }) {
    const [phoneNum, setPhoneNum] = useState("");
    const [category, setCategory] = useState("");
    const [ownerId, setOwnerId] = useState(0)
+   const [error, setError] = useState("");
+   const [confirmed, setConfirmed] = useState(false)
+
 
 
 
@@ -25,6 +28,17 @@ function RegisterFormModal({ onClose }) {
 
    const handleCheck = () => setIsVendor(!isVendor);
 
+   function passwordCheck() {
+      var input = document.getElementById('password-confirm');
+      if (input.value != document.getElementById('password').value) {
+         setConfirmed(true)
+         setError('Password Must be Matching.');
+      } else {
+         setConfirmed(false)
+         setError("");
+      }
+   }
+
    const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === "firstName") setFirstName(value);
@@ -38,34 +52,37 @@ function RegisterFormModal({ onClose }) {
 
    const handleSubmit = (e) => {
       e.preventDefault()
-      fetch("/register", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json"
-         },
-         body: JSON.stringify({
-            email: email,
-            password: password
-         })
-      }).then((resp) => {
-         console.log(resp)
-      })
+      if (confirmed) {
 
-      if (isVendor) {
-         fetch("/api/vendors", {
+         fetch("/register", {
             method: "POST",
             headers: {
                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-               shopName: shopName,
-               ownerName: email,
-               phoneNumber: phoneNum,
-               address: null,
-               description: null,
-               website: null
+               email: email,
+               password: password
             })
-         });
+         }).then((resp) => {
+            console.log(resp)
+         })
+         if (isVendor) {
+            // TODO: Get user id to use for ownerid(ownerName)
+            fetch("/api/vendors", {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify({
+                  shopName: shopName,
+                  ownerName: email,
+                  phoneNumber: phoneNum,
+                  address: null,
+                  description: null,
+                  website: null
+               })
+            });
+         }
       }
    }
 
@@ -98,11 +115,17 @@ function RegisterFormModal({ onClose }) {
                <label>Password</label>
                <input
                   type="password"
+                  id="password"
                   name="password"
                   onChange={handleChange}
                   required />
                <label>Confirm Password</label>
-               <input type="password" required></input>
+               <input
+                  type="password"
+                  id="password-confirm"
+                  onInput={passwordCheck}
+                  required />
+               {error && <span className="error">{error}</span>}
                <div id="vendor-checkbox-area">
                   <input type="checkbox" id="vendor-checkbox" onClick={handleCheck}></input>
                   <label>Are you a vendor?</label>
