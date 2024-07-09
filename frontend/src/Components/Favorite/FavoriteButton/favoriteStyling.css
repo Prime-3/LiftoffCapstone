@@ -12,9 +12,9 @@
   }
   
   .favorite-button:hover {
-    background-color: var(--color-water);
+    background-color:rgba(71, 103, 48, 1);
   }
   
   .favorite-button:active {
-    background-color: var(--color-water-10);
+    background-color: rgba(71, 103, 48, 1);
   }

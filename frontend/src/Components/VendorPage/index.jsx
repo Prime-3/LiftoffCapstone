@@ -2,9 +2,12 @@ import React from "react";
 import FavoriteButton from "../Favorite/FavoriteButton";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import './styling.css';
+import Header from "../Header";
 
 
 
+ //Filter through all vendors to find the requested vendor with vendorId
 const VendorDetailsPage = () => {
     let { vendorId } = useParams();
     const [selectedVendor, setSelectedVendor] = useState({});
@@ -20,21 +23,20 @@ const VendorDetailsPage = () => {
         })
     }, []);
 
-
-
-//   const allVendors = []; //! fetch vendor data here
-
-    //Filter through all vendors to find the requested vendor with vendorId
-//    selectedVendor = allVendors.find((vendor) => vendor.id === vendorId);
-  
     return (
     <div>
-      <div><h2>{selectedVendor.shopName}</h2><FavoriteButton /></div>
-      <div><img src={selectedVendor.logo} /></div>
-      {/* <div><p>Owner: {selectedVendor.ApplicationUser.FirstName} {selectedVendor.ApplicationUser.LastName}</p></div> */}
-      <div><h4>{selectedVendor.description}</h4></div>
-      <div>{/*Reviews*/}</div> 
-      <div>{/*Schedule*/}</div> 
+        <Header />
+      <div class="logo"><img src={selectedVendor.logo} />
+        <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton /></h2></div>
+      </div>
+
+      <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
+
+      <div class="description"><h4>{selectedVendor.description}</h4></div>
+    
+      <div class="schedule">{/*Schedule*/}</div> 
+
+      <div class="reviews">{/*Reviews*/}</div>  
     </div>
   );
 };

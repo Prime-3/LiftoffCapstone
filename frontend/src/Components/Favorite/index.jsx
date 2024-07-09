@@ -3,7 +3,7 @@ import FavoriteButton from "./FavoriteButton";
 
 const Favorited = () => {
     const [favorites, setFavorites] = useState([]);
-    const allVendors = []; //! need to fetch all vendors here
+    const allVendors = []; //TODO: Need to fetch all vendors here
 
 const handleFavoriteButton = (vendorId) => {
     // update vendor status in favorites list
@@ -21,7 +21,7 @@ const handleFavoriteButton = (vendorId) => {
 }
 
 // Filter and find only favorited vendors
-const favoritedVendors = allVendors.filter((vendor) => vendor.isFavorite);       //! need to add isFavorite to sql
+const favoritedVendors = allVendors.filter((vendor) => vendor.isFavorite);     //TODO: Need to add isFavorite to sql
 
   return (
     <div>
