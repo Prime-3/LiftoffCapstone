@@ -1,4 +1,3 @@
-import Header from "../Components/Header";
 import ReviewCard from "../Components/ReviewCard";
 import CreateReview from "../Components/CreateReview";
 import Header from "../Components/Header"
@@ -10,6 +9,7 @@ export default function Root() {
     return (
         <>
             <Header />
+
             {/* For testing review cards
             <CreateReview />
             <ReviewCard />
