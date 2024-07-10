@@ -7,6 +7,9 @@ import Vendors, {
     loader as vendorsLoader
 } from "./routes/vendors";
 
+import Vendor, {
+    loader as vendorLoader
+} from "./routes/vendor";
 import ErrorPage from "./pages/error";
 import Login from "./pages/Login";
 import AuthorizeView, { AuthorizedUser } from "./Components/AuthorizeView";

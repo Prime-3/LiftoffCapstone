@@ -8,6 +8,7 @@
 
 .intro-photos {
    width: 250px;
+   border-radius: 10px;
 }
 
 #instructions {
@@ -15,8 +16,9 @@
 }
 
 .intro-cards {
-   margin: 30px;
+   /* margin: 30px; */
    padding: 30px;
+   width: 300px;
 }
 
 #slogan {
@@ -29,7 +31,7 @@
    margin-top: 100px;
 }
 
-#landing-page>button {
+#landing-page>a>button {
    font-size: large;
    display: flex;
    align-items: center;
