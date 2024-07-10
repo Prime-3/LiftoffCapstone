@@ -9,16 +9,25 @@ const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
    const [showModal, setShowModal] = useState(false);
    const [modalSel, setModalSel] = useState();
+   const [user, setUser] = useState()
    const ulRef = useRef();
 
 
    const openMenu = (e) => {
-      console.log("HIT", showMenu)
       if (showMenu) return;
       setShowMenu(true);
    };
 
    useEffect(() => {
+      fetch("/pingauth")
+         .then((resp) => {
+            return resp.json();
+         })
+         .then((data) => {
+            console.log(data);
+            setUser(data)
+         })
+
       if (!showMenu) return;
 
       const closeMenu = (e) => {
@@ -40,32 +49,44 @@ const MenuButton = () => {
          <i className="fa-solid fa-bars fa-lg" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-         <li className="menu-item">
-            <h3 onClick={() => {
-               closeMenu()
-               setModalSel("login");
-               setShowModal(true)
-            }}>
-               Login
-            </h3>
-            {(showModal && modalSel == "login") && createPortal(
-               <LoginFormModal onClose={() => setShowModal(false)} />,
-               document.body
-            )}
-         </li>
-         <li className="menu-item">
-            <h3 onClick={() => {
-               closeMenu()
-               setModalSel("register");
-               setShowModal(true)
-            }}>
-               Register
-            </h3>
-            {(showModal && modalSel == "register") && createPortal(
-               <RegisterFormModal onClose={() => setShowModal(false)} />,
-               document.body
-            )}
-         </li>
+         {user ?
+            (
+               <li className="menu-item">
+                  <h3>TEST</h3>
+               </li>
+            )
+            :
+            (
+               <>
+                  <li className="menu-item">
+                     <h3 onClick={() => {
+                        closeMenu()
+                        setModalSel("login");
+                        setShowModal(true)
+                     }}>
+                        Login
+                     </h3>
+                     {(showModal && modalSel == "login") && createPortal(
+                        <LoginFormModal onClose={() => setShowModal(false)} />,
+                        document.body
+                     )}
+                  </li>
+                  <li className="menu-item">
+                     <h3 onClick={() => {
+                        closeMenu()
+                        setModalSel("register");
+                        setShowModal(true)
+                     }}>
+                        Register
+                     </h3>
+                     {(showModal && modalSel == "register") && createPortal(
+                        <RegisterFormModal onClose={() => setShowModal(false)} />,
+                        document.body
+                     )}
+                  </li>
+               </>
+            )
+         }
       </ul>
    </>
 }

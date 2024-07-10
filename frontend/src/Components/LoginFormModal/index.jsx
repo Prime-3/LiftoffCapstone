@@ -18,7 +18,7 @@ function LoginFormModal({ onClose }) {
    };
 
    const handleRegisterClick = () => {
-      navigate("/register");
+      navigate("/");
    };
 
    // event: React.FormEvent<HTMLFormElement>
@@ -49,7 +49,7 @@ function LoginFormModal({ onClose }) {
                setError("Successful login.");
                // redirect to /, force full browser reload so all cookies are set.
                // TODO: navigate to 'authorizeview' page that triggered login
-               window.location.href = '/vendors';
+               window.location.href = '/';
             } else {
                setError("Credentials did not match.");
             }
@@ -65,7 +65,7 @@ function LoginFormModal({ onClose }) {
          <div className="modal-background" onClick={onClose}></div>
          <div className="modal-content">
 
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleSubmit}>
                <h2 className="form-title">Login</h2>
                <label>Email</label>
                <input
@@ -94,7 +94,7 @@ function LoginFormModal({ onClose }) {
                      onChange={handleChange} />
                   <span>Remember Me</span>
                </div>
-               <button type="submit" className="submit-button">Submit</button>
+               <button type="submit" className="submit-button" onClick={handleRegisterClick}>Submit</button>
             </form>
          </div>
       </div>
