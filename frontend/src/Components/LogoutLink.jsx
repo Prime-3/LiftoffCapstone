@@ -1,10 +1,10 @@
 // https://www.youtube.com/watch?v=eYiLt2gQuME
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // children is a React.ReactNode
 export default function LogoutLink({ children }) {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // event is a React.FormEvent<HTMLAnchorElement>
     const handleSubmit = (event) => {
         event.preventDefault();

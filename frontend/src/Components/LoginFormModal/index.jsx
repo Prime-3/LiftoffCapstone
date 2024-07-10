@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import "./LoginFormModal.css"
 
 function LoginFormModal({ onClose }) {
@@ -7,7 +7,7 @@ function LoginFormModal({ onClose }) {
    const [password, setPassword] = useState("");
    const [rememberme, setRememberme] = useState(false);
    const [error, setError] = useState("");
-   const navigate = useNavigate();
+   // const navigate = useNavigate();
 
    // event: React.ChangeEvent<HTMLInputElement>
    const handleChange = (event) => {
@@ -17,9 +17,9 @@ function LoginFormModal({ onClose }) {
       if (name === "rememberme") setRememberme(event.target.checked);
    };
 
-   const handleRegisterClick = () => {
-      navigate("/");
-   };
+   // const handleRegisterClick = () => {
+   //    redirect("/");
+   // };
 
    // event: React.FormEvent<HTMLFormElement>
    const handleSubmit = (event) => {
@@ -94,7 +94,7 @@ function LoginFormModal({ onClose }) {
                      onChange={handleChange} />
                   <span>Remember Me</span>
                </div>
-               <button type="submit" className="submit-button" onClick={handleRegisterClick}>Submit</button>
+               <button type="submit" className="submit-button">Submit</button>
             </form>
          </div>
       </div>
