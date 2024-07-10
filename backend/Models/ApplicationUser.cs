@@ -8,8 +8,7 @@ public class ApplicationUser: IdentityUser
     // Field(s)/Propert(y|ies)
     public string? FirstName {get; set;}
     public string? LastName {get;set;}
-    public int? ShopId {get; set;}
-    public Shop? Shop {get; set;}
+    public List<Shop>? Shops {get; set;}
     public List<Shop> Favorites {get; set;}
     public List<Review> Reviews {get; set;}
 
