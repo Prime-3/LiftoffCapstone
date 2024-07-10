@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from 'react-dom';
 
 import LoginFormModal from "../LoginFormModal";
@@ -11,13 +11,14 @@ const MenuButton = () => {
    const [showModal, setShowModal] = useState(false);
    const [modalSel, setModalSel] = useState();
    const [user, setUser] = useState()
-   const ulRef = useRef();
 
 
    const openMenu = () => {
       if (showMenu) return;
       setShowMenu(true);
    };
+
+   const closeMenu = () => setShowMenu(false);
 
    useEffect(() => {
       fetch("/pingauth")
@@ -29,27 +30,17 @@ const MenuButton = () => {
             setUser(data)
          })
 
-      if (!showMenu) return;
+   }, []);
 
-      const closeMenu = (e) => {
-         if (!ulRef.current.contains(e.target)) {
-            setShowMenu(false);
-         }
-      };
-
-      return () => document.removeEventListener("click", closeMenu);
-   }, [showMenu]);
-
-   const closeMenu = () => setShowMenu(false);
 
    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
    return <>
-      <button className="profile-button" onClick={openMenu}>
+      <button className="profile-button" onClick={showMenu ? closeMenu : openMenu}>
          <p>Menu</p>
          <i className="fa-solid fa-bars fa-lg" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <ul className={ulClassName}>
          {user ?
             (
                <>

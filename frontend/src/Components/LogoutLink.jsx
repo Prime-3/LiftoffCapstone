@@ -16,7 +16,7 @@ export default function LogoutLink({ children }) {
             body: ""
         }).then((data) => {
             if (data.ok) {
-                navigate("/");
+                window.location.href = '/';
             }
             else { }
         }).catch((error) => {
