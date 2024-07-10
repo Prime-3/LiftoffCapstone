@@ -43,7 +43,7 @@ export default function Root() {
                 <SearchCard />
                 <SearchCard />
             </div> */}
-            {/* <VendorDetailsPage /> */}
+           
         </>
     )
 }
