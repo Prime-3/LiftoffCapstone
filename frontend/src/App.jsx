@@ -16,7 +16,7 @@ import Vendor, {
 } from "./routes/vendor";
 import ErrorPage from "./pages/error";
 import Login from "./pages/Login";
-import AuthorizeView, {AuthorizedUser} from "./Components/AuthorizeView";
+import AuthorizeView, { AuthorizedUser } from "./Components/AuthorizeView";
 import LogoutLink from "./Components/LogoutLink";
 import "./App.css";
 import Favorited from './Components/Favorite';
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element: (
             // https://www.youtube.com/watch?v=eYiLt2gQuME
             <AuthorizeView>
-                <LogoutLink>Logout<AuthorizedUser value="email"/></LogoutLink>
+                <LogoutLink>Logout<AuthorizedUser value="email" /></LogoutLink>
                 <Vendor />
             </AuthorizeView>
         ),
@@ -80,6 +80,7 @@ function App() {
 
     return (
         <>
+            <Header />
             <RouterProvider router={router} />
         </>
     )
