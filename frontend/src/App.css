@@ -1,5 +1,6 @@
 html {
   max-width: 1280px;
+  min-width: 600px;
   margin: 0 auto;
   padding: 0;
   text-align: center;
@@ -63,6 +64,7 @@ html {
 
 .submit-button {
   display: flex;
+  font-weight: bold;
   align-self: center;
   width: fit-content;
   background-color: red;
