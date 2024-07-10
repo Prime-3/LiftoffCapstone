@@ -13,7 +13,7 @@ const VendorDetailsPage = () => {
     let { vendorId } = useParams();
     const [selectedVendor, setSelectedVendor] = useState({});
     useEffect(() => {
-        fetch(`/api/vendors/${vendorId}`)
+        fetch(`/api/shops/${vendorId}`) 
         .then((resp) => {
             return resp.json();
         }

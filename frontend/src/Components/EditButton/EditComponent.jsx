@@ -31,7 +31,7 @@ const handleChange = (e) => {
     console.log("HIT handlesubmit")
  
     //PATCH request 
-    fetch(`/api/vendors/${vendorId}`, {
+    fetch(`/api/shops/${vendorId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
