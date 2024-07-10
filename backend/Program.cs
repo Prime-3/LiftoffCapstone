@@ -58,6 +58,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Add auth middleware.
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -86,8 +88,10 @@ app.MapGet("/pingauth", (ClaimsPrincipal user) => {
     // - for React app to know user is authenticated, app needs to check with
     //   the server. If user is logged in, server tells app identity of the
     //   user that is logged in by sending user's email back.
+
     var email = user.FindFirstValue(ClaimTypes.Email);
-    return Results.Json(new {Email = email});
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+    return Results.Json(new {Email = email, UserId = userId});
 }).RequireAuthorization();
 
 // middleware to serve Swagger UI & JSON endpoints
