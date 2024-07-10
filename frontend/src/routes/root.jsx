@@ -9,6 +9,7 @@ export default function Root() {
     return (
         <>
             <Header />
+
             {/* For testing review cards
             <CreateReview />
             <ReviewCard />
