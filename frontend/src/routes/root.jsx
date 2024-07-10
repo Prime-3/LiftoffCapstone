@@ -1,9 +1,10 @@
-import Header from "../Components/Header";
+
 import ReviewCard from "../Components/ReviewCard";
 import CreateReview from "../Components/CreateReview";
 import Header from "../Components/Header"
 import SearchCard from "../Components/SearchCard";
 import { useState, useEffect } from "react";
+import VendorDetailsPage from "../Components/VendorPage";
 
 export default function Root() {
 
@@ -42,6 +43,7 @@ export default function Root() {
                 <SearchCard />
                 <SearchCard />
             </div> */}
+            {/* <VendorDetailsPage /> */}
         </>
     )
 }
