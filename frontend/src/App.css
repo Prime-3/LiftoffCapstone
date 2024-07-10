@@ -63,6 +63,7 @@ html {
 
 .submit-button {
   display: flex;
+  font-weight: bold;
   align-self: center;
   width: fit-content;
   background-color: red;

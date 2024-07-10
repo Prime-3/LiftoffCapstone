@@ -4,7 +4,9 @@ const LandingPage = () => {
    return (
       <div id="landing-page">
          <h1 id="slogan">This is the Landing Page. Something short about the app. Numquam iste, nobis deleniti alias asperiores saepe nisi fuga sit.</h1>
-         <button className="submit-button">Browse Shops</button>
+         <a href="/">
+            <button className="submit-button">Browse Shops</button>
+         </a>
          <h2>How to use:</h2>
          <div id="instructions">
             <div className="intro-cards">
