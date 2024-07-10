@@ -3,17 +3,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Fetch from './routes/fetch';
 
-
-
-import Header from './Components/Header';
-
 import Vendors, {
     loader as vendorsLoader
 } from "./routes/vendors";
 
-import Vendor, {
-    loader as vendorLoader
-} from "./routes/vendor";
 import ErrorPage from "./pages/error";
 import Login from "./pages/Login";
 import AuthorizeView, { AuthorizedUser } from "./Components/AuthorizeView";
@@ -22,6 +15,7 @@ import "./App.css";
 import Favorited from './Components/Favorite';
 import VendorDetailsPage from './Components/VendorPage';
 
+import Header from './Components/Header';
 
 
 const router = createBrowserRouter([
