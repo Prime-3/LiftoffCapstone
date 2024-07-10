@@ -1,8 +1,8 @@
 // https://www.youtube.com/watch?v=eYiLt2gQuME
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // children is a React.ReactNode
-export default function LogoutLink({children}) {
+export default function LogoutLink({ children }) {
 
     const navigate = useNavigate();
     // event is a React.FormEvent<HTMLAnchorElement>
@@ -16,7 +16,7 @@ export default function LogoutLink({children}) {
             body: ""
         }).then((data) => {
             if (data.ok) {
-                navigate("/vendors");
+                navigate("/");
             }
             else { }
         }).catch((error) => {

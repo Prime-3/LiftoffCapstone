@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
 import "./MenuStyle.css"
+import LogoutLink from "../LogoutLink";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -13,7 +14,7 @@ const MenuButton = () => {
    const ulRef = useRef();
 
 
-   const openMenu = (e) => {
+   const openMenu = () => {
       if (showMenu) return;
       setShowMenu(true);
    };
@@ -51,9 +52,22 @@ const MenuButton = () => {
       <ul className={ulClassName} ref={ulRef}>
          {user ?
             (
-               <li className="menu-item">
-                  <h3>TEST</h3>
-               </li>
+               <>
+                  <li className="menu-item">
+                     <h3>Account</h3>
+                  </li>
+                  <li className="menu-item">
+                     <h3>Favorites</h3>
+                  </li>
+                  <li className="menu-item">
+                     <h3>Shops</h3>
+                  </li>
+                  <li className="menu-item">
+                     <LogoutLink>
+                        <h3 onClick={closeMenu}>Logout</h3>
+                     </LogoutLink>
+                  </li>
+               </>
             )
             :
             (
