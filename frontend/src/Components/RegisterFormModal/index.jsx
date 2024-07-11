@@ -93,8 +93,8 @@ function RegisterFormModal({ onClose }) {
                   })
                   .then((data) => {
                      console.log("pingauth", data);
-                     setOwnerId(data.userId)
-                  }).then(() => {
+                     return data.userId
+                  }).then((userId) => {
                      fetch("/api/shops", {
                         method: "POST",
                         headers: {
@@ -102,8 +102,9 @@ function RegisterFormModal({ onClose }) {
                         },
                         body: JSON.stringify({
                            shopName: shopName,
-                           applicationUserId: ownerId,
-                           phoneNumber: phoneNum
+                           applicationUserId: userId,
+                           phoneNumber: phoneNum,
+                           category: category
                         })
                      })
                   });

@@ -23,7 +23,12 @@ const MenuButton = () => {
    useEffect(() => {
       fetch("/pingauth")
          .then((resp) => {
-            return resp.json();
+            if (resp.ok) {
+
+               return resp.json();
+            } else {
+               return null
+            }
          })
          .then((data) => {
             console.log(data);
