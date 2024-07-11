@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./RegisterFormModal.css"
 
 
@@ -77,7 +77,6 @@ function RegisterFormModal({ onClose }) {
                      return resp.json();
                   })
                   .then((data) => {
-                     console.log("pingauth", data);
                      return data.userId
                   }).then((userId) => {
                      fetch("/api/shops", {
@@ -92,6 +91,8 @@ function RegisterFormModal({ onClose }) {
                            description: description,
                            category: category
                         })
+                     }).then(() => {
+                        window.location.href = '/';
                      })
                   });
             }
@@ -99,7 +100,6 @@ function RegisterFormModal({ onClose }) {
 
       }
    }
-
 
    return (
       <div className="modal">
@@ -155,18 +155,6 @@ function RegisterFormModal({ onClose }) {
                            name="shopName"
                            onChange={handleChange}
                            required />
-                        {/* <label>Phone #</label>
-                        <input
-                           type="text"
-                           name="phoneNum"
-                           onChange={handleChange}
-                           required /> */}
-                        {/* <label>Address</label>
-                        <input
-                           type="text"
-                           name="phoneNum"
-                           onChange={handleChange}
-                           required /> */}
                         <label>Description</label>
                         <textarea
                            name="description"
@@ -187,7 +175,6 @@ function RegisterFormModal({ onClose }) {
             </form>
          </div>
       </div>
-
    );
 }
 
