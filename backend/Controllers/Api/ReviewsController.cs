@@ -42,6 +42,7 @@ public class ReviewsController : ControllerBase
          return await context
          .Reviews
          .Where(r => id == r.ShopId)
+         .Include(r => r.Reviewer)
          .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
@@ -60,6 +61,7 @@ public class ReviewsController : ControllerBase
          return await context
          .Reviews
          .Where(r => id == r.ApplicationUserId)
+         .Include(r => r.Reviewer)
          .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
