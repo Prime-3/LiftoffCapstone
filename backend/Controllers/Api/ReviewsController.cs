@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using backend.Authorization;
 using backend.Data;
 using backend.Models;
 
@@ -10,14 +12,18 @@ namespace backend.Controllers;
 public class ReviewsController : ControllerBase
 {
    private readonly ApplicationDbContext context;
+   private readonly IAuthorizationService _authz;
 
-   public ReviewsController(ApplicationDbContext dbContext)
+   public ReviewsController(
+      ApplicationDbContext dbContext,
+      IAuthorizationService authz)
    {
       context = dbContext;
+      _authz = authz;
    }
 
    // POST /api/reviews
-   [HttpPost]
+   [HttpPost, Authorize]
    public IActionResult CreateReview([FromBody] Review review)
    {
       if (ModelState.IsValid)
@@ -70,13 +76,20 @@ public class ReviewsController : ControllerBase
    }
 
    // DELETE /api/reviews/{id}
-   [HttpDelete("{id}")]
-   public IActionResult DeleteReview(int id)
+   [HttpDelete("{id}"), Authorize]
+   public async Task<IActionResult> DeleteReviewAsync(int id)
    {
       var review = context.Reviews.FirstOrDefault(r => r.Id == id);
       if (review == null)
       {
          return NotFound();
+      }
+      var authzResult = await _authz.AuthorizeAsync(
+                           User, // User property from ControllerBase
+                           review,
+                           new OwnerOnlyRequirement());
+      if (!authzResult.Succeeded) {
+            return Forbid();
       }
 
       context.Reviews.Remove(review);
