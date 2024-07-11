@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchCard from "../SearchCard"
+import "./BrowsePage.css"
 
 const BrowsePage = () => {
    const [shops, setShops] = useState([])
@@ -15,10 +16,12 @@ const BrowsePage = () => {
    }, []);
 
    return (
-      <>
+      <div id="browse-page">
          <h1>BrowsePage</h1>
-         {shops.map((shop) => <SearchCard shop={shop} />)}
-      </>
+         <div id="card-container">
+            {shops.map((shop) => <SearchCard shop={shop} />)}
+         </div>
+      </div>
    )
 }
 
