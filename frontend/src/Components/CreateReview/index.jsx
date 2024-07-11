@@ -1,15 +1,50 @@
 import { useState } from "react";
 import "./CreateReview.css"
 
-function CreateReview() {
+function CreateReview({ shop }) {
    const [stars, setStars] = useState(0)
+   const [title, setTitle] = useState("")
+   const [comment, setComment] = useState("test")
    const [hover, setHover] = useState(0)
+
+   const handleChange = (e) => {
+      const { name, value } = e.target;
+      console.log("handleChange", title, comment)
+      if (name === "comment") setComment(value);
+      if (name === "title") setTitle(value);
+   };
+
+   const handleSubmit = (e) => {
+      e.preventDefault()
+
+      fetch("/pingauth")
+         .then((resp) => {
+            return resp.json();
+         })
+         .then((data) => {
+            return data.userId
+         }).then((userId) => {
+            fetch("/api/reviews", {
+               method: "POST",
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify({
+                  applicationUserId: userId,
+                  shopId: shop.shopId,
+                  title: title,
+                  stars: stars,
+                  description: comment
+               })
+            })
+         })
+   }
 
    return (
       <form className="form-create-review">
          <label className="review-label">Review Title</label>
          <div id="form-title-stars">
-            <input id="form-review-title" type="text"></input>
+            <input id="form-review-title" type="text" name="title" onChange={handleChange}></input>
             <div id="star-container">
                <div className="stars">
                   <i
@@ -47,8 +82,8 @@ function CreateReview() {
             </div>
          </div>
          <label className="review-label">Comment</label>
-         <textarea id="form-review-comment"></textarea>
-         <button className="submit-button" type="submit">Submit</button>
+         <textarea id="form-review-comment" name="comment" onChange={handleChange}></textarea>
+         <button className="submit-button" type="submit" onClick={handleSubmit}>Submit</button>
       </form>
    )
 }

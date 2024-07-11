@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './styling.css';
 import EditComponent from "../EditButton/EditComponent";
+import CreateReview from "../CreateReview"
+import ReviewCard from "../ReviewCard"
 
 
 
@@ -11,6 +13,8 @@ import EditComponent from "../EditButton/EditComponent";
 const VendorDetailsPage = () => {
     let { vendorId } = useParams();
     const [selectedVendor, setSelectedVendor] = useState({});
+    const [reviews, setReviews] = useState([]);
+
     useEffect(() => {
         fetch(`/api/shops/${vendorId}`)
             .then((resp) => {
@@ -32,7 +36,8 @@ const VendorDetailsPage = () => {
             </div>
 
             <div class="schedule">{/*Schedule*/}</div>
-            <div class="reviews">{/*Reviews*/}</div>
+            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
+            <div class="reviews"><ReviewCard /></div>
         </div>
     );
 };
