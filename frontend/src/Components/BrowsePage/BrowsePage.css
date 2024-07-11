@@ -5,4 +5,6 @@
 #card-container {
    display: flex;
    flex-wrap: wrap;
+   justify-content: left;
+   padding: 20px;
 }

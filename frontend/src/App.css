@@ -15,6 +15,7 @@ body {
 
 #app {
   background-color: rgba(227, 227, 220, 1);
+  min-height: 1500px;
 }
 
 header {
