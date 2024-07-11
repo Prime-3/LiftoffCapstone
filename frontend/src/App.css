@@ -4,6 +4,9 @@ html {
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  background-image: url("../images/fruit-932745_1280.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 body {
