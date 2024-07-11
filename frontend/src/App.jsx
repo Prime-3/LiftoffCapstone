@@ -19,6 +19,7 @@ import Favorited from './Components/Favorite';
 import VendorDetailsPage from './Components/VendorPage';
 
 import Header from './Components/Header';
+import BrowsePage from './Components/BrowsePage';
 
 
 const router = createBrowserRouter([
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
     {
         path: "/vendorpage/:vendorId",
         element: <VendorDetailsPage />
+    },
+    {
+        path: "/browse",
+        element: <BrowsePage />
     }
 ]);
 
