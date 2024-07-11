@@ -8,7 +8,7 @@ function SearchCard({ shop }) {
 
    return (
       <div className="search-card">
-         <a href={`/shops/${shop.id}`}>
+         <a href={`/vendorpage/${shop.id}`}>
             <img id="vendor-photo" src={vendorPhoto} />
             <div id="vendor-info">
                <div>

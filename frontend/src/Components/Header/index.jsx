@@ -6,7 +6,7 @@ const Header = () => {
       <>
          <header>
             <a href="/">
-               <img id="logo" src="images/STLmarkets.png" />
+               <img id="logo" src="/images/STLmarkets.png" />
             </a>
             <form>
                <input id="search-bar" type="text"></input>

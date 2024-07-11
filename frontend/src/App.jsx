@@ -81,10 +81,10 @@ const router = createBrowserRouter([
 function App() {
 
     return (
-        <>
+        <div id='app'>
             <Header />
             <RouterProvider router={router} />
-        </>
+        </div>
     )
 }
 export default App;

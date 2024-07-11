@@ -6,6 +6,20 @@ html {
   text-align: center;
 }
 
+body {
+  margin: 0;
+}
+
+#app {
+  background-color: rgba(227, 227, 220, 1);
+}
+
+header {
+  display: flex;
+  position: fixed;
+  width: 1240px;
+}
+
 .modal-content {
   display: flex;
   justify-content: center;
