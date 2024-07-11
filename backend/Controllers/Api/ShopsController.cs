@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // provides DbSet.Include()
+using backend.Authorization;
 using backend.Data;
 using backend.Models;
 
@@ -10,10 +12,14 @@ namespace backend.Controllers;
     public class ShopsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly IAuthorizationService _authz;
 
-        public ShopsController(ApplicationDbContext dbContext)
+        public ShopsController(
+            ApplicationDbContext dbContext,
+            IAuthorizationService authz)
         {
             context = dbContext;
+            _authz = authz;
         }
 
         // GET: api/shops --> Gets all shops
@@ -61,14 +67,26 @@ namespace backend.Controllers;
 
 
         // PATCH: api/shop/{id} --> Patch updates existing shop information
-        [HttpPatch("{id}")]
-        public IActionResult UpdateShop(int id, [FromBody] Shop shop)
+        // TODO: Based on MS docs, explicitly invoking AuthorizeAsync seems
+        //   not to be the prescribed method. Due to time constraints, this
+        //   will have to do. When we hit MVP, we may want to revisit how to
+        //   use AuthorizeAttribute, e.g. [Authorize(Policy="OwnerOnly")].
+        [HttpPatch("{id}"), Authorize]
+
+        public async Task<ActionResult> UpdateShop(int id, [FromBody] Shop shop)
         {
             //Get existing shop info
             var existingShop = context.Shops.FirstOrDefault(v => v.Id == id);
             if (existingShop == null)
             {
                 return NotFound();
+            }
+            var authzResult = await _authz.AuthorizeAsync(
+                                User, // User property from ControllerBase
+                                shop,
+                                new OwnerOnlyRequirement());
+            if (!authzResult.Succeeded) {
+                return Forbid();
             }
 
             //Apply changes
@@ -99,18 +117,26 @@ namespace backend.Controllers;
         }
 
     // DELETE: api/shops/{id}
-    [HttpDelete("{id}")]
-    public IActionResult DeleteShop(int id)
+    [HttpDelete("{id}"), Authorize]
+    public async Task<IActionResult> DeleteShop(int id)
     {
         var shop = context.Shops.FirstOrDefault(v => v.Id == id);
-            if (shop == null)
-            {
-                return NotFound();
-            }
+        if (shop == null)
+        {
+            Console.WriteLine("No shop!");
+            return NotFound();
+        }
+        var authzResult = await _authz.AuthorizeAsync(
+                User, // User property from ControllerBase
+                shop,
+                new OwnerOnlyRequirement());
+        if (!authzResult.Succeeded) {
+            return Forbid();
+        }
 
-            context.Shops.Remove(shop);
-            context.SaveChanges();
+        context.Shops.Remove(shop);
+        context.SaveChanges();
 
-            return Ok(new {message = "Successfully removed shop."});
+        return Ok(new {message = "Successfully removed shop."});
     }
 }

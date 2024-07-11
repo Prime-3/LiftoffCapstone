@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims; // ClaimsPrincipal, ClaimsTypes
+
+using backend.Authorization;
 using backend.Data;
 using backend.Models;
 
@@ -18,20 +21,29 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options => {
     // TODO: probably a good idea require (some kind of) confirmation. Disable
     //  'confirmation' for our MVP for now though.
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
 })
-.AddApiEndpoints()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-// TODO: Not sure if this is needed. Need to understand authorization 'roles',
-//   'claims' and 'policies".
-builder.Services.AddAuthorization();
+builder.Services.AddAuthentication();
+// TODO: understand authorization more
+//  claims - key/value pair that represents the subject
+//  roles - Identity can be assigned roles, which provide it with certain claims
+//  policies - set of one or more requirements on user to be "authorized"
+// register polic(y|ies)
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("OwnerOnly", policy =>
+        policy.Requirements.Add(new OwnerOnlyRequirement()))
+);
+// TODO: understand DI AddTransient(), AddScoped(), AddTransient()
+// register authorization handler(s)
+builder.Services.AddScoped<IAuthorizationHandler, OwnerOnlyHandler>();
 
 // Swagger generator
 // TODO: see https://aka.ms/aspnetcore/swashbuckle (about configuring)
@@ -65,7 +77,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
 // Add "out-of-the-box" auth endpoints, e.g.
 // - POST /register
 // - POST /login
