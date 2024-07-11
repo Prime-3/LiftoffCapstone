@@ -10,7 +10,7 @@ function RegisterFormModal({ onClose }) {
    const [shopName, setShopName] = useState("");
    const [phoneNum, setPhoneNum] = useState("");
    const [category, setCategory] = useState("");
-   const [ownerId, setOwnerId] = useState(0)
+   const [ownerId, setOwnerId] = useState("")
    const [error, setError] = useState("");
    const [confirmed, setConfirmed] = useState(false)
 
@@ -30,13 +30,16 @@ function RegisterFormModal({ onClose }) {
 
    function passwordCheck() {
       var input = document.getElementById('password-confirm');
-      if (input.value != document.getElementById('password').value) {
+      if (input.value == document.getElementById('password').value) {
+         console.log("true")
          setConfirmed(true)
-         setError('Password Must be Matching.');
-      } else {
-         setConfirmed(false)
          setError("");
+      } else {
+         console.log("false")
+         setConfirmed(false)
+         setError('Password Must be Matching.');
       }
+      console.log(input.value, document.getElementById('password').value, confirmed)
    }
 
    const handleChange = (e) => {
@@ -50,39 +53,66 @@ function RegisterFormModal({ onClose }) {
       if (name === "category") setCategory(value);
    };
 
+   const postShop = () => {
+      fetch("/api/shops", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+            shopName: shopName,
+            applicationUserId: ownerId,
+            phoneNumber: phoneNum
+         })
+            .then((resp) => {
+               console.log("shop post", resp)
+            })
+      });
+   }
+
    const handleSubmit = (e) => {
       e.preventDefault()
+
       if (confirmed) {
 
-         fetch("/register", {
+         fetch("/api/acounts/register", {
             method: "POST",
             headers: {
                "Content-Type": "application/json"
             },
             body: JSON.stringify({
+               firstName: firstName,
+               lastName: lastName,
                email: email,
                password: password
             })
          }).then((resp) => {
-            console.log(resp)
+            console.log("account register", resp)
+         }).then(() => {
+            if (isVendor) {
+               fetch("/pingauth")
+                  .then((resp) => {
+                     return resp.json();
+                  })
+                  .then((data) => {
+                     console.log("pingauth", data);
+                     setOwnerId(data.userId)
+                  }).then(() => {
+                     fetch("/api/shops", {
+                        method: "POST",
+                        headers: {
+                           "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                           shopName: shopName,
+                           applicationUserId: ownerId,
+                           phoneNumber: phoneNum
+                        })
+                     })
+                  });
+            }
          })
-         if (isVendor) {
-            // TODO: Get user id to use for ownerid(ownerName)
-            fetch("/api/vendors", {
-               method: "POST",
-               headers: {
-                  "Content-Type": "application/json"
-               },
-               body: JSON.stringify({
-                  shopName: shopName,
-                  ownerName: email,
-                  phoneNumber: phoneNum,
-                  address: null,
-                  description: null,
-                  website: null
-               })
-            });
-         }
+
       }
    }
 
@@ -92,7 +122,7 @@ function RegisterFormModal({ onClose }) {
          <div className="modal-background" onClick={onClose}></div>
          <div className="modal-content">
 
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form" >
                <h2 className="form-title">Register Account</h2>
                <label>First Name</label>
                <input
@@ -154,7 +184,7 @@ function RegisterFormModal({ onClose }) {
                      </select>
                   </>
                )}
-               <button type="submit" className="submit-button">Submit</button>
+               <button type="submit" className="submit-button" onClick={handleSubmit}>Submit</button>
             </form>
          </div>
       </div>
