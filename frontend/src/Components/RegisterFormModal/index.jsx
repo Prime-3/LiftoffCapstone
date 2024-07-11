@@ -14,9 +14,6 @@ function RegisterFormModal({ onClose }) {
    const [error, setError] = useState("");
    const [confirmed, setConfirmed] = useState(false)
 
-
-
-
    const categories = [
       "Food",
       "Clothing",

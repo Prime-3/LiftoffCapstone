@@ -10,6 +10,7 @@ public class ShopDTO
     public string? Description { get; set; }
     public string? Website { get; set; }
     public string? Logo { get; set; }
+    public string? Category { get; set; }
 
 
     public ShopDTO(Shop shop)
@@ -23,5 +24,6 @@ public class ShopDTO
         Description = shop.Description;
         Website = shop.Website;
         Logo = shop.Logo;
+        Category = shop.Category;
     }
 }
