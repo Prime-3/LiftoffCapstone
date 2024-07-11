@@ -1,0 +1,31 @@
+#register-form {
+   display: flex;
+}
+
+#account-container>label {
+   display: flex;
+   width: fit-content;
+}
+
+#shop-container>label {
+   display: flex;
+   width: fit-content;
+}
+
+#account-container {
+   display: flex;
+   justify-content: left;
+   flex-direction: column;
+   width: fit-content;
+}
+
+.modal-content {
+   flex-direction: column;
+}
+
+#shop-container {
+   display: flex;
+   justify-content: left;
+   flex-direction: column;
+   width: fit-content;
+}
