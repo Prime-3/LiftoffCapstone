@@ -9,6 +9,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 {
     public DbSet<Review>? Reviews { get; set; }
     public DbSet<Shop>? Shops { get; set; }
+    // public DbSet<ApplicationUser>? ApplicationUser { get; set; }
+    // public DbSet<FavoritesAndLikes>? FavoritesAndLikes { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) {}
 
@@ -24,3 +27,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         base.OnModelCreating(builder);
     }
 }
+//      builder.Entity<FavoritesAndLikes>()
+//         .HasOne(fal => fal.User) 
+//         .WithMany(fal => fal.Shops)
+//         .HasForeignKey(fal => fal.LikesId);
+
+//     builder.Entity<FavoritesAndLikes>()
+//         .HasOne(fal => fal.Shop)
+//         .WithMany(fal => fal.Users)
+//         .HasForeignKey(fal => fal.FavoritesId);

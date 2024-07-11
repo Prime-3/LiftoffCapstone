@@ -3,18 +3,41 @@ import FavoriteButton from "./FavoriteButton";
 
 const Favorited = () => {
     const [favorites, setFavorites] = useState([]);
+    const [userId, setUserId] = useState();
     const allVendors = []; //TODO: Need to fetch all vendors here
 
-const handleFavoriteButton = (vendorId) => {
+    fetch('/vendors', {method:'GET'})
+    .then((resp) => {
+        if (resp.ok) {
+            return resp.json();
+        }
+    })
+    .then((data) => {
+        setFavorites(data);
+    })
+    fetch('/pingauth', {method:'GET'})
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      }
+    }).then((data) => {
+        console.log(data)
+        setUserId(data.id)
+    })
+
+    //need fetch get
+
+
+const handleFavoriteButton = (shopId) => {
     // update vendor status in favorites list
     let updatedFavorites;
 
     //already favorited so user is trying to remove from favorites
-    if(favorites.includes(vendorId)){
-        updatedFavorites = favorites.filter((id) => id !== vendorId)
+    if(favorites.includes(shopIdId)){
+        updatedFavorites = favorites.filter((id) => id !== shopId)
     }else {
         //user is trying to add to favorites
-        updatedFavorites = [...favorites, vendorId]
+        updatedFavorites = [...favorites, shopId]
     }
 
     setFavorites(updatedFavorites);
@@ -26,13 +49,13 @@ const favoritedVendors = allVendors.filter((vendor) => vendor.isFavorite);     /
   return (
     <div>
         //* map over each favorited vendor and display them 
-        {favoritedVendors.map((vendorId, vendor) => (        
-            <div key = {vendorId}>
+        {favoritedVendors.map((shopId, vendor) => (        
+            <div key = {shopId}>
                 <div>{vendor.ShopName}</div>
                 <div>{vendor.Description}</div>
             </div>
             ))};      
-      <FavoriteButton onClick={handleFavoriteButton(vendorId)} />
+      <FavoriteButton onClick={handleFavoriteButton(shopId)} />
     </div>
   );
 };

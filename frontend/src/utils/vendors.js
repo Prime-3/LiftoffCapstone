@@ -7,11 +7,11 @@ export async function getVendors(query) {
     //   access /vendors (routes/vendors.jsx) without backend server running,
     //   causes pages/error.jsx to render with 500 error code. Are there any
     //   errors we need to handle with a try-catch block?
-    const resp = await axios.get("/api/vendors");
+    const resp = await axios.get("/api/shops");
     return resp.data;
 }
 
 export async function getVendor(id) {
-    const resp = await axios.get(`/api/vendors/${id}`);
+    const resp = await axios.get(`/api/shops/${id}`);
     return resp.data;
 }

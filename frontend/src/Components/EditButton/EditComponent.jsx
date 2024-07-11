@@ -12,6 +12,7 @@ function EditButtonComponent(args) {
   const [logo, setLogo] = useState(null)
   const [website, setWebsite] = useState(null)
   const [description, setDescription] = useState(null)
+  const [userId, setUserId] = useState("");
 
   //Open/Close Modal
   const toggle = () => setModal(!modal);
@@ -30,6 +31,16 @@ const handleChange = (e) => {
     e.preventDefault();
     console.log("HIT handlesubmit")
  
+    fetch('/pingauth', {method:'GET'})
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      setUserId(data.userId);
+    });
     //PATCH request 
     fetch(`/api/shops/${vendorId}`, {
       method: 'PATCH',
@@ -40,7 +51,8 @@ const handleChange = (e) => {
         shopName: shopName,
         logo: logo,
         website: website,
-        description: description
+        description: description,
+        applicationUserId: userId
       })
     })
     .then((resp) => {
