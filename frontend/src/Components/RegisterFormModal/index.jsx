@@ -11,7 +11,7 @@ function RegisterFormModal({ onClose }) {
    const [shopName, setShopName] = useState("");
    const [phoneNum, setPhoneNum] = useState("");
    const [category, setCategory] = useState("");
-   const [ownerId, setOwnerId] = useState("")
+   const [description, setDescription] = useState("")
    const [error, setError] = useState("");
    const [confirmed, setConfirmed] = useState(false)
 
@@ -49,24 +49,8 @@ function RegisterFormModal({ onClose }) {
       if (name === "shopName") setShopName(value);
       if (name === "phoneNum") setPhoneNum(value);
       if (name === "category") setCategory(value);
+      if (name === "description") setDescription(value);
    };
-
-   const postShop = () => {
-      fetch("/api/shops", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json"
-         },
-         body: JSON.stringify({
-            shopName: shopName,
-            applicationUserId: ownerId,
-            phoneNumber: phoneNum
-         })
-            .then((resp) => {
-               console.log("shop post", resp)
-            })
-      });
-   }
 
    const handleSubmit = (e) => {
       e.preventDefault()
@@ -105,6 +89,7 @@ function RegisterFormModal({ onClose }) {
                            shopName: shopName,
                            applicationUserId: userId,
                            phoneNumber: phoneNum,
+                           description: description,
                            category: category
                         })
                      })
@@ -170,10 +155,21 @@ function RegisterFormModal({ onClose }) {
                            name="shopName"
                            onChange={handleChange}
                            required />
-                        <label>Phone #</label>
+                        {/* <label>Phone #</label>
                         <input
                            type="text"
                            name="phoneNum"
+                           onChange={handleChange}
+                           required /> */}
+                        {/* <label>Address</label>
+                        <input
+                           type="text"
+                           name="phoneNum"
+                           onChange={handleChange}
+                           required /> */}
+                        <label>Description</label>
+                        <textarea
+                           name="description"
                            onChange={handleChange}
                            required />
                         <label>Category</label>

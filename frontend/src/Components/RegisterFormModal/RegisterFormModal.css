@@ -1,5 +1,6 @@
 #register-form {
    display: flex;
+   gap: 15px;
 }
 
 #account-container>label {
@@ -17,6 +18,7 @@
    justify-content: left;
    flex-direction: column;
    width: fit-content;
+   gap: 5px;
 }
 
 .modal-content {
@@ -28,4 +30,12 @@
    justify-content: left;
    flex-direction: column;
    width: fit-content;
+   gap: 5px;
+}
+
+#shop-container>textarea {
+   resize: none;
+   height: 145px;
+   border: 2px solid black;
+   border-radius: 5px;
 }
