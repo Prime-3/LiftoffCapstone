@@ -71,8 +71,7 @@ namespace backend.Controllers;
         //   not to be the prescribed method. Due to time constraints, this
         //   will have to do. When we hit MVP, we may want to revisit how to
         //   use AuthorizeAttribute, e.g. [Authorize(Policy="OwnerOnly")].
-        [Authorize]
-        [HttpPatch("{id}")]
+        [HttpPatch("{id}"), Authorize]
 
         public async Task<ActionResult> UpdateShop(int id, [FromBody] Shop shop)
         {
@@ -118,18 +117,26 @@ namespace backend.Controllers;
         }
 
     // DELETE: api/shops/{id}
-    [HttpDelete("{id}")]
-    public IActionResult DeleteShop(int id)
+    [HttpDelete("{id}"), Authorize]
+    public async Task<IActionResult> DeleteShop(int id)
     {
         var shop = context.Shops.FirstOrDefault(v => v.Id == id);
-            if (shop == null)
-            {
-                return NotFound();
-            }
+        if (shop == null)
+        {
+            Console.WriteLine("No shop!");
+            return NotFound();
+        }
+        var authzResult = await _authz.AuthorizeAsync(
+                User, // User property from ControllerBase
+                shop,
+                new OwnerOnlyRequirement());
+        if (!authzResult.Succeeded) {
+            return Forbid();
+        }
 
-            context.Shops.Remove(shop);
-            context.SaveChanges();
+        context.Shops.Remove(shop);
+        context.SaveChanges();
 
-            return Ok(new {message = "Successfully removed shop."});
+        return Ok(new {message = "Successfully removed shop."});
     }
 }
