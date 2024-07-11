@@ -3,6 +3,7 @@ namespace backend.Models;
 public class ReviewDTO
 {
    public int Id { get; set; }
+   public string? Title { get; set; }
    public int? ShopId { get; set; }
    public string? ReviewerName { get; set; }
    public int? Stars { get; set; }
@@ -12,6 +13,7 @@ public class ReviewDTO
    public ReviewDTO(Review review)
    {
       Id = review.Id;
+      Title = review.Title;
       ShopId = review.ShopId;
       ReviewerName = review.Reviewer.ToString();
       Stars = review.Stars;

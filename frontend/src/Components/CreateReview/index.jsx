@@ -4,12 +4,11 @@ import "./CreateReview.css"
 function CreateReview({ shop }) {
    const [stars, setStars] = useState(0)
    const [title, setTitle] = useState("")
-   const [comment, setComment] = useState("test")
+   const [comment, setComment] = useState("")
    const [hover, setHover] = useState(0)
 
    const handleChange = (e) => {
       const { name, value } = e.target;
-      console.log("handleChange", title, comment)
       if (name === "comment") setComment(value);
       if (name === "title") setTitle(value);
    };
@@ -31,7 +30,7 @@ function CreateReview({ shop }) {
                },
                body: JSON.stringify({
                   applicationUserId: userId,
-                  shopId: shop.shopId,
+                  shopId: shop.id,
                   title: title,
                   stars: stars,
                   description: comment
