@@ -94,21 +94,24 @@ namespace backend.Controllers;
             existingShop.ShopName =
                 (shop.ShopName != null) && (shop.ShopName != existingShop.ShopName)
                 ? shop.ShopName : existingShop.ShopName;
-            existingShop.ApplicationUserId =
-                (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
-                ? shop.ApplicationUserId : existingShop.ApplicationUserId;
+            // existingShop.ApplicationUserId =
+            //     (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
+            //     ? shop.ApplicationUserId : existingShop.ApplicationUserId;
             existingShop.Description =
                 (shop.Description != null) && (shop.Description != existingShop.Description)
                 ? shop.Description : existingShop.Description;
-            existingShop.PhoneNumber =
-                (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
-                ? shop.PhoneNumber : existingShop.PhoneNumber;
-            existingShop.Address =
-                (shop.Address != null) && (shop.Address != existingShop.Address)
-                ? shop.Address : existingShop.Address;
+            // existingShop.PhoneNumber =
+            //     (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
+            //     ? shop.PhoneNumber : existingShop.PhoneNumber;
+            // existingShop.Address =
+            //     (shop.Address != null) && (shop.Address != existingShop.Address)
+            //     ? shop.Address : existingShop.Address;
             existingShop.Website =
                 (shop.Website != null) && (shop.Website != existingShop.Website)
                 ? shop.Website : existingShop.Website;
+            existingShop.Logo =
+                (shop.Logo != null) && (shop.Logo != existingShop.Logo)
+                ? shop.Logo : existingShop.Logo;
             //Save changes
             context.SaveChanges();
 
