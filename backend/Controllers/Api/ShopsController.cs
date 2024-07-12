@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore; // provides DbSet.Include()
 using backend.Authorization;
 using backend.Data;
 using backend.Models;
+using System.Linq.Expressions;
 
 namespace backend.Controllers;
 
@@ -24,11 +25,15 @@ namespace backend.Controllers;
 
         // GET: api/shops --> Gets all shops
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops()
+        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops(string? q)
         {
+            string searchTerm = q.ToLower();
             return await context
                 .Shops
                 .Include(v => v.Owner)
+                .Where(s => s.ShopName.ToLower().Contains(searchTerm)
+                    || s.Description.ToLower().Contains(searchTerm)
+                    || s.Category.Contains(searchTerm))
                 .Select(v => new ShopDTO(v))
                 .ToListAsync();
         }
@@ -71,7 +76,7 @@ namespace backend.Controllers;
         //   not to be the prescribed method. Due to time constraints, this
         //   will have to do. When we hit MVP, we may want to revisit how to
         //   use AuthorizeAttribute, e.g. [Authorize(Policy="OwnerOnly")].
-        [HttpPatch("{id}"), Authorize]
+        [HttpPatch("{id}")]
 
         public async Task<ActionResult> UpdateShop(int id, [FromBody] Shop shop)
         {
