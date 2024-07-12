@@ -24,6 +24,16 @@ const VendorDetailsPage = () => {
             .then((data) => {
                 console.log(data);
                 setSelectedVendor(data);
+            }).then(() => {
+                fetch(`/api/reviews/shop/${vendorId}`)
+                    .then((resp) => {
+                        return resp.json();
+                    })
+                    .then((data) => {
+                        console.log("review fetch", data);
+                        setReviews(data)
+                    })
+
             })
     }, []);
 
@@ -37,7 +47,7 @@ const VendorDetailsPage = () => {
 
             <div class="schedule">{/*Schedule*/}</div>
             <div class="create-review"><CreateReview shop={selectedVendor} /></div>
-            <div class="reviews"><ReviewCard /></div>
+            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} /></div>)}
         </div>
     );
 };
