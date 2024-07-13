@@ -1,23 +1,23 @@
 // https://reactrouter.com/en/main/start/tutorial
 import {useLoaderData, Link} from "react-router-dom";
-import {getVendor} from "../utils/vendors";
+import {getShop} from "../utils/shops";
 
 export async function loader({params}) {
-    const vendor = await getVendor(params.vendorId);
-    return {vendor};
+    const shop = await getShop(params.shopId);
+    return {shop};
 }
 
-export default function Vendor () {
-    const {vendor} = useLoaderData();
+export default function Shop () {
+    const {shop} = useLoaderData();
 
     return (
         <>
-            <p>{vendor.shopName}</p>
-            <p>{vendor.ownerName}</p>
-            <p>{vendor.phoneNumber}</p>
-            <p>{vendor.address}</p>
-            <p>{vendor.description}</p>
-            <p>{vendor.website}</p>
+            <p>{shop.shopName}</p>
+            <p>{shop.ownerName}</p>
+            <p>{shop.phoneNumber}</p>
+            <p>{shop.address}</p>
+            <p>{shop.description}</p>
+            <p>{shop.website}</p>
         </>
     );
 }

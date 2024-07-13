@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterFormModal.css"
 
 
 function RegisterFormModal({ onClose }) {
+   const navigate = useNavigate();
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
    const [email, setEmail] = useState("");
@@ -92,7 +94,7 @@ function RegisterFormModal({ onClose }) {
                            category: category
                         })
                      }).then(() => {
-                        window.location.href = '/';
+                        navigate(0);
                      })
                   });
             }

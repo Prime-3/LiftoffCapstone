@@ -2,26 +2,26 @@
 // https://reactrouter.com/en/main/components/link
 // -> <Link to>... resolves relative to parent route
 import {useLoaderData, Link} from "react-router-dom";
-import {getVendors} from "../utils/vendors";
+import {getShops} from "../utils/shops";
 
 export async function loader() {
-    const vendors = await getVendors();
-    return {vendors};
+    const shops = await getShops();
+    return {shops};
 }
 
-export default function Vendors () {
-    const {vendors} = useLoaderData();
+export default function Shops () {
+    const {shops} = useLoaderData();
 
-    const vendorsJSX = vendors.map(vendor => {
+    const shopsJSX = shops.map(shop => {
         return (
-            <Link to={`${vendor.id}`} key={vendor.id}>
-                <p>{vendor.shopName}</p>
+            <Link to={`${shop.id}`} key={shop.id}>
+                <p>{shop.shopName}</p>
             </Link>
         );
     });
     return (
         <>
-        {vendorsJSX}
+        {shopsJSX}
         </>
     );
 }
