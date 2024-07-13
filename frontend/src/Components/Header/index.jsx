@@ -1,18 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import "./HeaderStyle.css"
 import MenuButton from "./MenuButton";
 
 const Header = () => {
+   const navigate = useNavigate();
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const searchTerm = formData.get("search-term");
+      navigate(`/browse/${searchTerm}`);
+   }
    return (
       <>
          <header>
             <a href="/">
                <img id="logo" src="/images/STLmarkets.png" />
             </a>
-            <form>
-               <input id="search-bar" type="text"></input>
-               <a href="/" id="search-button">
-                  <i className="fa-solid fa-magnifying-glass"></i>
-               </a>
+            <form onSubmit={handleSubmit}>
+               <input id="search-bar" type="search" name="search-term"></input>
+               <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <div id="profile-button">
                <MenuButton />
