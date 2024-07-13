@@ -27,7 +27,7 @@ namespace backend.Controllers;
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops(string? q)
         {
-            string searchTerm = q.ToLower();
+            string searchTerm = q != null ? q.ToLower() : "";
             return await context
                 .Shops
                 .Include(v => v.Owner)
