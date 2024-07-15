@@ -8,6 +8,7 @@ function EditButtonComponent(args) {
   const [modal, setModal] = useState(false);
   const { vendorId } = useParams();
   const [userId, setUserId] = useState("");
+  const [isShopPageUpdated, setIsShopPageUpdated] = useState(false); //This is for the user feedback message when updating
 
   const [shopName, setShopName] = useState(null)
   const [logo, setLogo] = useState(null)
@@ -64,31 +65,32 @@ const handleChange = (e) => {
     })
     .then((resp) => {
       console.log(resp);
+      if (resp.ok){
+        setIsShopPageUpdated(true);
+      }
     })
   }
+
 
   return (
     //This is updated vendor page
     <div>
-      <Button color="danger" onClick={toggle}>
-        Update Profile Page
-      </Button>
+      <Button color="danger" onClick={toggle}>Update Profile Page</Button>
       <Modal isOpen={modal} toggle={toggle} {...args} unmountOnClose={false}>
-        <ModalHeader toggle={toggle}>Edit Content</ModalHeader>
+        <ModalHeader>Edit Content</ModalHeader>
         <ModalBody>
             {/* Form for Vendor to update profile */}
             <form onSubmit={handleFormSubmit}>
-                <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange}></input>
-                <input type="url" name="logo" placeholder="Logo"onChange={handleChange}></input>
-                <input type="url" name="website" placeholder="Website"onChange={handleChange}></input>
-                <input type="text" name="description" placeholder="Description"onChange={handleChange}></input>
-                <Button color="success" onClick={handleFormSubmit}>Save</Button>{' '}
+                <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange}></input> <br />
+                <input type="url" name="logo" placeholder="Logo URL"onChange={handleChange}></input> <br />
+                <input type="url" name="website" placeholder="Website URL"onChange={handleChange}></input> <br />
+                <textarea type = "text" name = "description" placeholder = "Enter your description here..." rows = {5} onChange={handleChange}></textarea> <br />
+                <Button color="success" onClick={handleFormSubmit}>{' '}Save{' '}</Button> {'   '}
+                <Button color="secondary" onClick={toggle}>{' '}Close{' '}</Button>
             </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
-            Close
-          </Button>
+          {isShopPageUpdated ? <p>Shop page successfully updated! Refresh the page to see your changes.</p> : <p>No changes made to this shop.</p> }
         </ModalFooter>
       </Modal>
     </div> 
