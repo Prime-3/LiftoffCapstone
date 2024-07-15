@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import './styling.css';
 import EditComponent from "../EditButton/EditComponent";
+import CreateReview from "../CreateReview"
+import ReviewCard from "../ReviewCard"
 
 
 
@@ -11,6 +13,8 @@ import EditComponent from "../EditButton/EditComponent";
 const VendorDetailsPage = () => {
     let { vendorId } = useParams();
     const [selectedVendor, setSelectedVendor] = useState({});
+    const [reviews, setReviews] = useState([]);
+
     useEffect(() => {
         fetch(`/api/shops/${vendorId}`)
             .then((resp) => {
@@ -20,6 +24,16 @@ const VendorDetailsPage = () => {
             .then((data) => {
                 console.log(data);
                 setSelectedVendor(data);
+            }).then(() => {
+                fetch(`/api/reviews/shop/${vendorId}`)
+                    .then((resp) => {
+                        return resp.json();
+                    })
+                    .then((data) => {
+                        console.log("review fetch", data);
+                        setReviews(data)
+                    })
+
             })
     }, []);
 
@@ -32,7 +46,8 @@ const VendorDetailsPage = () => {
             </div>
 
             <div class="schedule">{/*Schedule*/}</div>
-            <div class="reviews">{/*Reviews*/}</div>
+            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
+            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} /></div>)}
         </div>
     );
 };

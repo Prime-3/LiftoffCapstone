@@ -9,6 +9,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 {
     public DbSet<Review>? Reviews { get; set; }
     public DbSet<Shop>? Shops { get; set; }
+    public DbSet<UserFavoriteShop> UserFavoriteShops { get; set; }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) {}
 
@@ -17,7 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         builder.Entity<ApplicationUser>()
             .HasMany(u => u.Favorites)
             .WithMany(v => v.Likes)
-            .UsingEntity(e => e.ToTable("FavoritesAndLikes"));
+            .UsingEntity<UserFavoriteShop>();
         builder.Entity<Shop>()
             .HasOne(v => v.Owner)
             .WithMany(u => u.Shops);

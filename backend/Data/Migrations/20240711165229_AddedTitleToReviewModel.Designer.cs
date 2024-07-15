@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240711165229_AddedTitleToReviewModel")]
+    partial class AddedTitleToReviewModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace backend.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("ApplicationUserShop", b =>
+                {
+                    b.Property<int>("FavoritesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LikesId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("FavoritesId", "LikesId");
+
+                    b.HasIndex("LikesId");
+
+                    b.ToTable("FavoritesAndLikes", (string)null);
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -295,19 +313,19 @@ namespace backend.Data.Migrations
                     b.ToTable("Shops");
                 });
 
-            modelBuilder.Entity("backend.Models.UserFavoriteShop", b =>
+            modelBuilder.Entity("ApplicationUserShop", b =>
                 {
-                    b.Property<int>("ShopId")
-                        .HasColumnType("int");
+                    b.HasOne("backend.Models.Shop", null)
+                        .WithMany()
+                        .HasForeignKey("FavoritesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("ShopId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFavoriteShops");
+                    b.HasOne("backend.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("LikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -381,25 +399,6 @@ namespace backend.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("backend.Models.UserFavoriteShop", b =>
-                {
-                    b.HasOne("backend.Models.Shop", "Shop")
-                        .WithMany()
-                        .HasForeignKey("ShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Shop");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Models.ApplicationUser", b =>

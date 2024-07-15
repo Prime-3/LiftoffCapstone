@@ -5,6 +5,7 @@ namespace backend.Models
     public class Review
     {
         public int Id { get; set; }
+        public string? Title { get; set; }
         public int ShopId { get; set; }
         // Id in aspnetusers
         public string ApplicationUserId { get; set; }
@@ -18,8 +19,9 @@ namespace backend.Models
         public Review()
         {
         }
-        public Review(int shopId, string applicationUserId, int stars, string description)
+        public Review(string title, int shopId, string applicationUserId, int stars, string description)
         {
+            Title = title;
             ShopId = shopId;
             ApplicationUserId = applicationUserId;
             Stars = stars;

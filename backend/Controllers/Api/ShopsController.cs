@@ -88,7 +88,7 @@ namespace backend.Controllers;
             }
             var authzResult = await _authz.AuthorizeAsync(
                                 User, // User property from ControllerBase
-                                shop,
+                                existingShop,
                                 new OwnerOnlyRequirement());
             if (!authzResult.Succeeded) {
                 return Forbid();
