@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useParams } from "react-router-dom";
 
@@ -7,6 +7,7 @@ function EditButtonComponent(args) {
   //This is for the modal
   const [modal, setModal] = useState(false);
   const { vendorId } = useParams();
+  const [userId, setUserId] = useState("");
 
   const [shopName, setShopName] = useState(null)
   const [logo, setLogo] = useState(null)
@@ -16,6 +17,23 @@ function EditButtonComponent(args) {
   //Open/Close Modal
   const toggle = () => setModal(!modal);
   
+  // get userId
+  useEffect(() => {
+    fetch("/pingauth")
+    .then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      }
+      else {
+        return null;
+      }
+    })
+    .then((data) => {
+          console.log(data);
+          setUserId(data.userId);
+    })
+  }, []);
+
 //Fetch updated data
 const handleChange = (e) => {
   const { name, value} = e.target;
@@ -40,11 +58,12 @@ const handleChange = (e) => {
         shopName: shopName,
         logo: logo,
         website: website,
-        description: description
+        description: description,
+        applicationUserId: userId,
       })
     })
     .then((resp) => {
-      console.log(resp)
+      console.log(resp);
     })
   }
 
@@ -63,12 +82,10 @@ const handleChange = (e) => {
                 <input type="url" name="logo" placeholder="Logo"onChange={handleChange}></input>
                 <input type="url" name="website" placeholder="Website"onChange={handleChange}></input>
                 <input type="text" name="description" placeholder="Description"onChange={handleChange}></input>
+                <Button color="success" onClick={handleFormSubmit}>Save</Button>{' '}
             </form>
         </ModalBody>
         <ModalFooter>
-        <Button color="success" onClick={handleFormSubmit}>
-            Save
-          </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Close
           </Button>
