@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LoginFormModal.css"
 
 function LoginFormModal({ onClose }) {
+   const navigate = useNavigate();
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [rememberme, setRememberme] = useState(false);
@@ -16,10 +17,6 @@ function LoginFormModal({ onClose }) {
       if (name === "password") setPassword(value);
       if (name === "rememberme") setRememberme(event.target.checked);
    };
-
-   // const handleRegisterClick = () => {
-   //    redirect("/");
-   // };
 
    // event: React.FormEvent<HTMLFormElement>
    const handleSubmit = (event) => {
@@ -47,9 +44,7 @@ function LoginFormModal({ onClose }) {
             console.log(resp);
             if (resp.ok) {
                setError("Successful login.");
-               // redirect to /, force full browser reload so all cookies are set.
-               // TODO: navigate to 'authorizeview' page that triggered login
-               window.location.href = '/';
+               navigate(0);
             } else {
                setError("Credentials did not match.");
             }

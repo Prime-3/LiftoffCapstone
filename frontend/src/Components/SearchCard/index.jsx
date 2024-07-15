@@ -1,9 +1,9 @@
 import "./SearchCard.css"
 
 function SearchCard({ shop }) {
-   let vendorPhoto = "images/dummy-image-square.png"
-   let vendorName = shop.shopName
-   let vendorCategory = shop.category
+   let vendorPhoto = shop.logo ? shop.logo : "images/dummy-image-square.png";
+   let vendorName = shop.shopName;
+   let vendorCategory = shop.category;
    let stars = 3;
 
    return (

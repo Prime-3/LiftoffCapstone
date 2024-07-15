@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore; // provides DbSet.Include()
 using backend.Authorization;
 using backend.Data;
 using backend.Models;
+using System.Linq.Expressions;
 
 namespace backend.Controllers;
 
@@ -24,11 +25,15 @@ namespace backend.Controllers;
 
         // GET: api/shops --> Gets all shops
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops()
+        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops(string? q)
         {
+            string searchTerm = q != null ? q.ToLower() : "";
             return await context
                 .Shops
                 .Include(v => v.Owner)
+                .Where(s => s.ShopName.ToLower().Contains(searchTerm)
+                    || s.Description.ToLower().Contains(searchTerm)
+                    || s.Category.Contains(searchTerm))
                 .Select(v => new ShopDTO(v))
                 .ToListAsync();
         }
@@ -47,7 +52,7 @@ namespace backend.Controllers;
 
 
         // POST: api/shop --> Posts new shop registration info
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult RegisterShop([FromBody] Shop shop)
         {
             if (ModelState.IsValid)
@@ -71,7 +76,7 @@ namespace backend.Controllers;
         //   not to be the prescribed method. Due to time constraints, this
         //   will have to do. When we hit MVP, we may want to revisit how to
         //   use AuthorizeAttribute, e.g. [Authorize(Policy="OwnerOnly")].
-        [HttpPatch("{id}"), Authorize]
+        [HttpPatch("{id}")]
 
         public async Task<ActionResult> UpdateShop(int id, [FromBody] Shop shop)
         {
@@ -94,21 +99,24 @@ namespace backend.Controllers;
             existingShop.ShopName =
                 (shop.ShopName != null) && (shop.ShopName != existingShop.ShopName)
                 ? shop.ShopName : existingShop.ShopName;
-            existingShop.ApplicationUserId =
-                (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
-                ? shop.ApplicationUserId : existingShop.ApplicationUserId;
+            // existingShop.ApplicationUserId =
+            //     (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
+            //     ? shop.ApplicationUserId : existingShop.ApplicationUserId;
             existingShop.Description =
                 (shop.Description != null) && (shop.Description != existingShop.Description)
                 ? shop.Description : existingShop.Description;
-            existingShop.PhoneNumber =
-                (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
-                ? shop.PhoneNumber : existingShop.PhoneNumber;
-            existingShop.Address =
-                (shop.Address != null) && (shop.Address != existingShop.Address)
-                ? shop.Address : existingShop.Address;
+            // existingShop.PhoneNumber =
+            //     (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
+            //     ? shop.PhoneNumber : existingShop.PhoneNumber;
+            // existingShop.Address =
+            //     (shop.Address != null) && (shop.Address != existingShop.Address)
+            //     ? shop.Address : existingShop.Address;
             existingShop.Website =
                 (shop.Website != null) && (shop.Website != existingShop.Website)
                 ? shop.Website : existingShop.Website;
+            existingShop.Logo =
+                (shop.Logo != null) && (shop.Logo != existingShop.Logo)
+                ? shop.Logo : existingShop.Logo;
             //Save changes
             context.SaveChanges();
 

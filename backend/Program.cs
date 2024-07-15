@@ -44,6 +44,7 @@ builder.Services.AddAuthorization(options =>
 // TODO: understand DI AddTransient(), AddScoped(), AddTransient()
 // register authorization handler(s)
 builder.Services.AddScoped<IAuthorizationHandler, OwnerOnlyHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, ReviewerOnlyHandler>();
 
 // Swagger generator
 // TODO: see https://aka.ms/aspnetcore/swashbuckle (about configuring)

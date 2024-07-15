@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import SearchCard from "../SearchCard"
 import "./BrowsePage.css"
+import { getShops } from "../../utils/shops.js";
 
+export async function loader({params}) {
+   const shops = await getShops(params.searchTerm);
+   return {shops};
+}
 const BrowsePage = () => {
-   const [shops, setShops] = useState([])
-   useEffect(() => {
-      fetch("/api/shops")
-         .then((resp) => {
-            return resp.json();
-         })
-         .then((data) => {
-            console.log(data)
-            setShops(data);
-         });
-   }, []);
+   const {shops} = useLoaderData();
 
    return (
       <div id="browse-page">
          <h1>BrowsePage</h1>
          <div id="card-container">
-            {shops.map((shop) => <SearchCard shop={shop} />)}
+            {shops.map((shop) => <SearchCard shop={shop} key={shop.id}/>)}
          </div>
       </div>
    )

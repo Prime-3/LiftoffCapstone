@@ -5,11 +5,11 @@ using backend.Models;
 
 namespace backend.Authorization;
 
-public class OwnerOnlyHandler:
-    AuthorizationHandler<OwnerOnlyRequirement, Shop>
+public class ReviewerOnlyHandler:
+    AuthorizationHandler<OwnerOnlyRequirement, Review>
 {
     UserManager<ApplicationUser> _userManager;
-    public OwnerOnlyHandler(UserManager<ApplicationUser> userManager)
+    public ReviewerOnlyHandler(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
@@ -17,7 +17,7 @@ public class OwnerOnlyHandler:
     protected override Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
         OwnerOnlyRequirement requirement,
-        Shop resource)
+        Review resource)
     {
         if (resource.ApplicationUserId == _userManager.GetUserId(context.User))
         {
