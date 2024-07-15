@@ -15,7 +15,7 @@ body {
 
 #app {
   background-color: rgba(227, 227, 220, 1);
-  min-height: 1500px;
+  /* min-height: 1500px; */
 }
 
 header {
@@ -90,6 +90,10 @@ header {
   margin-top: 10px;
   border-radius: 5px;
   padding: 5px 10px;
+}
+
+.submit-button:hover {
+  cursor: pointer;
 }
 
 #vendor-checkbox-area {
