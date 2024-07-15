@@ -52,7 +52,7 @@ namespace backend.Controllers;
 
 
         // POST: api/shop --> Posts new shop registration info
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult RegisterShop([FromBody] Shop shop)
         {
             if (ModelState.IsValid)
