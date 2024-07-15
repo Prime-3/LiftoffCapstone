@@ -1,0 +1,9 @@
+#rememberme {
+   width: fit-content;
+}
+
+#remember-box {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}

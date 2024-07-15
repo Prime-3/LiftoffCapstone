@@ -1,14 +1,14 @@
 import "./SearchCard.css"
 
-function SearchCard(/* vendorPhoto, vendorName, vendorCategory, stars */) {
-   let vendorPhoto = "images/dummy-image-square.png"
-   let vendorName = "Vendor Name"
-   let vendorCategory = "Vendor Category"
+function SearchCard({ shop }) {
+   let vendorPhoto = shop.logo ? shop.logo : "images/dummy-image-square.png";
+   let vendorName = shop.shopName;
+   let vendorCategory = shop.category;
    let stars = 3;
 
    return (
       <div className="search-card">
-         <a href="/">
+         <a href={`/vendorpage/${shop.id}`}>
             <img id="vendor-photo" src={vendorPhoto} />
             <div id="vendor-info">
                <div>

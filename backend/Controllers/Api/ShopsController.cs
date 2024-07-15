@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore; // provides DbSet.Include()
+using backend.Authorization;
 using backend.Data;
 using backend.Models;
+using System.Linq.Expressions;
 
 namespace backend.Controllers;
 
@@ -10,19 +13,27 @@ namespace backend.Controllers;
     public class ShopsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly IAuthorizationService _authz;
 
-        public ShopsController(ApplicationDbContext dbContext)
+        public ShopsController(
+            ApplicationDbContext dbContext,
+            IAuthorizationService authz)
         {
             context = dbContext;
+            _authz = authz;
         }
 
         // GET: api/shops --> Gets all shops
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops()
+        public async Task<ActionResult<IEnumerable<ShopDTO>>> GetShops(string? q)
         {
+            string searchTerm = q != null ? q.ToLower() : "";
             return await context
                 .Shops
                 .Include(v => v.Owner)
+                .Where(s => s.ShopName.ToLower().Contains(searchTerm)
+                    || s.Description.ToLower().Contains(searchTerm)
+                    || s.Category.Contains(searchTerm))
                 .Select(v => new ShopDTO(v))
                 .ToListAsync();
         }
@@ -41,7 +52,7 @@ namespace backend.Controllers;
 
 
         // POST: api/shop --> Posts new shop registration info
-        [HttpPost]
+        [HttpPost, Authorize]
         public IActionResult RegisterShop([FromBody] Shop shop)
         {
             if (ModelState.IsValid)
@@ -61,8 +72,13 @@ namespace backend.Controllers;
 
 
         // PATCH: api/shop/{id} --> Patch updates existing shop information
+        // TODO: Based on MS docs, explicitly invoking AuthorizeAsync seems
+        //   not to be the prescribed method. Due to time constraints, this
+        //   will have to do. When we hit MVP, we may want to revisit how to
+        //   use AuthorizeAttribute, e.g. [Authorize(Policy="OwnerOnly")].
         [HttpPatch("{id}")]
-        public IActionResult UpdateShop(int id, [FromBody] Shop shop)
+
+        public async Task<ActionResult> UpdateShop(int id, [FromBody] Shop shop)
         {
             //Get existing shop info
             var existingShop = context.Shops.FirstOrDefault(v => v.Id == id);
@@ -70,27 +86,37 @@ namespace backend.Controllers;
             {
                 return NotFound();
             }
+            var authzResult = await _authz.AuthorizeAsync(
+                                User, // User property from ControllerBase
+                                shop,
+                                new OwnerOnlyRequirement());
+            if (!authzResult.Succeeded) {
+                return Forbid();
+            }
 
             //Apply changes
                 //If shops is not null and does not equal existingShop then update
             existingShop.ShopName =
                 (shop.ShopName != null) && (shop.ShopName != existingShop.ShopName)
                 ? shop.ShopName : existingShop.ShopName;
-            existingShop.ApplicationUserId =
-                (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
-                ? shop.ApplicationUserId : existingShop.ApplicationUserId;
+            // existingShop.ApplicationUserId =
+            //     (shop.ApplicationUserId != null) && (shop.ApplicationUserId != existingShop.ApplicationUserId)
+            //     ? shop.ApplicationUserId : existingShop.ApplicationUserId;
             existingShop.Description =
                 (shop.Description != null) && (shop.Description != existingShop.Description)
                 ? shop.Description : existingShop.Description;
-            existingShop.PhoneNumber =
-                (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
-                ? shop.PhoneNumber : existingShop.PhoneNumber;
-            existingShop.Address =
-                (shop.Address != null) && (shop.Address != existingShop.Address)
-                ? shop.Address : existingShop.Address;
+            // existingShop.PhoneNumber =
+            //     (shop.PhoneNumber != null) && (shop.PhoneNumber != existingShop.PhoneNumber)
+            //     ? shop.PhoneNumber : existingShop.PhoneNumber;
+            // existingShop.Address =
+            //     (shop.Address != null) && (shop.Address != existingShop.Address)
+            //     ? shop.Address : existingShop.Address;
             existingShop.Website =
                 (shop.Website != null) && (shop.Website != existingShop.Website)
                 ? shop.Website : existingShop.Website;
+            existingShop.Logo =
+                (shop.Logo != null) && (shop.Logo != existingShop.Logo)
+                ? shop.Logo : existingShop.Logo;
             //Save changes
             context.SaveChanges();
 
@@ -99,18 +125,26 @@ namespace backend.Controllers;
         }
 
     // DELETE: api/shops/{id}
-    [HttpDelete("{id}")]
-    public IActionResult DeleteShop(int id)
+    [HttpDelete("{id}"), Authorize]
+    public async Task<IActionResult> DeleteShop(int id)
     {
         var shop = context.Shops.FirstOrDefault(v => v.Id == id);
-            if (shop == null)
-            {
-                return NotFound();
-            }
+        if (shop == null)
+        {
+            Console.WriteLine("No shop!");
+            return NotFound();
+        }
+        var authzResult = await _authz.AuthorizeAsync(
+                User, // User property from ControllerBase
+                shop,
+                new OwnerOnlyRequirement());
+        if (!authzResult.Succeeded) {
+            return Forbid();
+        }
 
-            context.Shops.Remove(shop);
-            context.SaveChanges();
+        context.Shops.Remove(shop);
+        context.SaveChanges();
 
-            return Ok(new {message = "Successfully removed shop."});
+        return Ok(new {message = "Successfully removed shop."});
     }
 }

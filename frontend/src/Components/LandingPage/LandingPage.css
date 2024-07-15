@@ -1,0 +1,46 @@
+#landing-page {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 100px;
+   /* background-color: rgba(227, 227, 220, 1); */
+
+}
+
+.intro-photos {
+   width: 250px;
+   border-radius: 10px;
+}
+
+#instructions {
+   display: flex;
+}
+
+.intro-cards {
+   /* margin: 30px; */
+   padding: 30px;
+   width: 300px;
+}
+
+#slogan {
+   font-size: xxx-large;
+   width: 750px;
+   margin-top: 100px;
+}
+
+#landing-page>h2 {
+   margin-top: 100px;
+}
+
+#landing-page>a>button {
+   font-size: large;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 175px;
+   height: 50px;
+}
+
+#landing-page>a {
+   text-decoration: none;
+}
