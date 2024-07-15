@@ -1,0 +1,14 @@
+a {
+   text-decoration: none;
+}
+
+li {
+   list-style-type: none;
+}
+
+#footer-container {
+   display: flex;
+   justify-content: space-between;
+   background-color: rgba(71, 103, 48, 1);
+   padding: 20px 100px;
+}
