@@ -1,5 +1,6 @@
 a {
    text-decoration: none;
+   color: black;
 }
 
 li {
@@ -9,6 +10,39 @@ li {
 #footer-container {
    display: flex;
    justify-content: space-between;
-   background-color: rgba(71, 103, 48, 1);
-   padding: 20px 100px;
+   background-color: rgba(209, 187, 162, 1);
+   padding: 0px 100px;
+}
+
+#site-map {
+   padding-right: 100px;
+   margin-top: 0px;
+}
+
+#site-map-links {
+   display: flex;
+   gap: 10px;
+}
+
+#site-map>h5 {
+   margin-top: 10px;
+   margin-bottom: 5px;
+}
+
+#site-map>ul>li {
+   display: flex;
+   justify-content: left;
+}
+
+#footer-socials {
+   display: flex;
+   justify-content: center;
+   gap: 15px;
+   padding-bottom: 10px;
+}
+
+#footer-title-socials {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
 }
