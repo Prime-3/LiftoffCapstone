@@ -5,6 +5,7 @@ import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
 import "./MenuStyle.css"
 import LogoutLink from "../LogoutLink";
+import { redirect } from "react-router-dom";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -45,7 +46,7 @@ const MenuButton = () => {
          <p>Menu</p>
          <i className="fa-solid fa-bars fa-lg" />
       </button>
-      <ul className={ulClassName}>
+      <ul className={ulClassName} id="menu-items-container">
          {user ?
             (
                <>

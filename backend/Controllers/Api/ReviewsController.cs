@@ -24,10 +24,30 @@ public class ReviewsController : ControllerBase
 
    // POST /api/reviews
    [HttpPost, Authorize]
-   public IActionResult CreateReview([FromBody] Review review)
+   public async Task<ActionResult> CreateReview([FromBody] Review review)
    {
       if (ModelState.IsValid)
       {
+         var reviewedShop = context.Shops.FirstOrDefault(s => s.Id == review.ShopId);
+         var reviews = context.Reviews.Where(r => r.ShopId == review.ShopId);
+
+         if (reviewedShop.AvgStars == 0)
+         {
+            reviewedShop.AvgStars = review.Stars;
+         }
+         else
+         {
+            int tot = 0;
+            foreach (Review r in reviews)
+            {
+               tot += r.Stars;
+            }
+
+            int avg = tot / reviews.Count();
+            // Console.WriteLine("HIT! HIT! HIT! AVERAGE: ", avg);
+
+            reviewedShop.AvgStars = avg;
+         }
          context.Reviews.Add(review);
          context.SaveChanges();
 
@@ -49,6 +69,7 @@ public class ReviewsController : ControllerBase
          .Reviews
          .Where(r => id == r.ShopId)
          .Include(r => r.Reviewer)
+         .OrderByDescending(r => r.Id)
          .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
@@ -90,13 +111,35 @@ public class ReviewsController : ControllerBase
                            User, // User property from ControllerBase
                            review,
                            new OwnerOnlyRequirement());
-      if (!authzResult.Succeeded) {
-            return Forbid();
+      if (!authzResult.Succeeded)
+      {
+         return Forbid();
       }
 
       context.Reviews.Remove(review);
       context.SaveChanges();
 
+      var reviewedShop = context.Shops.FirstOrDefault(s => s.Id == review.ShopId);
+      var reviews = context.Reviews.Where(r => r.ShopId == review.ShopId);
+
+      if (reviewedShop.AvgStars == 0)
+      {
+         reviewedShop.AvgStars = 0;
+      }
+      else
+      {
+         int tot = 0;
+         foreach (Review r in reviews)
+         {
+            tot += r.Stars;
+         }
+
+         int avg = tot / reviews.Count();
+
+         reviewedShop.AvgStars = avg;
+      }
+
+      context.SaveChanges();
       return Ok(new { message = "Successfully removed review." });
    }
 }

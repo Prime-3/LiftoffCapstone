@@ -11,6 +11,8 @@ public class ShopDTO
     public string? Website { get; set; }
     public string? Logo { get; set; }
     public string? Category { get; set; }
+    public int AvgStars { get; set; }
+
 
 
     public ShopDTO(Shop shop)
@@ -25,5 +27,6 @@ public class ShopDTO
         Website = shop.Website;
         Logo = shop.Logo;
         Category = shop.Category;
+        AvgStars = shop.AvgStars;
     }
 }

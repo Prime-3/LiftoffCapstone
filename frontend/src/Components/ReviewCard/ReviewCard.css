@@ -14,6 +14,10 @@
    gap: 15px;
 }
 
+#title-stars>span:hover {
+   cursor: pointer;
+}
+
 #title-stars>h3 {
    margin: 0;
 }

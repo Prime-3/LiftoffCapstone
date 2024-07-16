@@ -1,6 +1,7 @@
 html {
   max-width: 1280px;
   min-width: 600px;
+  height: 100%;
   margin: 0 auto;
   padding: 0;
   text-align: center;
@@ -10,12 +11,26 @@ html {
 }
 
 body {
+  max-width: 1280px;
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  max-width: 1280px;
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
   background-color: rgba(227, 227, 220, 1);
-  /* min-height: 1500px; */
+  position: relative;
+  width: 1280px;
+  height: auto !important;
+  min-height: 100%;
+  bottom: 0;
+  top: 0;
 }
 
 header {
