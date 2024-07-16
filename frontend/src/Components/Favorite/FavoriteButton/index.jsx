@@ -42,7 +42,7 @@ export default function FavoriteButton({shopId}) {
     .then((data) => {
       return data.userId
     })
-      
+    //get user list of favorites
   .then((userId) => {
     fetch(`/api/favorites/${userId}`, {
         method: 'GET',
@@ -62,7 +62,7 @@ export default function FavoriteButton({shopId}) {
     
    }, [])
   }
-//click to add or remove
+//handles button click to add or delete
 const handleFavoriteButton = () => {
   const isInFavorites = checkIfInFavorites(shopId);
   setIsFavorite(isInFavorites);
