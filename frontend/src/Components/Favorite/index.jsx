@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import FavoriteButton from "./FavoriteButton"; 
 import { useParams } from "react-router-dom";
 import "./favoriteStyles.css" 
+import VendorDetailsPage from "../VendorPage";
+import { Link } from 'react-router-dom';
+
 
 const Favorited = () => {
     const [favorites, setFavorites] = useState([]);
-    const [userId, setUserId] = useState("");
 
   // get userId
   useEffect(() => {
@@ -42,57 +44,20 @@ const Favorited = () => {
     })
 }, []);
 
-
-
-// //click to add or remove
-// const handleFavoriteButton = (vendorId) => {
-//     console.log("HIT handlesubmit")
-//     const isFavorited = favorites.includes(vendorId)
-
-//     if(isFavorited) {
-//         //remove from favorites
-//         fetch(`/api/favorites/remove`, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 userId: userId, 
-//             }),
-//         })
-//         .then((resp) => {
-//             console.log(resp);
-//         })
-//     }else {
-//         //add to favorites
-//         fetch(`/api/favorites/add`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify({
-//                 userId: userId,
-//             }),
-//         })
-//         .then((resp) => {
-//             console.log(resp);
-//         })
-    // }
-    
-    
-// }
   return (
     <div className="favoriteList">
         <h1 className="title">Favorites List</h1>
         {/* map over each favorited vendor and display them  */}
         {favorites.map((vendor) => (        
-            <div className="key" key = {vendor.shopId}>
+            <div className="key" key = {vendor.id}>
+                {console.log(vendor)}
                 <div className="logo"><img className="format" src={vendor.logo} /></div>
                 <div>
-                <div className="shopname">{vendor.shopName} </div>
+                <div className="shopname">
+                    <Link to={`/vendorpage/${vendor.id}`}>{vendor.shopName}</Link>
+                    </div>
                 <div className="description">{vendor.description}</div>
                 </div>
-                {/* <FavoriteButton className= "button" onClick={(vendorId) => handleFavoriteButton(vendorId)} /> */}
             </div>
             ))}  
      

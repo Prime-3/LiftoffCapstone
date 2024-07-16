@@ -53,13 +53,14 @@ const VendorDetailsPage = () => {
                     setUser(data)
                 }
             })
-    }, []);
+ }, [])
+    
 
     return (
         <div id="vendor-page">
             <Link to={-1}>Back</Link>
             <div class="logo"><img src={selectedVendor.logo} />
-                <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton /></h2></div>
+                <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId}/></h2></div>
                 <div>
                     <i
                         className={(selectedVendor.avgStars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
@@ -77,6 +78,7 @@ const VendorDetailsPage = () => {
                         className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
                     ></i>
                 </div>
+                {/* <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId} /></h2></div> */}
                 <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
                 <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
             </div>
