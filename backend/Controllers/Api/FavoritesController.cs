@@ -18,6 +18,8 @@ public class FavoritesController: ControllerBase
         _context = context;
     }
 
+
+    //GET: api/favorites/{id}
     [HttpGet("{id}"), Authorize]
     public async Task<ActionResult<IEnumerable<Shop>>> Favorites(string id)
     {
@@ -33,7 +35,8 @@ public class FavoritesController: ControllerBase
         return Ok(favoriteShops);
     }
 
-    [HttpPost("add"), Authorize]
+    //POST: api/favorites/add
+    [HttpPost("add"), Authorize]    
     public async Task<ActionResult> AddFavorites([FromBody] AddFavoriteShopViewModel viewModel)
     {
         ApplicationUser? user = await _context.Users.FindAsync(viewModel.UserId);
@@ -50,8 +53,41 @@ public class FavoritesController: ControllerBase
         user = await _context.Users
             .Include(u => u.Favorites)
             .SingleAsync(u => u.Id == viewModel.UserId);
-        user.Favorites.Add(shop);
+        
+        //if shop is already favorited, don't add again
+            if(user.Favorites.Any(f => f.Id == viewModel.ShopId))
+            {
+                return Ok("Shop is already in your favorites.");
+            } else 
+            {
+                user.Favorites.Add(shop);
+                _context.SaveChanges();
+                return Ok();
+            }
+    }
+
+    //DELETE: api/favorites/remove
+    [HttpDelete("remove"), Authorize]    
+    public async Task<ActionResult> RemoveFavorites([FromBody] AddFavoriteShopViewModel viewModel)
+    {
+        ApplicationUser? user = await _context.Users.FindAsync(viewModel.UserId);
+        Shop? shop = await _context.Shops.FindAsync(viewModel.ShopId);
+        if (user == null)
+        {
+            return NotFound("Could not find user.");
+        }
+        if (shop == null)
+        {
+            return NotFound("Could not find shop.");
+        }
+        // TODO: authorization - viewModel.UserId needs to match context.User's id
+        user = await _context.Users
+            .Include(u => u.Favorites)
+            .SingleAsync(u => u.Id == viewModel.UserId);
+            
+        user.Favorites.Remove(shop);
         _context.SaveChanges();
         return Ok();
+            
     }
 }
