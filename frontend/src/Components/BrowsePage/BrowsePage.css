@@ -1,5 +1,6 @@
 #browse-page {
    padding-top: 100px;
+   min-height: 900px;
 }
 
 #card-container {
