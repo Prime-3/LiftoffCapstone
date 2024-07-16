@@ -5,6 +5,8 @@ public class ReviewDTO
    public int Id { get; set; }
    public string? Title { get; set; }
    public int? ShopId { get; set; }
+   public string ApplicationUserId { get; set; }
+
    public string? ReviewerName { get; set; }
    public int? Stars { get; set; }
    public string? Description { get; set; }
@@ -17,6 +19,7 @@ public class ReviewDTO
       Id = review.Id;
       Title = review.Title;
       ShopId = review.ShopId;
+      ApplicationUserId = review.ApplicationUserId;
       ReviewerName = review.Reviewer.ToString();
       Stars = review.Stars;
       Description = review.Description;

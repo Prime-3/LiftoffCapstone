@@ -14,13 +14,14 @@ const VendorDetailsPage = () => {
     let { vendorId } = useParams();
     const [selectedVendor, setSelectedVendor] = useState({});
     const [reviews, setReviews] = useState([]);
+    const [user, setUser] = useState("");
+
 
     useEffect(() => {
         fetch(`/api/shops/${vendorId}`)
             .then((resp) => {
                 return resp.json();
-            }
-            )
+            })
             .then((data) => {
                 console.log(data);
                 setSelectedVendor(data);
@@ -33,16 +34,23 @@ const VendorDetailsPage = () => {
                         console.log("review fetch", data);
                         setReviews(data)
                     })
+            })
+        fetch("/pingauth")
+            .then((resp) => {
+                if (resp.ok) {
 
+                    return resp.json();
+                } else {
+                    return null
+                }
+            })
+            .then((data) => {
+                if (data != null) {
+                    console.log(data);
+                    setUser(data)
+                }
             })
     }, []);
-
-    let tot = 0;
-    for (let r of reviews) {
-        tot += r.stars;
-    }
-    let avg = tot / reviews.length;
-    console.log(avg)
 
     return (
         <div id="vendor-page">
@@ -54,7 +62,7 @@ const VendorDetailsPage = () => {
 
             <div class="schedule">{/*Schedule*/}</div>
             <div class="create-review"><CreateReview shop={selectedVendor} /></div>
-            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} /></div>)}
+            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} user={user} /></div>)}
         </div>
     );
 };

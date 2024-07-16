@@ -24,7 +24,7 @@ public class ReviewsController : ControllerBase
 
    // POST /api/reviews
    [HttpPost, Authorize]
-   public async IActionResult CreateReview([FromBody] Review review)
+   public async Task<ActionResult> CreateReview([FromBody] Review review)
    {
       if (ModelState.IsValid)
       {

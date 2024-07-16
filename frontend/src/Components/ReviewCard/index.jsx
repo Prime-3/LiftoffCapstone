@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react"
 import "./ReviewCard.css"
 
-function ReviewCard({ review }) {
+function ReviewCard({ review, user }) {
 
-   // Hard coded for now. Need data passed in from a parent component though commented out params.
    let reviewTitle = review.title
    let stars = review.stars
    let reviewedBy = review.reviewerName
    let reviewComment = review.description
+   let userId = review.applicationUserId
+
 
    return (
       <div className="review-card">
@@ -29,6 +31,7 @@ function ReviewCard({ review }) {
                   className={(stars >= 5) ? "fa-solid fa-star" : "hidden"}
                ></i>
             </div>
+            {(userId == user.userId) ? <span>Delete</span> : ""}
          </div>
          <h5 id="reviewed-by">Review by {reviewedBy}</h5>
          <p id="review-comment">{reviewComment}</p>
