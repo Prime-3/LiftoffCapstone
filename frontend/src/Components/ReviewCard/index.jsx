@@ -9,6 +9,27 @@ function ReviewCard({ review, user }) {
    let reviewComment = review.description
    let userId = review.applicationUserId
 
+   const handleClick = () => {
+      fetch(`/api/reviews/${review.id}`, {
+         method: "DELETE",
+         headers: {
+            "Content-Type": "application/json"
+         }
+      })
+         .then((resp) => {
+            if (resp.ok) {
+               return resp.json()
+            } else {
+               return null;
+            }
+         })
+         .then((data) => {
+            if (data != null) {
+               console.log(data);
+               document.location.href = `/vendorpage/${review.shopId}`
+            }
+         })
+   }
 
    return (
       <div className="review-card">
@@ -31,7 +52,7 @@ function ReviewCard({ review, user }) {
                   className={(stars >= 5) ? "fa-solid fa-star" : "hidden"}
                ></i>
             </div>
-            {(userId == user.userId) ? <span>Delete</span> : ""}
+            {(userId == user.userId) ? <span onClick={handleClick}>Delete</span> : ""}
          </div>
          <h5 id="reviewed-by">Review by {reviewedBy}</h5>
          <p id="review-comment">{reviewComment}</p>

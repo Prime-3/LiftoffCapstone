@@ -118,6 +118,27 @@ public class ReviewsController : ControllerBase
       context.Reviews.Remove(review);
       context.SaveChanges();
 
+      var reviewedShop = context.Shops.FirstOrDefault(s => s.Id == review.ShopId);
+      var reviews = context.Reviews.Where(r => r.ShopId == review.ShopId);
+
+      if (reviewedShop.AvgStars == 0)
+      {
+         reviewedShop.AvgStars = 0;
+      }
+      else
+      {
+         int tot = 0;
+         foreach (Review r in reviews)
+         {
+            tot += r.Stars;
+         }
+
+         int avg = tot / reviews.Count();
+
+         reviewedShop.AvgStars = avg;
+      }
+
+      context.SaveChanges();
       return Ok(new { message = "Successfully removed review." });
    }
 }
