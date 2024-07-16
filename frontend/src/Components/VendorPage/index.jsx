@@ -35,12 +35,13 @@ const VendorDetailsPage = () => {
                     })
 
             })
-    }, []);
+ }, [])
+    
 
     return (
         <div id="vendor-page">
             <div class="logo"><img src={selectedVendor.logo} />
-                <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton /></h2></div>
+                <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId} /></h2></div>
                 <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
                 <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
             </div>
