@@ -69,6 +69,7 @@ public class ReviewsController : ControllerBase
          .Reviews
          .Where(r => id == r.ShopId)
          .Include(r => r.Reviewer)
+         .OrderByDescending(r => r.Id)
          .Select(r => new ReviewDTO(r))
          .ToListAsync();
       }
