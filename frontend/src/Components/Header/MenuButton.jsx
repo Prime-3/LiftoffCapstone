@@ -11,6 +11,7 @@ const MenuButton = () => {
    const [showModal, setShowModal] = useState(false);
    const [modalSel, setModalSel] = useState();
    const [user, setUser] = useState()
+   const [userName, setUserName] = useState("")
 
 
    const openMenu = () => {
@@ -33,9 +34,27 @@ const MenuButton = () => {
          .then((data) => {
             console.log(data);
             setUser(data)
+            return data.userId;
+         })
+         .then((userId) => {
+            fetch(`/api/acounts/${userId}`)
+               .then((resp) => {
+                  try {
+                     return resp.json();
+                  } catch {
+                     return null
+                  }
+               })
+               .then((data) => {
+                  console.log("HIT", data)
+                  if (data != null) {
+                     setUserName(`${data.firstName} ${data.lastName}`)
+                  }
+               })
          })
 
    }, []);
+
 
 
    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -49,6 +68,7 @@ const MenuButton = () => {
          {user ?
             (
                <>
+                  <h3>Hello, {userName}</h3>
                   <li className="menu-item">
                      <h3>Account</h3>
                   </li>

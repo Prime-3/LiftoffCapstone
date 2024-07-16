@@ -4,6 +4,8 @@ h3 {
 
 .menu-item:hover {
    cursor: pointer;
+   background: rgba(71, 103, 48, .25);
+
 }
 
 .profile-button {
@@ -39,11 +41,15 @@ h3 {
    list-style-type: none;
    border: 2px solid grey;
    background: white;
-   position: fixed;
+   position: absolute;
    width: 106px;
    top: 65px;
-   right: auto;
+   right: 35px;
    z-index: 1;
    padding: 20px 0px;
    border-radius: 5px;
+}
+
+#menu-items-container {
+   width: fit-content;
 }
