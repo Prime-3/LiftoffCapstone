@@ -10,6 +10,8 @@ public class ReviewDTO
    public string? Description { get; set; }
 
 
+
+
    public ReviewDTO(Review review)
    {
       Id = review.Id;

@@ -37,6 +37,13 @@ const VendorDetailsPage = () => {
             })
     }, []);
 
+    let tot = 0;
+    for (let r of reviews) {
+        tot += r.stars;
+    }
+    let avg = tot / reviews.length;
+    console.log(avg)
+
     return (
         <div id="vendor-page">
             <div class="logo"><img src={selectedVendor.logo} />
