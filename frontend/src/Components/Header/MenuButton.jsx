@@ -5,7 +5,6 @@ import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
 import "./MenuStyle.css"
 import LogoutLink from "../LogoutLink";
-import { redirect } from "react-router-dom";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -54,7 +53,7 @@ const MenuButton = () => {
                      <h3>Account</h3>
                   </li>
                   <li className="menu-item">
-                     <h3>Favorites</h3>
+                     <h3 onClick={() => document.location.href = "/favorites"}>Favorites</h3>
                   </li>
                   <li className="menu-item">
                      <h3>Shops</h3>
