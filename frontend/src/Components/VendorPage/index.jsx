@@ -15,6 +15,9 @@ const VendorDetailsPage = () => {
     const [selectedVendor, setSelectedVendor] = useState({});
     const [reviews, setReviews] = useState([]);
     const [user, setUser] = useState("");
+    const [isReviewing, setIsReviewing] = useState(false)
+
+    const handleOpenReviewForm = () => setIsReviewing(!isReviewing)
 
 
     useEffect(() => {
@@ -61,7 +64,19 @@ const VendorDetailsPage = () => {
             </div>
 
             <div class="schedule">{/*Schedule*/}</div>
-            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
+            <div id="review-form-popup">
+                {isReviewing ?
+                    (
+                        <>
+                            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
+                            <span onClick={handleOpenReviewForm}>Close</span>
+                        </>
+                    )
+                    :
+                    (
+                        <span onClick={handleOpenReviewForm}>Add a Review</span>
+                    )}
+            </div>
             {reviews.map((r) => <div class="reviews"><ReviewCard review={r} user={user} /></div>)}
         </div>
     );
