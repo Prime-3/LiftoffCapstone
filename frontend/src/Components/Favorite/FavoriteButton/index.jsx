@@ -81,6 +81,7 @@ function FavoriteButton({ shopId }) {
         }),
       })
         .then((resp) => {
+          setIsFavorite(false)
           console.log(resp);
         })
     } else {
@@ -96,10 +97,10 @@ function FavoriteButton({ shopId }) {
         }),
       })
         .then((resp) => {
+          setIsFavorite(true)
           console.log(resp);
         })
     }
-    document.location.href = `/vendorpage/${shopId}`
   }
   return (
     <button
