@@ -32,6 +32,7 @@ function FavoriteButton({ shopId }) {
         setUserId(data.userId)
         return data.userId
       })
+      //check favorites list
       .then((userId) => {
         fetch("/api/favorites/check", {
           method: "POST",
@@ -55,16 +56,10 @@ function FavoriteButton({ shopId }) {
             }
           })
       })
-    //get user list of favorites
-
-    // checkFavorites
   }, [])
 
   //handles button click to add or delete
   const handleFavoriteButton = () => {
-    // setIsFavorite(isInFavorites);
-
-    // setIsFavorite(!isFavorite);
     console.log("HIT handlesubmit")
 
     if (isFavorite) {

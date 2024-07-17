@@ -46,7 +46,7 @@ const VendorDetailsPage = () => {
                 <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
             </div>
 
-            <div class="schedule">{/*Schedule*/}</div>
+            <div class="photo-gallery">{/*Photo Gallery*/}</div>
 
             <div class="create-review"><CreateReview shop={selectedVendor} /></div>
             {reviews.map((r) => <div class="reviews"><ReviewCard review={r} /></div>)}
