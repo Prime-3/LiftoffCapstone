@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=eYiLt2gQuME
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // children is a React.ReactNode
 export default function LogoutLink({ children }) {
@@ -25,7 +25,7 @@ export default function LogoutLink({ children }) {
     };
     return (
         <>
-            <a href="#" onClick={handleSubmit}>{children}</a>
+            <Link to="/" onClick={handleSubmit}>{children}</Link>
         </>
     );
 }

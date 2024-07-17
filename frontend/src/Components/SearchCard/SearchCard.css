@@ -1,12 +1,16 @@
 .search-card {
+   display: flex;
    width: fit-content;
    margin: 20px;
    padding: 10px;
    /* border: 1px solid black; */
 }
 
-.search-card>a {
+#shop-link {
    color: black;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
    text-decoration: none;
 }
 
@@ -17,13 +21,15 @@
 }
 
 #vendor-photo {
-   width: 250px;
-   border-radius: 5px;
+   width: 240px;
+   padding: 5px;
+   border-radius: 15px;
 }
 
 #vendor-title {
    display: flex;
    margin: 0;
+   max-width: 175px;
 }
 
 #vendor-category {

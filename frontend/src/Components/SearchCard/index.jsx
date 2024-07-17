@@ -1,14 +1,15 @@
 import "./SearchCard.css"
+import { Link } from "react-router-dom";
 
 function SearchCard({ shop }) {
-   let vendorPhoto = shop.logo ? shop.logo : "/images/dummy-image-square.png";
+   let vendorPhoto = (shop.logo ? shop.logo : "/images/dummy-image-square.png");
    let vendorName = shop.shopName;
    let vendorCategory = shop.category;
    let stars = shop.avgStars;
 
    return (
       <div className="search-card">
-         <a href={`/vendorpage/${shop.id}`}>
+         <Link to={`/vendorpage/${shop.id}`} id="shop-link">
             <img id="vendor-photo" src={vendorPhoto} />
             <div id="vendor-info">
                <div>
@@ -42,7 +43,7 @@ function SearchCard({ shop }) {
                      )}
                </div>
             </div>
-         </a>
+         </Link>
       </div>
    )
 }
