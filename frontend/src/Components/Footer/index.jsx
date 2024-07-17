@@ -1,7 +1,28 @@
 import "./Footer.css"
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+   const [user, setUser] = useState()
+
+   useEffect(() => {
+      fetch("/pingauth")
+         .then((resp) => {
+            if (resp.ok) {
+
+               return resp.json();
+            } else {
+               return null
+            }
+         })
+         .then((data) => {
+            console.log(data);
+            setUser(data)
+            return data;
+         })
+   })
+
+
    return (
       <div id="footer-container">
          <div id="footer-title-socials">
@@ -17,22 +38,43 @@ const Footer = () => {
          <ul id="site-map">
             <h5>Site Map</h5>
             <div id="site-map-links">
-               <div>
-                  <li>
-                     <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                     <Link to="/">Account</Link>
-                  </li>
-               </div>
-               <div>
-                  <li>
-                     <Link to="/browse">Browse</Link>
-                  </li>
-                  <li>
-                     <Link to="/favorites">Favorites</Link>
-                  </li>
-               </div>
+               {user ?
+                  (
+                     <>
+                        <div>
+                           <li>
+                              <Link to="/">Home</Link>
+                           </li>
+                           <li>
+                              <Link to="/">Account</Link>
+                           </li>
+                        </div>
+                        <div>
+                           <li>
+                              <Link to="/browse">Browse</Link>
+                           </li>
+                           <li>
+                              <Link to="/favorites">Favorites</Link>
+                           </li>
+                        </div>
+                     </>
+
+                  )
+                  :
+                  (
+                     <>
+                        <div>
+                           <li>
+                              <Link to="/">Home</Link>
+                           </li>
+                        </div>
+                        <div>
+                           <li>
+                              <Link to="/browse">Browse</Link>
+                           </li>
+                        </div>
+                     </>
+                  )}
             </div>
          </ul>
       </div>
