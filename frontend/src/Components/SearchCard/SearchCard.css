@@ -3,6 +3,8 @@
    width: fit-content;
    margin: 20px;
    padding: 10px;
+   background: rgba(71, 103, 48, .25);
+   border-radius: 10px;
    /* border: 1px solid black; */
 }
 
@@ -17,7 +19,7 @@
 .search-card:hover {
    background-color: grey;
    border-radius: 5px;
-   background: rgba(71, 103, 48, .25);
+   background: rgba(71, 103, 48, .50);
 }
 
 #vendor-photo {
