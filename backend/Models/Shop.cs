@@ -18,7 +18,7 @@ namespace backend.Models
         public string? Logo { get; set; }
         public string? Category { get; set; }
         public int AvgStars { get; set; }
-
+        public string? AlbumId { get; set; } = null;
 
         public Shop()
         {

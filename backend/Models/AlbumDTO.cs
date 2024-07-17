@@ -12,7 +12,9 @@ public class AlbumDTO
         Id = album.id;
         Title = album.title;
         // https://developers.google.com/photos/library/guides/access-media-items#base-urls
-        CoverPhotoUrl = $"{album.coverPhotoBaseUrl}=w2048-h1024";
+        CoverPhotoUrl = Uri.IsWellFormedUriString(album.coverPhotoBaseUrl, UriKind.Absolute)
+            ? $"{album.coverPhotoBaseUrl}=w2048-h1024"
+            : "";
         Count = album.mediaItemsCount;
     }
 }
