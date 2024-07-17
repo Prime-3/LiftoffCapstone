@@ -31,23 +31,21 @@ public class ReviewsController : ControllerBase
          var reviewedShop = context.Shops.FirstOrDefault(s => s.Id == review.ShopId);
          var reviews = context.Reviews.Where(r => r.ShopId == review.ShopId);
 
-         if (reviewedShop.AvgStars == 0)
+         int tot = 0;
+         foreach (Review r in reviews)
          {
-            reviewedShop.AvgStars = review.Stars;
+            tot += r.Stars;
+         }
+         if (tot > 0)
+         {
+            int avg = tot / reviews.Count();
+            reviewedShop.AvgStars = avg;
          }
          else
          {
-            int tot = 0;
-            foreach (Review r in reviews)
-            {
-               tot += r.Stars;
-            }
-
-            int avg = tot / reviews.Count();
-            // Console.WriteLine("HIT! HIT! HIT! AVERAGE: ", avg);
-
-            reviewedShop.AvgStars = avg;
+            reviewedShop.AvgStars = 0;
          }
+
          context.Reviews.Add(review);
          context.SaveChanges();
 
@@ -122,21 +120,19 @@ public class ReviewsController : ControllerBase
       var reviewedShop = context.Shops.FirstOrDefault(s => s.Id == review.ShopId);
       var reviews = context.Reviews.Where(r => r.ShopId == review.ShopId);
 
-      if (reviewedShop.AvgStars == 0)
+      int tot = 0;
+      foreach (Review r in reviews)
       {
-         reviewedShop.AvgStars = 0;
+         tot += r.Stars;
+      }
+      if (tot > 0)
+      {
+         int avg = tot / reviews.Count();
+         reviewedShop.AvgStars = avg;
       }
       else
       {
-         int tot = 0;
-         foreach (Review r in reviews)
-         {
-            tot += r.Stars;
-         }
-
-         int avg = tot / reviews.Count();
-
-         reviewedShop.AvgStars = avg;
+         reviewedShop.AvgStars = 0;
       }
 
       context.SaveChanges();

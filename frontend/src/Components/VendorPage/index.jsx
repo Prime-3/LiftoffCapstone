@@ -1,7 +1,7 @@
 import React from "react";
 import FavoriteButton from "../Favorite/FavoriteButton";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import './styling.css';
 import EditComponent from "../EditButton/EditComponent";
 import CreateReview from "../CreateReview"
@@ -57,6 +57,7 @@ const VendorDetailsPage = () => {
 
     return (
         <div id="vendor-page">
+            <Link to={-1}>Back</Link>
             <div class="logo"><img src={selectedVendor.logo} />
                 <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton /></h2></div>
                 <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>

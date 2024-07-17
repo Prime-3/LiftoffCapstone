@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./ReviewCard.css"
 
 function ReviewCard({ review, user }) {
-
+   const navigate = useNavigate()
    let reviewTitle = review.title
    let stars = review.stars
    let reviewedBy = review.reviewerName
@@ -26,9 +27,9 @@ function ReviewCard({ review, user }) {
          .then((data) => {
             if (data != null) {
                console.log(data);
-               document.location.href = `/vendorpage/${review.shopId}`
             }
          })
+      navigate(0)
    }
 
    return (
