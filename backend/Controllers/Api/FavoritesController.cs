@@ -35,6 +35,7 @@ public class FavoritesController : ControllerBase
         return Ok(favoriteShops);
     }
 
+    //POST: api/favorites/check
     [HttpPost("check")]
     public IActionResult CheckFavorites([FromBody] AddFavoriteShopViewModel favorite)
     {
