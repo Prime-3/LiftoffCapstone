@@ -5,6 +5,7 @@ import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
 import "./MenuStyle.css"
 import LogoutLink from "../LogoutLink";
+import { Link } from "react-router-dom";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -48,7 +49,7 @@ const MenuButton = () => {
                .then((data) => {
                   console.log("HIT", data)
                   if (data != null) {
-                     setUserName(`${data.firstName} ${data.lastName}`)
+                     setUserName(`${data.firstName}`)
                   }
                })
          })
@@ -68,16 +69,16 @@ const MenuButton = () => {
          {user ?
             (
                <>
-                  <h3>Hello, {userName}</h3>
+                  <h3 id="welcome-text">Hello, {userName}</h3>
                   <li className="menu-item">
                      <h3>Account</h3>
                   </li>
                   <li className="menu-item">
-                     <h3 onClick={() => document.location.href = "/favorites"}>Favorites</h3>
+                     <h3><Link to={"/favorites"}>Favorites</Link></h3>
                   </li>
-                  <li className="menu-item">
+                  {/* <li className="menu-item">
                      <h3>Shops</h3>
-                  </li>
+                  </li> */}
                   <li className="menu-item">
                      <LogoutLink>
                         <h3 onClick={closeMenu}>Logout</h3>
