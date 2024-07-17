@@ -38,6 +38,7 @@ const VendorDetailsPage = () => {
                         setReviews(data)
                     })
             })
+<<<<<<< HEAD
         fetch("/pingauth")
             .then((resp) => {
                 if (resp.ok) {
@@ -53,6 +54,8 @@ const VendorDetailsPage = () => {
                     setUser(data)
                 }
             })
+=======
+>>>>>>> 20e211f6d6f4bd8cff9ca8adc2ab1d3995d56e3e
     }, [])
 
 
@@ -60,6 +63,7 @@ const VendorDetailsPage = () => {
         <div id="vendor-page">
             <Link to={-1}>Back</Link>
             <div class="logo"><img src={selectedVendor.logo} />
+<<<<<<< HEAD
                 <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId}/></h2></div>
                 <div>
                     <i
@@ -79,10 +83,14 @@ const VendorDetailsPage = () => {
                     ></i>
                 </div>
                 {/* <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId} /></h2></div> */}
+=======
+                <div class="favoriteButton-position"><h2>{selectedVendor.shopName}</h2><FavoriteButton shopId={vendorId} /></div>
+>>>>>>> 20e211f6d6f4bd8cff9ca8adc2ab1d3995d56e3e
                 <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
                 <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
             </div>
 
+<<<<<<< HEAD
             <div class="schedule">{/*Schedule*/}</div>
             <div id="review-form-popup">
                 {isReviewing ?
@@ -98,6 +106,12 @@ const VendorDetailsPage = () => {
                     )}
             </div>
             {reviews.map((r) => <div class="reviews"><ReviewCard review={r} user={user} /></div>)}
+=======
+            <div class="photo-gallery">{/*Photo Gallery*/}</div>
+
+            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
+            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} /></div>)}
+>>>>>>> 20e211f6d6f4bd8cff9ca8adc2ab1d3995d56e3e
         </div>
     );
 };
