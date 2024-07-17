@@ -43,7 +43,7 @@ public class ReviewsController : ControllerBase
          }
          else
          {
-            reviewedShop.AvgStars = 0;
+            reviewedShop.AvgStars = review.Stars;
          }
 
          context.Reviews.Add(review);

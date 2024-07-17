@@ -26,7 +26,7 @@ const VendorDetailsPage = () => {
                 return resp.json();
             })
             .then((data) => {
-                console.log(data);
+                console.log("selected vendor: ", data);
                 setSelectedVendor(data);
             }).then(() => {
                 fetch(`/api/reviews/shop/${vendorId}`)
@@ -60,6 +60,23 @@ const VendorDetailsPage = () => {
             <Link to={-1}>Back</Link>
             <div class="logo"><img src={selectedVendor.logo} />
                 <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton /></h2></div>
+                <div>
+                    <i
+                        className={(selectedVendor.avgStars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    ></i>
+                    <i
+                        className={(selectedVendor.avgStars >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    ></i>
+                    <i
+                        className={(selectedVendor.avgStars >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    ></i>
+                    <i
+                        className={(selectedVendor.avgStars >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    ></i>
+                    <i
+                        className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                    ></i>
+                </div>
                 <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
                 <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
             </div>

@@ -31,12 +31,14 @@
 #vendor-title {
    display: flex;
    margin: 0;
-   max-width: 175px;
+   max-width: 160px;
 }
 
 #vendor-category {
    display: flex;
    font-size: medium;
+   max-width: 160px;
+
 }
 
 .stars {
