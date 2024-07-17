@@ -1,12 +1,13 @@
 import "./LandingPage.css"
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
    return (
       <div id="landing-page">
          <h1 id="slogan">Welcome to the Tower Grove Farmers Market!<br /> We're <em>farmers, purveyors,</em> and <em>eaters</em> of locally grown food.</h1>
-         <a href="/browse">
+         <Link to="/browse">
             <button className="submit-button">Browse Shops</button>
-         </a>
+         </Link>
          <h2>About the Market:</h2>
          <div id="instructions">
             <div className="intro-cards">
@@ -23,9 +24,9 @@ const LandingPage = () => {
                <img className="intro-photos" src="images/hours.png"></img>
                <h5>Market Hours</h5>
                <p>
-                     Open from April 6 - November 2, 2024 (Saturdays Only) <br />
-                     Hours: 8:00 am - 12:30 pm <br /> <br />
-                     West of Center Cross Drive in the heart of the park at 4256 Magnolia Ave, St. Louis, MO 63110
+                  Open from April 6 - November 2, 2024 (Saturdays Only) <br />
+                  Hours: 8:00 am - 12:30 pm <br /> <br />
+                  West of Center Cross Drive in the heart of the park at 4256 Magnolia Ave, St. Louis, MO 63110
                </p>
             </div>
          </div>

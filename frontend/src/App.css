@@ -4,7 +4,6 @@ html {
   height: 100%;
   margin: 0 auto;
   padding: 0;
-  text-align: center;
   background-image: url("../images/fruit-932745_1280.jpg");
   background-attachment: fixed;
   background-size: cover;
@@ -93,6 +92,7 @@ header {
 
 .form-title {
   margin: 0;
+  text-align: center;
 }
 
 .submit-button {
@@ -103,7 +103,7 @@ header {
   background-color: red;
   color: white;
   margin-top: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 5px 10px;
 }
 

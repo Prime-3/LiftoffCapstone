@@ -1,4 +1,5 @@
 import "./Footer.css"
+import { Link } from "react-router-dom";
 
 const Footer = () => {
    return (
@@ -18,18 +19,18 @@ const Footer = () => {
             <div id="site-map-links">
                <div>
                   <li>
-                     <a href="/">Home</a>
+                     <Link to="/">Home</Link>
                   </li>
                   <li>
-                     <a href="/">Account</a>
+                     <Link to="/">Account</Link>
                   </li>
                </div>
                <div>
                   <li>
-                     <a href="/browse">Browse</a>
+                     <Link to="/browse">Browse</Link>
                   </li>
                   <li>
-                     <a href="/">Contact</a>
+                     <Link to="/favorites">Favorites</Link>
                   </li>
                </div>
             </div>

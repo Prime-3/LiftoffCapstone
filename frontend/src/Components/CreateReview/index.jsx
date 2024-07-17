@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CreateReview.css"
 
 function CreateReview({ shop }) {
+   const navigate = useNavigate()
    const [stars, setStars] = useState(0)
    const [title, setTitle] = useState("")
    const [comment, setComment] = useState("")
    const [hover, setHover] = useState(0)
+
+
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -36,7 +40,7 @@ function CreateReview({ shop }) {
                   description: comment
                })
             })
-            document.location.href = `/vendorpage/${shop.id}`;
+            navigate(0)
          })
    }
 

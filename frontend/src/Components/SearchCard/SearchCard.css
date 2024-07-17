@@ -1,34 +1,44 @@
 .search-card {
+   display: flex;
    width: fit-content;
    margin: 20px;
    padding: 10px;
+   background: rgba(71, 103, 48, .25);
+   border-radius: 10px;
    /* border: 1px solid black; */
 }
 
-.search-card>a {
+#shop-link {
    color: black;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
    text-decoration: none;
 }
 
 .search-card:hover {
    background-color: grey;
    border-radius: 5px;
-   background: rgba(71, 103, 48, .25);
+   background: rgba(71, 103, 48, .50);
 }
 
 #vendor-photo {
-   width: 250px;
-   border-radius: 5px;
+   width: 240px;
+   padding: 5px;
+   border-radius: 15px;
 }
 
 #vendor-title {
    display: flex;
    margin: 0;
+   max-width: 160px;
 }
 
 #vendor-category {
    display: flex;
    font-size: medium;
+   max-width: 160px;
+
 }
 
 .stars {

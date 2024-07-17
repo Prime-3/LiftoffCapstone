@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using System.Net.Mime;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -9,14 +11,27 @@ public class AcountsController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly ApplicationDbContext _context;
+
 
     public AcountsController(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager
+        SignInManager<ApplicationUser> signInManager,
+        ApplicationDbContext context
         )
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _context = context;
+    }
+
+ 
+    [HttpGet("{id}")]
+
+    public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
+    {
+        ApplicationUser? user = await _context.Users.FindAsync(id);
+        return user;
     }
 
     [HttpPost("register")]
