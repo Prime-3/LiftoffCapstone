@@ -53,8 +53,8 @@ const VendorDetailsPage = () => {
                     setUser(data)
                 }
             })
- }, [])
-    
+    }, [])
+
 
     return (
         <div id="vendor-page">

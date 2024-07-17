@@ -8,7 +8,7 @@ public class FavoriteShopDTO
     public string? Logo { get; set; }
     public int Id { get; set; }
 
-    public FavoriteShopDTO() {}
+    public FavoriteShopDTO() { }
     public FavoriteShopDTO(Shop shop)
     {
         ShopName = shop.ShopName;
