@@ -1,112 +1,106 @@
 import React, { useEffect, useState } from "react";
 import "./favoriteStyling.css";
 
-export default function FavoriteButton({shopId}) {
+function FavoriteButton({ shopId }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [userId, setUserId] = useState("")
   const [favorites, setFavorites] = useState("");
-  
-  const checkFavorites = () => {
-   console.log("ooooooooooo", favorites.length)
+
+  const checkFavorites = async () => {
+    console.log("ooooooooooo", favorites.length)
     for (const shop of favorites) {
       console.log("WEEEEEEEEE", shop.id, shodId)
-      if(shop.id === shopId){
+      if (shop.id === shopId) {
         setIsFavorite(true)
       }
     }
-    // favorites.forEach((shop) => {
-    //   console.log("WEEEEEEEEE")
-    //   if(shop.id === shopId){
-    //     setIsFavorite(true)
-    //   }
-    //   console.log("Check this out!!!!", shop.id, shopId)
-
-    // })
-  
   }
-    
-    
-//get user info
+
+
+  //get user info
   useEffect(() => {
     fetch("/pingauth")
-    .then((resp) => {
-      if (resp.ok) 
-      {
-        return resp.json();
-      }
-      else 
-      {
-        return null;
-      }
-    })
-    .then((data) => {
-      return data.userId
-    })
-    //get user list of favorites
-  .then((userId) => {
-    fetch(`/api/favorites/${userId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }, 
-    })
-    .then((resp) => {
-        return resp.json()
-    })
-    .then((data) => {
-        console.log("Favorites date: ", data)
-        setFavorites(data);
-        console.log(favorites);
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        else {
+          return null;
+        }
       })
-    })
-    
-   }, [])
-  }
-//handles button click to add or delete
-const handleFavoriteButton = () => {
-  const isInFavorites = checkIfInFavorites(shopId);
-  setIsFavorite(isInFavorites);
+      .then((data) => {
+        setUserId(data.userId)
+        return data.userId
+      })
+      .then((userId) => {
+        fetch("/api/favorites/check", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId: userId,
+            shopId: shopId
+          })
+        })
+          .then((resp) => {
+            return resp.json()
+          })
+          .then((data) => {
+            console.log("CHECK: ", data)
+            if (data.length > 0) {
+              setIsFavorite(true)
+            } else {
+              setIsFavorite(false)
+            }
+          })
+      })
+    //get user list of favorites
 
-  setIsFavorite(!isFavorite);
-  console.log("HIT handlesubmit")
+    // checkFavorites
+  }, [])
 
-  if(isFavorite) {
+  //handles button click to add or delete
+  const handleFavoriteButton = () => {
+    // setIsFavorite(isInFavorites);
+
+    // setIsFavorite(!isFavorite);
+    console.log("HIT handlesubmit")
+
+    if (isFavorite) {
       //remove from favorites
       fetch(`/api/favorites/remove`, {
-          method: 'DELETE',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              userId: userId,
-              shopId: shopId, 
-                  
-          }),
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          shopId: shopId,
+
+        }),
       })
-      .then((resp) => {
+        .then((resp) => {
           console.log(resp);
-      })
-  }else {
+        })
+    } else {
       //add to favorites
       fetch(`/api/favorites/add`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              userId: userId,
-              shopId: shopId,
-          }),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          shopId: shopId,
+        }),
       })
-      .then((resp) => {
+        .then((resp) => {
           console.log(resp);
-      }) 
+        })
     }
-
-  
-
-
-
+    document.location.href = `/vendorpage/${shopId}`
+  }
   return (
     <button
       className="favorite-button"
@@ -116,22 +110,6 @@ const handleFavoriteButton = () => {
       {isFavorite ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
     </button>
   );
-
-  async function checkIfInFavorites(shopId){
-    const response = await fetch(`/api/favorites/${userId}`, {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-      }, 
-    })
-    .then((resp) => {
-      return resp.json()
-    })
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.isFavorite;
-    } 
-  }
-
 }
+
+export default FavoriteButton;
