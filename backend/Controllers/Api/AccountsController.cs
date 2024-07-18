@@ -1,9 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Models;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using System.Net.Mime;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -31,10 +30,10 @@ public class AcountsController : ControllerBase
     public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
     {
         ApplicationUser? user = await _context.Users.FindAsync(id);
-        return user;
+        return Ok(new UserDTO(user));
     }
 
-    [HttpPost("register")]
+    [HttpPost("register"), AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterViewModel user)
     {
         IdentityResult? result = null;
