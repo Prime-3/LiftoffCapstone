@@ -53,7 +53,7 @@ function ReviewCard({ review, user }) {
                   className={(stars >= 5) ? "fa-solid fa-star" : "hidden"}
                ></i>
             </div>
-            {(userId == user.userId) ? <span onClick={handleClick}>Delete</span> : ""}
+            {(userId == user.userId) ? <span onClick={handleClick} className="deleteButton">Delete</span> : ""}
          </div>
          <h5 id="reviewed-by">Review by {reviewedBy}</h5>
          <p id="review-comment">{reviewComment}</p>

@@ -7,9 +7,19 @@
 
 #review-form-popup>span {
    display: flex;
-   margin-left: 200px;
+   margin-left: 165px;
    padding-left: 10px;
    cursor: pointer;
+   width: fit-content;
+   padding-right: 10px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   border-bottom: 2px solid black; 
+   border-right: 1px solid black; 
+   border-radius: 10px;
+   background: rgba(71, 103, 48, 1);
+   color: white;
+   font-size: 14px;
 }
 
 .logo{
@@ -17,7 +27,6 @@
     height: 350px;
     display: flex;
     padding-left: 100px;
-    /* padding-top: 200px; */
 }
 
 .shopName{
@@ -37,17 +46,18 @@
    margin-top: 15px;
    margin-bottom: 15px;
    width: fit-content;
-   border: 3px solid black;
-   border-radius: 9px;
-   background: rgba(71, 103, 48, .75);
-   padding: 5px;
-   
+   border-bottom: 2px solid black; 
+   border-right: 1px solid black; 
+   border-radius: 10px;
+   background: rgba(71, 103, 48, 1);
+   padding: 8px;
+   color: white;
+   font-size: 14px;
 }
 
 .top-right{
    display: flex;
    flex-direction: column;
-   /* width: 500px; */
 }
 #a-link{
    text-decoration: underline;
@@ -57,7 +67,6 @@
 .top-left {
    display: flex;
    flex-direction: column;
-   /* width: 500px; */
 }
 
 .reviews{

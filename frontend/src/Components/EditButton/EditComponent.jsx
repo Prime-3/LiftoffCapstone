@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useParams } from "react-router-dom";
-
+import './styleEdit.css'
 
 function EditButtonComponent(args) {
   //This is for the modal
@@ -75,22 +75,23 @@ const handleChange = (e) => {
   return (
     //This is updated vendor page
     <div>
-      <Button color="danger" onClick={toggle}>Update Profile Page</Button>
-      <Modal isOpen={modal} toggle={toggle} {...args} unmountOnClose={false}>
-        <ModalHeader>Edit Content</ModalHeader>
-        <ModalBody>
+      <Button color="danger" onClick={toggle} className='update'>Update Profile</Button>
+      <Modal isOpen={modal} toggle={toggle} {...args} unmountOnClose={false} className='modal'>
+        <ModalHeader className='header'>Edit Content</ModalHeader>
+        <ModalBody className='body'>
             {/* Form for Vendor to update profile */}
-            <form onSubmit={handleFormSubmit}>
-                <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange}></input> <br />
-                <input type="url" name="logo" placeholder="Logo URL"onChange={handleChange}></input> <br />
-                <input type="url" name="website" placeholder="Website URL"onChange={handleChange}></input> <br />
-                <textarea type = "text" name = "description" placeholder = "Enter your description here..." rows = {5} onChange={handleChange}></textarea> <br />
-                <Button color="success" onClick={handleFormSubmit}>{' '}Save{' '}</Button> {'   '}
-                <Button color="secondary" onClick={toggle}>{' '}Close{' '}</Button>
+            <form onSubmit={handleFormSubmit} className='form'>
+                <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange} className='shop'></input> <br />
+                <input type="url" name="logo" placeholder="Logo URL"onChange={handleChange} className='lo'></input> <br />
+                <input type="url" name="website" placeholder="Website URL"onChange={handleChange} className='web'></input> <br />
+                <textarea type = "text" name = "description" placeholder = "Enter your description here..." rows = {7} cols={32} onChange={handleChange} className='area'></textarea> <br />
+                <div className='buttons'><Button onClick={handleFormSubmit} className='save'>{' '}Save{' '}</Button> {'   '}
+                <Button onClick={toggle} className='close' >{' '}Close{' '}</Button>
+            </div>
             </form>
         </ModalBody>
-        <ModalFooter>
-          {isShopPageUpdated ? <p>Shop page successfully updated! Refresh the page to see your changes.</p> : <p>No changes made to this shop.</p> }
+        <ModalFooter className='footer'>
+          {isShopPageUpdated ? <p className='success'>Shop page successfully updated!<br /> Refresh the page to see your changes.</p> : <p className='no-changes'>No changes made to this shop.</p> }
         </ModalFooter>
       </Modal>
     </div> 
