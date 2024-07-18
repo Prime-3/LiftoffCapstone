@@ -18,7 +18,8 @@ namespace backend.Models
         public string? Logo { get; set; }
         public string? Category { get; set; }
         public int AvgStars { get; set; }
-        public string? AlbumUniqueTitle { get; set; } = null;
+        public string? AlbumUniqueTitle { get; set; } = null; // used to create/get album
+        public string? AlbumId { get; set; } = null; // used to post/get photos
 
         public Shop()
         {
