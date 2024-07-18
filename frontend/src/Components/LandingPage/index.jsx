@@ -6,7 +6,7 @@ const LandingPage = () => {
       <div id="landing-page">
          <h1 id="slogan">Welcome to the Tower Grove Farmers Market!<br /> We're <em>farmers, purveyors,</em> and <em>eaters</em> of locally grown food.</h1>
          <Link to="/browse">
-            <button className="submit-button">Browse Shops</button>
+            <button className="browseshops">Browse Shops</button>
          </Link>
          <h2>About the Market:</h2>
          <div id="instructions">

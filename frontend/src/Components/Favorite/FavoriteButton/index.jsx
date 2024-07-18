@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./favoriteStyling.css";
+import JSConfetti from "js-confetti";
 
 function FavoriteButton({ shopId }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -61,7 +62,10 @@ function FavoriteButton({ shopId }) {
   //handles button click to add or delete
   const handleFavoriteButton = () => {
     console.log("HIT handlesubmit")
-
+    //confetti
+    const confetti = new JSConfetti()
+    confetti.addConfetti()
+    
     if (isFavorite) {
       //remove from favorites
       fetch(`/api/favorites/remove`, {

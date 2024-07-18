@@ -48,6 +48,9 @@
    text-decoration: none;
 }
 
-.submit-button{
+.browseshops{
    background: rgba(71, 103, 48, 1);
+   border-radius: 5px;
+   color: white;
+   cursor: pointer;
 }
