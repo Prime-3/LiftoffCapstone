@@ -58,10 +58,14 @@ const VendorDetailsPage = () => {
 
     return (
         <div id="vendor-page">
-            <Link to={-1}>Back</Link>
-            <div class="logo"><img src={selectedVendor.logo} />
-                <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId}/></h2></div>
-                <div>
+            <div id="top-half">
+                <div className="top-left">
+                <Link to={-1} className="back">Back</Link>
+                <img src={selectedVendor.logo} className="logo"/>
+                </div>
+                <div className="top-right">
+                <h2 className="shopName">{selectedVendor.shopName} <FavoriteButton shopId={vendorId}/></h2>
+                <div className="avg-stars">
                     <i
                         className={(selectedVendor.avgStars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
                     ></i>
@@ -78,12 +82,12 @@ const VendorDetailsPage = () => {
                         className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
                     ></i>
                 </div>
-                {/* <div class="favoriteButton-position"><h2>{selectedVendor.shopName} <FavoriteButton shopId={vendorId} /></h2></div> */}
-                <div class="website"><p>Link to Vendor's Website: <a href={selectedVendor.website}>{selectedVendor.shopName}</a></p></div>
-                <div class="description"><h4>{selectedVendor.description}</h4> <EditComponent onClick={EditComponent} /></div>
+                <p className="website">Link to Vendor's Website: <a href={selectedVendor.website} id="a-link">{selectedVendor.shopName}</a></p>
+                <h4 className="description">{selectedVendor.description}<EditComponent onClick={EditComponent} /></h4> 
+                </div>
             </div>
 
-            <div class="schedule">{/*Schedule*/}</div>
+            <div className="Photos">{/*Photos*/}</div>
             <div id="review-form-popup">
                 {isReviewing ?
                     (
@@ -97,7 +101,7 @@ const VendorDetailsPage = () => {
                         <span onClick={handleOpenReviewForm}>Add a Review</span>
                     )}
             </div>
-            {reviews.map((r) => <div class="reviews"><ReviewCard review={r} user={user} /></div>)}
+            {reviews.map((r) => <div className="reviews"><ReviewCard review={r} user={user} /></div>)}
         </div>
     );
 };

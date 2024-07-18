@@ -18,8 +18,8 @@ const Header = () => {
                <img id="logo" src="/images/STLmarkets.png" />
             </Link>
             <form onSubmit={handleSubmit}>
-               <input id="search-bar" type="search" name="search-term"></input>
-               <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
+               <input id="search-bar" type="search" name="search-term" placeholder="Search..."></input>
+               <button type="submit" className="searchSubmit"><i className="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <div id="profile-button">
                <MenuButton />

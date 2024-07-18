@@ -21,6 +21,7 @@
    border: 2px solid black;
    border-radius: 5px;
    resize: none;
+   background-color: rgba(209, 187, 162, .20);
 }
 
 .review-label {
@@ -40,4 +41,22 @@
 
 .form-create-review>button {
    align-self: self-end;
+}
+
+#form-review-title{
+   background-color: rgba(209, 187, 162, .20);
+}
+
+.submit-button{
+   border-bottom: 2px solid black; 
+    border-right: 1px solid black; 
+    border-top: none;
+    border-left: none;
+    border-radius: 10px;
+    color: white;
+    background: rgb(237, 70, 15);
+    font-size: 13px;
+    cursor: pointer;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 7px;
 }

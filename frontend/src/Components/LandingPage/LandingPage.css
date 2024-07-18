@@ -47,3 +47,10 @@
 #landing-page>a {
    text-decoration: none;
 }
+
+.browseshops{
+   background: rgba(71, 103, 48, 1);
+   border-radius: 5px;
+   color: white;
+   cursor: pointer;
+}
