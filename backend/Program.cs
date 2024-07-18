@@ -52,6 +52,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add google photos API as a service
+builder.Services.AddGooglePhotos();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
