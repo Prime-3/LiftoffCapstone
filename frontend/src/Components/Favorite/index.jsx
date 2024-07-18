@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "./favoriteStyles.css"
 import VendorDetailsPage from "../VendorPage";
 import { Link } from 'react-router-dom';
-
+import './favoriteStyles.css'
 
 const Favorited = () => {
   const [favorites, setFavorites] = useState([]);
