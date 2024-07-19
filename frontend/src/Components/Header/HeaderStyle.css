@@ -5,6 +5,7 @@ header {
    align-items: center;
    background-color: rgba(209, 187, 162, 1);
    padding: 20px;
+   z-index: 1;
 }
 
 #logo {
@@ -42,7 +43,7 @@ select {
    right: 25px;
 }
 
-.searchSubmit{
+.searchSubmit {
    background-color: rgba(223, 214, 203, 0.736);
    border-bottom: 2px solid black;
    border-right: 1px solid black;

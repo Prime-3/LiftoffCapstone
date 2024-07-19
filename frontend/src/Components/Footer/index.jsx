@@ -20,7 +20,7 @@ const Footer = () => {
             setUser(data)
             return data;
          })
-   })
+   }, [])
 
 
    return (

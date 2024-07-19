@@ -6,6 +6,7 @@ import './styling.css';
 import EditComponent from "../EditButton/EditComponent";
 import CreateReview from "../CreateReview"
 import ReviewCard from "../ReviewCard"
+import ImageGallery from "../ImageGallery";
 
 
 
@@ -60,34 +61,34 @@ const VendorDetailsPage = () => {
         <div id="vendor-page">
             <div id="top-half">
                 <div className="top-left">
-                <Link to={-1} className="back">Back</Link>
-                <img src={selectedVendor.logo} className="logo"/>
+                    <Link to={-1} className="back">Back</Link>
+                    <img src={selectedVendor.logo} className="logo" />
                 </div>
                 <div className="top-right">
-                <h2 className="shopName">{selectedVendor.shopName} <FavoriteButton shopId={vendorId}/></h2>
-                <div className="avg-stars">
-                    <i
-                        className={(selectedVendor.avgStars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                    ></i>
-                    <i
-                        className={(selectedVendor.avgStars >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                    ></i>
-                    <i
-                        className={(selectedVendor.avgStars >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                    ></i>
-                    <i
-                        className={(selectedVendor.avgStars >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                    ></i>
-                    <i
-                        className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                    ></i>
-                </div>
-                <p className="website">Link to Vendor's Website: <a href={selectedVendor.website} id="a-link">{selectedVendor.shopName}</a></p>
-                <h4 className="description">{selectedVendor.description}<EditComponent onClick={EditComponent} /></h4> 
+                    <h2 className="shopName">{selectedVendor.shopName} <FavoriteButton shopId={vendorId} /></h2>
+                    <div className="avg-stars">
+                        <i
+                            className={(selectedVendor.avgStars >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        ></i>
+                        <i
+                            className={(selectedVendor.avgStars >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        ></i>
+                        <i
+                            className={(selectedVendor.avgStars >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        ></i>
+                        <i
+                            className={(selectedVendor.avgStars >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        ></i>
+                        <i
+                            className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        ></i>
+                    </div>
+                    <p className="website">Link to Vendor's Website: <a href={selectedVendor.website} id="a-link">{selectedVendor.shopName}</a></p>
+                    <h4 className="description">{selectedVendor.description}<EditComponent onClick={EditComponent} /></h4>
                 </div>
             </div>
 
-            <div className="Photos">{/*Photos*/}</div>
+            <div className="Photos"><ImageGallery /></div>
             <div id="review-form-popup">
                 {isReviewing ?
                     (
