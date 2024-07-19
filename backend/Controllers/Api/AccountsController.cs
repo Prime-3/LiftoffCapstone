@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using backend.Constants;
 using backend.Data;
 using backend.Models;
 
@@ -11,12 +13,10 @@ public class AcountsController : ControllerBase
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ApplicationDbContext _context;
 
-
     public AcountsController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        ApplicationDbContext context
-        )
+        ApplicationDbContext context)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -29,7 +29,8 @@ public class AcountsController : ControllerBase
     public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
     {
         ApplicationUser? user = await _context.Users.FindAsync(id);
-        return Ok(new UserDTO(user));
+        bool isAdmin = await _userManager.IsInRoleAsync(user, Admin.ROLE);
+        return Ok(new UserDTO(user, isAdmin));
     }
 
     [HttpPost("register")]
@@ -52,5 +53,35 @@ public class AcountsController : ControllerBase
             }
         }
         return BadRequest(new {message = result != null ? result.ToString() : ""});
+    }
+
+    // DELETE /api/accounts/{id}
+    [HttpDelete("{id}"), Authorize(Roles=Admin.ROLE)]
+    public async Task<IActionResult> Delete(string id)
+    {
+        ApplicationUser user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+            return NotFound(new {message = $"Could not find user ({id})."});
+
+        IdentityResult result = await _userManager.DeleteAsync(user);
+        if (!result.Succeeded)
+            return Problem(detail: $"Could not delete user: {result}.", statusCode: 503);
+
+        return Ok(new {message = $"Successfully deleted user ({user.Email})."});
+    }
+
+    // PATCH /api/accounts/makeAdministrator/{id}
+    [HttpPatch("makeAdministrator/{id}"), Authorize(Roles=Admin.ROLE)]
+    public async Task<IActionResult> MakeAdministrator(string id)
+    {
+        ApplicationUser user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+            return NotFound(new {message = $"Could not find user ({id})."});
+
+        IdentityResult result = await _userManager.AddToRoleAsync(user, Admin.ROLE);
+        if (!result.Succeeded)
+            return Problem(detail: $"Could not make user({id}) and administrator.", statusCode: 503);
+
+        return Ok(new {message = $"User ({user.Email}) is now administrator. With great power..."});
     }
 }

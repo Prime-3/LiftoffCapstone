@@ -28,6 +28,7 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options => {
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
 })
+.AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -37,10 +38,17 @@ builder.Services.AddAuthentication();
 //  roles - Identity can be assigned roles, which provide it with certain claims
 //  policies - set of one or more requirements on user to be "authorized"
 // register polic(y|ies)
-builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthorization(options => {
     options.AddPolicy("OwnerOnly", policy =>
-        policy.Requirements.Add(new OwnerOnlyRequirement()))
-);
+        policy.Requirements.Add(new OwnerOnlyRequirement()));
+    // TODO: currently we make all endpoints available be default, and "black
+    //   list" certain endpoints using a combination of AuthorizeAttribute and
+    //   Policy-based authorization. Do we want to invert that, and lock
+    //   everything down, and "white list" some endpoints?
+    // options.FallbackPolicy = new AuthorizationPolicyBuilder()
+    //     .RequireAuthenticatedUser()
+    //     .Build();
+});
 // TODO: understand DI AddTransient(), AddScoped(), AddTransient()
 // register authorization handler(s)
 builder.Services.AddScoped<IAuthorizationHandler, OwnerOnlyHandler>();
@@ -56,6 +64,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddGooglePhotos();
 
 var app = builder.Build();
+
+// https://learn.microsoft.com/en-us/aspnet/core/security/authorization/secure-data?view=aspnetcore-8.0
+// Create ("seed") an admin user in our DB.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+    var testUserPw = builder.Configuration.GetValue<string>("SeedUserPW");
+    await SeedData.InitializeAsync(services, testUserPw);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
