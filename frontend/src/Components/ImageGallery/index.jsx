@@ -75,11 +75,13 @@ const ImageGallery = () => {
          <div className="carousel">
             <div className="item active">
                <img src={testImages.shift()} />
+               <p className="caption">Optional Caption 1</p>
             </div>
             {
-               testImages.map((img) => (
+               testImages.map((img, idx) => (
                   <div className="item">
                      <img src={img} />
+                     <p className="caption">Optional Caption {idx}</p>
                   </div>
                ))
             }
