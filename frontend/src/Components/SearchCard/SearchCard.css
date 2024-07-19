@@ -3,9 +3,8 @@
    width: fit-content;
    margin: 20px;
    padding: 10px;
-   background: rgba(71, 103, 48, .25);
+   background-color: #d1bba290;
    border-radius: 10px;
-   /* border: 1px solid black; */
 }
 
 #shop-link {
@@ -19,7 +18,7 @@
 .search-card:hover {
    background-color: grey;
    border-radius: 5px;
-   background: rgba(71, 103, 48, .50);
+   background: rgba(120, 173, 131, 0.332);
 }
 
 #vendor-photo {
@@ -50,4 +49,11 @@
 #vendor-info {
    display: flex;
    justify-content: space-between;
+}
+
+
+.searchPhotos{
+   height: 254px;
+   align-items: center;
+   display: flex;
 }

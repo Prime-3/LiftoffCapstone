@@ -62,9 +62,7 @@ function FavoriteButton({ shopId }) {
   //handles button click to add or delete
   const handleFavoriteButton = () => {
     console.log("HIT handlesubmit")
-    //confetti
-    const confetti = new JSConfetti()
-    confetti.addConfetti()
+    
     
     if (isFavorite) {
       //remove from favorites
@@ -84,6 +82,9 @@ function FavoriteButton({ shopId }) {
           console.log(resp);
         })
     } else {
+      //confetti
+    const confetti = new JSConfetti()
+    confetti.addConfetti()
       //add to favorites
       fetch(`/api/favorites/add`, {
         method: 'POST',
