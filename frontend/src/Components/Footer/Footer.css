@@ -12,6 +12,9 @@ li {
    justify-content: space-between;
    background-color: rgba(209, 187, 162, 1);
    padding: 0px 100px;
+   position: absolute;
+   width: 1080px;
+   bottom: 0;
 }
 
 #site-map {

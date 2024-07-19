@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./HeaderStyle.css"
 import MenuButton from "./MenuButton";
 
@@ -14,12 +14,12 @@ const Header = () => {
    return (
       <>
          <header>
-            <a href="/">
+            <Link to="/">
                <img id="logo" src="/images/STLmarkets.png" />
-            </a>
+            </Link>
             <form onSubmit={handleSubmit}>
-               <input id="search-bar" type="search" name="search-term"></input>
-               <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
+               <input id="search-bar" type="search" name="search-term" placeholder="Search..."></input>
+               <button type="submit" className="searchSubmit"><i className="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <div id="profile-button">
                <MenuButton />

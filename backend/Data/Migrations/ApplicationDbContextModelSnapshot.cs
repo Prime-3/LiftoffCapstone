@@ -266,9 +266,18 @@ namespace backend.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("AlbumId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AlbumUniqueTitle")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<int>("AvgStars")
+                        .HasColumnType("int");
 
                     b.Property<string>("Category")
                         .HasColumnType("longtext");

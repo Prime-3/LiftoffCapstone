@@ -1,8 +1,10 @@
 #landing-page {
+   text-align: center;
    display: flex;
    flex-direction: column;
    align-items: center;
    padding-top: 100px;
+   padding-bottom: 100px;
    /* background-color: rgba(227, 227, 220, 1); */
 
 }
@@ -23,6 +25,7 @@
 }
 
 #slogan {
+
    font-size: xxx-large;
    width: 750px;
    margin-top: 100px;
@@ -43,4 +46,11 @@
 
 #landing-page>a {
    text-decoration: none;
+}
+
+.browseshops{
+   background: rgba(71, 103, 48, 1);
+   border-radius: 10px;
+   color: white;
+   cursor: pointer;
 }

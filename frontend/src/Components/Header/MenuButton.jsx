@@ -5,12 +5,14 @@ import LoginFormModal from "../LoginFormModal";
 import RegisterFormModal from "../RegisterFormModal";
 import "./MenuStyle.css"
 import LogoutLink from "../LogoutLink";
+import { Link } from "react-router-dom";
 
 const MenuButton = () => {
    const [showMenu, setShowMenu] = useState(false);
    const [showModal, setShowModal] = useState(false);
    const [modalSel, setModalSel] = useState();
    const [user, setUser] = useState()
+   const [userName, setUserName] = useState("")
 
 
    const openMenu = () => {
@@ -33,9 +35,27 @@ const MenuButton = () => {
          .then((data) => {
             console.log(data);
             setUser(data)
+            return data.userId;
+         })
+         .then((userId) => {
+            fetch(`/api/acounts/${userId}`)
+               .then((resp) => {
+                  try {
+                     return resp.json();
+                  } catch {
+                     return null
+                  }
+               })
+               .then((data) => {
+                  console.log("HIT", data)
+                  if (data != null) {
+                     setUserName(`${data.firstName}`)
+                  }
+               })
          })
 
    }, []);
+
 
 
    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -45,19 +65,20 @@ const MenuButton = () => {
          <p>Menu</p>
          <i className="fa-solid fa-bars fa-lg" />
       </button>
-      <ul className={ulClassName}>
+      <ul className={ulClassName} id="menu-items-container">
          {user ?
             (
                <>
+                  <h3 id="welcome-text">Hello, {userName}</h3>
                   <li className="menu-item">
                      <h3>Account</h3>
                   </li>
                   <li className="menu-item">
-                     <h3>Favorites</h3>
+                     <h3><Link to={"/favorites"}>Favorites</Link></h3>
                   </li>
-                  <li className="menu-item">
+                  {/* <li className="menu-item">
                      <h3>Shops</h3>
-                  </li>
+                  </li> */}
                   <li className="menu-item">
                      <LogoutLink>
                         <h3 onClick={closeMenu}>Logout</h3>

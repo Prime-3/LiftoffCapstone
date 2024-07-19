@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./CreateReview.css"
 
 function CreateReview({ shop }) {
+   const navigate = useNavigate()
    const [stars, setStars] = useState(0)
    const [title, setTitle] = useState("")
    const [comment, setComment] = useState("")
    const [hover, setHover] = useState(0)
+
+
 
    const handleChange = (e) => {
       const { name, value } = e.target;
@@ -36,54 +40,58 @@ function CreateReview({ shop }) {
                   description: comment
                })
             })
+            navigate(0)
          })
    }
 
+
    return (
-      <form className="form-create-review">
-         <label className="review-label">Review Title</label>
-         <div id="form-title-stars">
-            <input id="form-review-title" type="text" name="title" onChange={handleChange}></input>
-            <div id="star-container">
-               <div className="stars">
-                  <i
-                     className={(stars >= 1 || hover >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={() => setStars(1)}
-                     onMouseOver={() => setHover(1)}
-                     onMouseLeave={() => setHover(0)}
-                  ></i>
-                  <i
-                     className={(stars >= 2 || hover >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={() => setStars(2)}
-                     onMouseOver={() => setHover(2)}
-                     onMouseLeave={() => setHover(0)}
-                  ></i>
-                  <i
-                     className={(stars >= 3 || hover >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={() => setStars(3)}
-                     onMouseOver={() => setHover(3)}
-                     onMouseLeave={() => setHover(0)}
-                  ></i>
-                  <i
-                     className={(stars >= 4 || hover >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={() => setStars(4)}
-                     onMouseOver={() => setHover(4)}
-                     onMouseLeave={() => setHover(0)}
-                  ></i>
-                  <i
-                     className={(stars >= 5 || hover >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
-                     onClick={() => setStars(5)}
-                     onMouseOver={() => setHover(5)}
-                     onMouseLeave={() => setHover(0)}
-                  ></i>
+      <div>
+         <form className="form-create-review">
+            <label className="review-label">Review Title</label>
+            <div id="form-title-stars">
+               <input id="form-review-title" type="text" name="title" onChange={handleChange}></input>
+               <div id="star-container">
+                  <div className="stars">
+                     <i
+                        className={(stars >= 1 || hover >= 1) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        onClick={() => setStars(1)}
+                        onMouseOver={() => setHover(1)}
+                        onMouseLeave={() => setHover(0)}
+                     ></i>
+                     <i
+                        className={(stars >= 2 || hover >= 2) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        onClick={() => setStars(2)}
+                        onMouseOver={() => setHover(2)}
+                        onMouseLeave={() => setHover(0)}
+                     ></i>
+                     <i
+                        className={(stars >= 3 || hover >= 3) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        onClick={() => setStars(3)}
+                        onMouseOver={() => setHover(3)}
+                        onMouseLeave={() => setHover(0)}
+                     ></i>
+                     <i
+                        className={(stars >= 4 || hover >= 4) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        onClick={() => setStars(4)}
+                        onMouseOver={() => setHover(4)}
+                        onMouseLeave={() => setHover(0)}
+                     ></i>
+                     <i
+                        className={(stars >= 5 || hover >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
+                        onClick={() => setStars(5)}
+                        onMouseOver={() => setHover(5)}
+                        onMouseLeave={() => setHover(0)}
+                     ></i>
+                  </div>
+                  <span>stars</span>
                </div>
-               <span>stars</span>
             </div>
-         </div>
-         <label className="review-label">Comment</label>
-         <textarea id="form-review-comment" name="comment" onChange={handleChange}></textarea>
-         <button className="submit-button" type="submit" onClick={handleSubmit}>Submit</button>
-      </form>
+            <label className="review-label">Comment</label>
+            <textarea id="form-review-comment" name="comment" onChange={handleChange}></textarea>
+            <button className="submit-button" type="submit" onClick={handleSubmit}>Submit</button>
+         </form>
+      </div>
    )
 }
 

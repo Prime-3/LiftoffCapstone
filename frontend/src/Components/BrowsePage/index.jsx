@@ -3,18 +3,17 @@ import SearchCard from "../SearchCard"
 import "./BrowsePage.css"
 import { getShops } from "../../utils/shops.js";
 
-export async function loader({params}) {
+export async function loader({ params }) {
    const shops = await getShops(params.searchTerm);
-   return {shops};
+   return { shops };
 }
 const BrowsePage = () => {
-   const {shops} = useLoaderData();
+   const { shops } = useLoaderData();
 
    return (
       <div id="browse-page">
-         <h1>BrowsePage</h1>
          <div id="card-container">
-            {shops.map((shop) => <SearchCard shop={shop} key={shop.id}/>)}
+            {shops.map((shop) => <SearchCard shop={shop} key={shop.id} />)}
          </div>
       </div>
    )
