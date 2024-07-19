@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+using backend.Constants;
 using backend.Data;
 
 namespace backend.Models;
@@ -14,8 +15,8 @@ public class SeedData
         using (var context = new ApplicationDbContext(
             serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
         {
-            var adminID = await EnsureUser(serviceProvider, testUserPw, "stlmarkets7@gmail.com");
-            await EnsureRole(serviceProvider, adminID, "Administrator");
+            var adminID = await EnsureUser(serviceProvider, testUserPw, Admin.EMAIL);
+            await EnsureRole(serviceProvider, adminID, Admin.ROLE);
         }
     }
     private static async Task<string> EnsureUser(IServiceProvider serviceProvider, string testUserPw, string userName)
@@ -30,8 +31,8 @@ public class SeedData
         {
             user = new ApplicationUser
                 {
-                    FirstName = "Admin",
-                    LastName = "Istrator",
+                    FirstName = Admin.FIRST_NAME,
+                    LastName = Admin.LAST_NAME,
                     Email = userName,
                     NormalizedEmail = userName.ToUpper(),
                     UserName = userName,
