@@ -31,15 +31,15 @@
     width: 275px;
     justify-content: left;
     display: flex;
-    padding-left: 10px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    object-fit: contain;
+    margin: 40px 10px;
+    border-radius: 15px;
 
 }
 
 .key {
     display: flex;
-    background-color: rgb(19, 75, 27);
+    background-color: rgba(19, 75, 27, .75);
     border-radius: 20px;
     border-style: solid;
     margin: 25px 50px;
