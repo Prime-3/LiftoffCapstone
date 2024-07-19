@@ -1,10 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./ImageGallery.scss"
 
 
 const ImageGallery = () => {
-   const [initialized, setInitialized] = useState(false)
-
    const testImages = [
       "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2021/08/farmers-market-produce-0812211.jpg",
       "https://www.a2gov.org/departments/Parks-Recreation/parks-places/farmers-market/PublishingImages/Pages/default/market%20sign%20flowers.jpg?RenditionId=18",
@@ -15,78 +13,80 @@ const ImageGallery = () => {
       "https://www.aldenestatesofjefferson.com/wp-content/uploads/sites/63/2019/08/GettyImages-671270196-1-600x511.jpg",
       "https://www.socosy.co.uk/wp-content/uploads/2020/07/farmers-market.webp",
       "https://img1.wsimg.com/isteam/stock/26336/:/rs=w:1280",
+      "https://www.castlepinesconnection.com/wp-content/uploads/2022/04/farmers_marketsjpg-1-768x387.jpg"
    ]
 
-   useEffect((e) => {
-      console.log("useEffect HIT")
-      // document.addEventListener("load", function () {
-      let carousel = document.querySelector(".carousel");
-      let items = carousel.querySelectorAll(".item");
-      let dotsContainer = document.querySelector(".dots");
+   const init = useRef(false)
 
-      // if (!initialized) {
-      // Insert dots into the DOM
-      //    items.forEach((index) => {
-      //       let dot = document.createElement("span");
-      //       dot.classList.add("dot");
-      //       if (index === 0) dot.classList.add("active");
-      //       dot.dataset.index = index;
-      //       dotsContainer.appendChild(dot);
-      //    });
-      //    setInitialized(true)
-      // }
-      // let dots = document.querySelectorAll(".dot");
+   useEffect(() => {
+      if (!init.current) {
+         init.current = true
 
-      // Function to show a specific item
-      function showItem(index) {
-         items.forEach((item, idx) => {
-            item.classList.remove("active");
-            // dots[idx].classList.remove("active");
-            if (idx === index) {
-               item.classList.add("active");
-               // dots[idx].classList.add("active");
-            }
+         let carousel = (document.querySelector(".carousel"));
+         let items = (carousel.querySelectorAll(".item"));
+         let dotsContainer = document.querySelector(".dots");
+
+         items.forEach((_, index) => {
+            let dot = document.createElement("span");
+            dot.classList.add("dot");
+            if (index === 0) dot.classList.add("active");
+            dot.dataset.index = index;
+            dotsContainer.appendChild(dot);
          });
+
+         let dots = document.querySelectorAll(".dot");
+
+         function showItem(index) {
+            items.forEach((item, idx) => {
+               item.classList.remove("active");
+               dots[idx].classList.remove("active");
+               if (idx === index) {
+                  item.classList.add("active");
+                  dots[idx].classList.add("active");
+               }
+            });
+         }
+
+         document.querySelector(".prev").addEventListener("click", () => {
+            let index = [...items].findIndex((item) =>
+               item.classList.contains("active")
+            );
+            showItem((index == 0 ? items.length - 1 : index - 1));
+         });
+
+         document.querySelector(".next").addEventListener("click", () => {
+            let index = [...items].findIndex((item) =>
+               item.classList.contains("active")
+            );
+            showItem((index >= items.length - 1 ? 0 : index + 1));
+         });
+
+         dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+               let index = parseInt(dot.dataset.index);
+               showItem(index);
+            })
+         })
       }
-
-      // Event listeners for buttons
-      document.querySelector(".prev").addEventListener("click", () => {
-         let index = [...items].findIndex((item) =>
-            item.classList.contains("active")
-         );
-         showItem((index - 1 + items.length) % items.length);
-      });
-
-      document.querySelector(".next").addEventListener("click", () => {
-         let index = [...items].findIndex((item) =>
-            item.classList.contains("active")
-         );
-         showItem((index + 1) % items.length);
-      });
-
-      // Event listeners for dots
-      // dots.forEach((dot) => {
-      //    dot.addEventListener("click", () => {
-      //       let index = parseInt(dot.dataset.index);
-      //       showItem(index);
-      //    });
-      // });
    }, [])
 
    return (
-      <main class="carousel-container">
-         <div class="carousel">
-            <div class="item active">
-               <img src={testImages[0]} />
+      <main className="carousel-container">
+         <div className="carousel">
+            <div className="item active">
+               <img src={testImages.shift()} />
             </div>
-            {testImages.slice(1).map((img) => (
-               <div class="item">
-                  <img src={img} />
-               </div>
-            ))}
+            {
+               testImages.map((img) => (
+                  <div className="item">
+                     <img src={img} />
+                  </div>
+               ))
+            }
          </div>
-         <button class="btn prev">Prev</button>
-         <button class="btn next">Next</button>
+         <button className="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+         <button className="btn next"><i class="fa-solid fa-chevron-right"></i></button>
+         <div class="dots"></div>
       </main>
    )
 }

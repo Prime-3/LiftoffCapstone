@@ -33,7 +33,7 @@ const MenuButton = () => {
             }
          })
          .then((data) => {
-            console.log(data);
+            // console.log(data);
             setUser(data)
             return data.userId;
          })
@@ -47,7 +47,7 @@ const MenuButton = () => {
                   }
                })
                .then((data) => {
-                  console.log("HIT", data)
+                  // console.log("HIT", data)
                   if (data != null) {
                      setUserName(`${data.firstName}`)
                   }

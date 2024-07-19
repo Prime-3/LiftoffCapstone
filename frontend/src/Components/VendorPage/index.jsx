@@ -27,7 +27,7 @@ const VendorDetailsPage = () => {
                 return resp.json();
             })
             .then((data) => {
-                console.log("selected vendor: ", data);
+                // console.log("selected vendor: ", data);
                 setSelectedVendor(data);
             }).then(() => {
                 fetch(`/api/reviews/shop/${vendorId}`)
@@ -35,7 +35,7 @@ const VendorDetailsPage = () => {
                         return resp.json();
                     })
                     .then((data) => {
-                        console.log("review fetch", data);
+                        // console.log("review fetch", data);
                         setReviews(data)
                     })
             })
@@ -50,7 +50,7 @@ const VendorDetailsPage = () => {
             })
             .then((data) => {
                 if (data != null) {
-                    console.log(data);
+                    // console.log(data);
                     setUser(data)
                 }
             })
@@ -58,7 +58,7 @@ const VendorDetailsPage = () => {
 
 
     return (
-        <div id="vendor-page">
+        <div id="vendor-page" >
             <div id="top-half">
                 <div className="top-left">
                     <Link to={-1} className="back">Back</Link>
