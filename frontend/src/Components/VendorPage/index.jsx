@@ -22,6 +22,7 @@ const VendorDetailsPage = () => {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetch(`/api/shops/${vendorId}`)
             .then((resp) => {
                 return resp.json();
@@ -93,8 +94,8 @@ const VendorDetailsPage = () => {
                 {isReviewing ?
                     (
                         <>
-                            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
                             <span onClick={handleOpenReviewForm}>Close</span>
+                            <div class="create-review"><CreateReview shop={selectedVendor} /></div>
                         </>
                     )
                     :
@@ -102,6 +103,7 @@ const VendorDetailsPage = () => {
                         <span onClick={handleOpenReviewForm}>Add a Review</span>
                     )}
             </div>
+            {reviews.length == 0 ? <h3 id="alt-msg">This shop has no reviews, yet...</h3> : ""}
             {reviews.map((r) => <div className="reviews"><ReviewCard review={r} user={user} /></div>)}
         </div>
     );

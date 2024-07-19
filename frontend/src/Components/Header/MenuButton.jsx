@@ -74,7 +74,7 @@ const MenuButton = () => {
                      <h3>Account</h3>
                   </li>
                   <li className="menu-item">
-                     <h3><Link to={"/favorites"}>Favorites</Link></h3>
+                     <h3><Link to={"/favorites"} onClick={closeMenu}>Favorites</Link></h3>
                   </li>
                   {/* <li className="menu-item">
                      <h3>Shops</h3>
