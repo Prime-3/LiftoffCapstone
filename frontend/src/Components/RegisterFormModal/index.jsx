@@ -93,8 +93,6 @@ function RegisterFormModal({ onClose }) {
       if (name === "description") setDescription(value);
    };
 
-   
-   
    const handleSubmit = (e) => {
       e.preventDefault()
 
@@ -113,9 +111,6 @@ function RegisterFormModal({ onClose }) {
             })
          }).then((resp) => {
             console.log("account register", resp)
-            // if(!resp.ok) {
-               
-            // }
          }).then(() => {
             if (isVendor) {
                fetch("/pingauth")
