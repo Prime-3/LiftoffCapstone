@@ -40,21 +40,58 @@ function RegisterFormModal({ onClose }) {
          setConfirmed(false)
          setError('Password Must be Matching.');
       }
-      console.log(input.value, document.getElementById('password').value, confirmed)
+      console.log(input.value, document.getElementById('password').value, confirmed)  
    }
+   function PasswordRequirements(pw) {
+      setError('');
+      console.log(`AAA ${pw}`)
+      const reLower = new RegExp('[a-z]');
+      const reUpper = new RegExp('[A-Z]');
+      const reNumber = new RegExp('[0-9]');
+      const reSpecial = new RegExp('[#@*&!?%$]')
+      if(!reLower.test(pw)){
+         setError('Error!')
+      }
+      
+      if (!reUpper.test(pw)) {
+         
+         setError('Password needs a capital letter.')
+      }
+      
+      if (!reLower.test(pw)) {
+         setError('Password needs a lowercase letter.')
+      }
 
+      if (!reNumber.test(pw)) {
+         setError('Password needs a number')
+      }
+      
+      if (!reSpecial.test(pw)) {
+         setError('Password needs a special character.')
+      }
+
+      if (pw.length < 7) {
+        
+         setError('Password needs to be at least 8 characters.')
+      }
+   }
    const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === "firstName") setFirstName(value);
       if (name === "lastName") setLastName(value);
       if (name === "email") setEmail(value);
-      if (name === "password") setPassword(value);
+      if (name === "password") {
+         PasswordRequirements(value);
+         setPassword(value);
+      }    
       if (name === "shopName") setShopName(value);
       if (name === "phoneNum") setPhoneNum(value);
       if (name === "category") setCategory(value);
       if (name === "description") setDescription(value);
    };
 
+   
+   
    const handleSubmit = (e) => {
       e.preventDefault()
 
@@ -73,6 +110,9 @@ function RegisterFormModal({ onClose }) {
             })
          }).then((resp) => {
             console.log("account register", resp)
+            // if(!resp.ok) {
+               
+            // }
          }).then(() => {
             if (isVendor) {
                fetch("/pingauth")
