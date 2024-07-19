@@ -6,14 +6,13 @@ const ImageGallery = () => {
    const [initialized, setInitialized] = useState(false)
 
    useEffect((e) => {
-      if (!initialized) {
-         setInitialized(true)
-         console.log("useEffect HIT")
-         // document.addEventListener("load", function () {
-         let carousel = document.querySelector(".carousel");
-         let items = carousel.querySelectorAll(".item");
-         let dotsContainer = document.querySelector(".dots");
+      console.log("useEffect HIT")
+      // document.addEventListener("load", function () {
+      let carousel = document.querySelector(".carousel");
+      let items = carousel.querySelectorAll(".item");
+      let dotsContainer = document.querySelector(".dots");
 
+      if (!initialized) {
          // Insert dots into the DOM
          items.forEach((index) => {
             let dot = document.createElement("span");
@@ -22,44 +21,44 @@ const ImageGallery = () => {
             dot.dataset.index = index;
             dotsContainer.appendChild(dot);
          });
+         setInitialized(true)
+      }
+      let dots = document.querySelectorAll(".dot");
 
-         let dots = document.querySelectorAll(".dot");
-
-         // Function to show a specific item
-         function showItem(index) {
-            items.forEach((item, idx) => {
-               item.classList.remove("active");
-               dots[idx].classList.remove("active");
-               if (idx === index) {
-                  item.classList.add("active");
-                  dots[idx].classList.add("active");
-               }
-            });
-         }
-
-         // Event listeners for buttons
-         document.querySelector(".prev").addEventListener("click", () => {
-            let index = [...items].findIndex((item) =>
-               item.classList.contains("active")
-            );
-            showItem((index - 1 + items.length) % items.length);
-         });
-
-         document.querySelector(".next").addEventListener("click", () => {
-            let index = [...items].findIndex((item) =>
-               item.classList.contains("active")
-            );
-            showItem((index + 1) % items.length);
-         });
-
-         // Event listeners for dots
-         dots.forEach((dot) => {
-            dot.addEventListener("click", () => {
-               let index = parseInt(dot.dataset.index);
-               showItem(index);
-            });
+      // Function to show a specific item
+      function showItem(index) {
+         items.forEach((item, idx) => {
+            item.classList.remove("active");
+            dots[idx].classList.remove("active");
+            if (idx === index) {
+               item.classList.add("active");
+               dots[idx].classList.add("active");
+            }
          });
       }
+
+      // Event listeners for buttons
+      document.querySelector(".prev").addEventListener("click", () => {
+         let index = [...items].findIndex((item) =>
+            item.classList.contains("active")
+         );
+         showItem((index - 1 + items.length) % items.length);
+      });
+
+      document.querySelector(".next").addEventListener("click", () => {
+         let index = [...items].findIndex((item) =>
+            item.classList.contains("active")
+         );
+         showItem((index + 1) % items.length);
+      });
+
+      // Event listeners for dots
+      dots.forEach((dot) => {
+         dot.addEventListener("click", () => {
+            let index = parseInt(dot.dataset.index);
+            showItem(index);
+         });
+      });
    }, [])
 
    return (
