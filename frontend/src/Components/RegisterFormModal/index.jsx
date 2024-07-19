@@ -42,39 +42,42 @@ function RegisterFormModal({ onClose }) {
       }
       console.log(input.value, document.getElementById('password').value, confirmed)  
    }
+   
+   //Password Registration Feedback
    function PasswordRequirements(pw) {
       setError('');
-      console.log(`AAA ${pw}`)
       const reLower = new RegExp('[a-z]');
       const reUpper = new RegExp('[A-Z]');
       const reNumber = new RegExp('[0-9]');
       const reSpecial = new RegExp('[#@*&!?%$]')
-      if(!reLower.test(pw)){
-         setError('Error!')
-      }
       
+      //Capital Letter
       if (!reUpper.test(pw)) {
-         
          setError('Password needs a capital letter.')
       }
       
+      //Lowercase Letter
       if (!reLower.test(pw)) {
          setError('Password needs a lowercase letter.')
       }
 
+      //Number
       if (!reNumber.test(pw)) {
          setError('Password needs a number')
       }
       
+      //Special Character
       if (!reSpecial.test(pw)) {
          setError('Password needs a special character.')
       }
 
+      //Length
       if (pw.length < 7) {
-        
          setError('Password needs to be at least 8 characters.')
       }
    }
+
+
    const handleChange = (e) => {
       const { name, value } = e.target;
       if (name === "firstName") setFirstName(value);
