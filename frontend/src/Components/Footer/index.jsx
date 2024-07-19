@@ -16,7 +16,7 @@ const Footer = () => {
             }
          })
          .then((data) => {
-            console.log(data);
+            // console.log(data);
             setUser(data)
             return data;
          })

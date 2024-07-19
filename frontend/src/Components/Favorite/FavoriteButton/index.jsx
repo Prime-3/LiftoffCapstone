@@ -8,9 +8,9 @@ function FavoriteButton({ shopId }) {
   const [favorites, setFavorites] = useState("");
 
   const checkFavorites = async () => {
-    console.log("ooooooooooo", favorites.length)
+    // console.log("ooooooooooo", favorites.length)
     for (const shop of favorites) {
-      console.log("WEEEEEEEEE", shop.id, shodId)
+      // console.log("WEEEEEEEEE", shop.id, shodId)
       if (shop.id === shopId) {
         setIsFavorite(true)
       }
@@ -49,7 +49,7 @@ function FavoriteButton({ shopId }) {
             return resp.json()
           })
           .then((data) => {
-            console.log("CHECK: ", data)
+            // console.log("CHECK: ", data)
             if (data.length > 0) {
               setIsFavorite(true)
             } else {
@@ -61,9 +61,9 @@ function FavoriteButton({ shopId }) {
 
   //handles button click to add or delete
   const handleFavoriteButton = () => {
-    console.log("HIT handlesubmit")
-    
-    
+    // console.log("HIT handlesubmit")
+
+
     if (isFavorite) {
       //remove from favorites
       fetch(`/api/favorites/remove`, {
@@ -79,12 +79,12 @@ function FavoriteButton({ shopId }) {
       })
         .then((resp) => {
           setIsFavorite(false)
-          console.log(resp);
+          // console.log(resp);
         })
     } else {
       //confetti
-    const confetti = new JSConfetti()
-    confetti.addConfetti()
+      const confetti = new JSConfetti()
+      confetti.addConfetti()
       //add to favorites
       fetch(`/api/favorites/add`, {
         method: 'POST',
@@ -98,7 +98,7 @@ function FavoriteButton({ shopId }) {
       })
         .then((resp) => {
           setIsFavorite(true)
-          console.log(resp);
+          // console.log(resp);
         })
     }
   }
