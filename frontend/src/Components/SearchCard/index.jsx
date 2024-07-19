@@ -10,7 +10,7 @@ function SearchCard({ shop }) {
    return (
       <div className="search-card">
          <Link to={`/vendorpage/${shop.id}`} id="shop-link">
-            <img id="vendor-photo" src={vendorPhoto} />
+            <div className="searchPhotos"><img id="vendor-photo" src={vendorPhoto} /></div>
             <div id="vendor-info">
                <div>
                   <h3 id="vendor-title">{vendorName}</h3>
