@@ -5,13 +5,13 @@ import "./ImageGallery.scss"
 const ImageGallery = () => {
    const testImages = [
       "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2021/08/farmers-market-produce-0812211.jpg",
-      "https://www.a2gov.org/departments/Parks-Recreation/parks-places/farmers-market/PublishingImages/Pages/default/market%20sign%20flowers.jpg?RenditionId=18",
-      "https://media.ksdk.com/assets/KSDK/images/2bc65bd9-9f20-421d-93ec-cced21c205b7/2bc65bd9-9f20-421d-93ec-cced21c205b7_1920x1080.jpg",
-      "https://www.sftravel.com/sites/default/files/styles/hero/public/2022-11/farmers-market-tomatoes.jpg.webp?itok=camAgJHT",
+      "https://i.pinimg.com/originals/25/1f/3f/251f3f20008259d2f27a97b31246b02a.jpg",
+      "https://barbheise.com/wp-content/uploads/2021/06/Tower-grove-market-21-1536x687.jpg",
+      "https://images.squarespace-cdn.com/content/v1/5df2b9a23b45611b9a4847d6/ea07a8da-9564-4e74-a3bb-b98836e5a355/Display2.jpg",
       "https://thepaleodiet.com/wp-content/uploads/2023/05/woman-selling-produce-at-farmers-market.jpg",
-      "https://friscofreshmarket.com/wp-content/uploads/2022/09/fall-farmers-market-scaled.jpeg",
+      "https://everettfarmersmarket.com/wp-content/uploads/2020/08/20200809_123637.jpg",
       "https://www.aldenestatesofjefferson.com/wp-content/uploads/sites/63/2019/08/GettyImages-671270196-1-600x511.jpg",
-      "https://www.socosy.co.uk/wp-content/uploads/2020/07/farmers-market.webp",
+      "https://i.pinimg.com/originals/59/89/a8/5989a885ca454e5ac0d3e943499c297f.jpg",
       "https://img1.wsimg.com/isteam/stock/26336/:/rs=w:1280",
       "https://www.castlepinesconnection.com/wp-content/uploads/2022/04/farmers_marketsjpg-1-768x387.jpg"
    ]
@@ -75,13 +75,14 @@ const ImageGallery = () => {
          <div className="carousel">
             <div className="item active">
                <img src={testImages.shift()} />
-               <p className="caption">Optional Caption 0</p>
+               <p className="caption">Tower Grove Farmers Market</p>
             </div>
             {
                testImages.map((img, idx) => (
                   <div className="item">
                      <img src={img} />
-                     <p className="caption">Optional Caption {idx + 1}</p>
+                     {/* <p className="caption">Optional Caption {idx + 1}</p> */}
+                     <p className="caption">Tower Grove Farmers Market</p>
                   </div>
                ))
             }
