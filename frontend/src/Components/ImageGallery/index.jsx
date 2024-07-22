@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import "./ImageGallery.scss"
+import UploadImage from "./UploadImage";
 
 
-const ImageGallery = () => {
+const ImageGallery = ({ shop, user }) => {
    const testImages = [
       "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2021/08/farmers-market-produce-0812211.jpg",
       "https://i.pinimg.com/originals/25/1f/3f/251f3f20008259d2f27a97b31246b02a.jpg",
@@ -17,6 +18,8 @@ const ImageGallery = () => {
    ]
 
    const init = useRef(false)
+   const [isUploading, setIsUploading] = useState(false)
+
 
    useEffect(() => {
       if (!init.current) {
@@ -71,26 +74,29 @@ const ImageGallery = () => {
    }, [])
 
    return (
-      <main className="carousel-container">
-         <div className="carousel">
-            <div className="item active">
-               <img src={testImages.shift()} />
-               <p className="caption">Tower Grove Farmers Market</p>
+      <>
+         <main className="carousel-container">
+            <UploadImage shop={shop} />
+            <div className="carousel">
+               <div className="item active">
+                  <img src={testImages.shift()} />
+                  <p className="caption">Tower Grove Farmers Market</p>
+               </div>
+               {
+                  testImages.map((img, idx) => (
+                     <div className="item">
+                        <img src={img} />
+                        {/* <p className="caption">Optional Caption {idx + 1}</p> */}
+                        <p className="caption">Tower Grove Farmers Market</p>
+                     </div>
+                  ))
+               }
             </div>
-            {
-               testImages.map((img, idx) => (
-                  <div className="item">
-                     <img src={img} />
-                     {/* <p className="caption">Optional Caption {idx + 1}</p> */}
-                     <p className="caption">Tower Grove Farmers Market</p>
-                  </div>
-               ))
-            }
-         </div>
-         <button className="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
-         <button className="btn next"><i class="fa-solid fa-chevron-right"></i></button>
-         <div class="dots"></div>
-      </main>
+            <button className="btn prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button className="btn next"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="dots"></div>
+         </main>
+      </>
    )
 }
 
