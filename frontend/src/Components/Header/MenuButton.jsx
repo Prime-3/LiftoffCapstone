@@ -26,15 +26,16 @@ const MenuButton = () => {
       fetch("/pingauth")
          .then((resp) => {
             if (resp.ok) {
-
                return resp.json();
             } else {
-               return null
+               return "";
             }
          })
          .then((data) => {
             // console.log(data);
-            setUser(data)
+            if (data == "")
+               return "";
+            setUser(data);
             return data.userId;
          })
          .then((userId) => {
