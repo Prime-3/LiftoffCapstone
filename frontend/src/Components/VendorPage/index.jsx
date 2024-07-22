@@ -84,7 +84,7 @@ const VendorDetailsPage = () => {
                             className={(selectedVendor.avgStars >= 5) ? "fa-solid fa-star" : "fa-regular fa-star"}
                         ></i>
                     </div>
-                    <p className="website">Link to Vendor's Website: <a href={selectedVendor.website} id="a-link">{selectedVendor.shopName}</a></p>
+                    <p className="website">Link to Vendor's Website: <a href={selectedVendor.website} id="a-link" target="_blank">{selectedVendor.shopName}</a></p>
                     <h4 className="description">{selectedVendor.description}<EditComponent onClick={EditComponent} /></h4>
                 </div>
             </div>

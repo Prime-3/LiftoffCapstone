@@ -30,9 +30,9 @@ const Footer = () => {
                <h2>STL Markets&#8482;</h2>
             </div>
             <div id="footer-socials">
-               <a href="https://www.facebook.com/tgfarmersmarket/"><i class="fa-brands fa-facebook" /></a>
-               <a href="https://x.com/tgfarmersmarket"><i class="fa-brands fa-instagram" /></a>
-               <a href="https://www.instagram.com/tgfarmersmarket/"><i class="fa-brands fa-x-twitter" /></a>
+               <a href="https://www.facebook.com/tgfarmersmarket/" target="_blank"><i class="fa-brands fa-facebook" /></a>
+               <a href="https://x.com/tgfarmersmarket" target="_blank"><i class="fa-brands fa-instagram" /></a>
+               <a href="https://www.instagram.com/tgfarmersmarket/" target="_blank"><i class="fa-brands fa-x-twitter" /></a>
             </div>
          </div>
          <ul id="site-map">
