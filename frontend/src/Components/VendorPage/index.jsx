@@ -89,7 +89,7 @@ const VendorDetailsPage = () => {
                 </div>
             </div>
 
-            <div className="Photos"><ImageGallery /></div>
+            <div className="Photos"><ImageGallery shop={selectedVendor} user={user} /></div>
             <div id="review-form-popup">
                 {isReviewing ?
                     (
