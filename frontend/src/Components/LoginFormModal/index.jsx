@@ -89,6 +89,7 @@ function LoginFormModal({ onClose }) {
                      onChange={handleChange} />
                   <span>Remember Me</span>
                </div>
+               {error && <span className="error">{error}</span>}
                <button type="submit" className="submit-button">Submit</button>
             </form>
          </div>
