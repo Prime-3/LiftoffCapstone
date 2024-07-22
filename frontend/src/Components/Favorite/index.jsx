@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import './favoriteStyles.css'
 
 const Favorited = () => {
+  window.scrollTo(0, 0);
   const [favorites, setFavorites] = useState([]);
 
   // get userId

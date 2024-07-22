@@ -4,6 +4,7 @@ import "./BrowsePage.css"
 import { getShops } from "../../utils/shops.js";
 
 export async function loader({ params }) {
+   window.scrollTo(0, 0);
    const shops = await getShops(params.searchTerm);
    return { shops };
 }

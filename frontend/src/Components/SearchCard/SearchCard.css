@@ -22,6 +22,7 @@
 }
 
 #vendor-photo {
+   max-height: 240px;
    width: 240px;
    padding: 5px;
    border-radius: 15px;
@@ -52,7 +53,7 @@
 }
 
 
-.searchPhotos{
+.searchPhotos {
    height: 254px;
    align-items: center;
    display: flex;

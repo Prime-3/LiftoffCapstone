@@ -7,47 +7,57 @@
 
 #review-form-popup>span {
    display: flex;
-   margin-left: 165px;
-   padding-left: 10px;
+   justify-content: left;
+   margin-left: 60px;
+   margin-bottom: 15px;
    cursor: pointer;
    width: fit-content;
+   padding-left: 10px;
    padding-right: 10px;
    padding-top: 5px;
    padding-bottom: 5px;
-   border-bottom: 2px solid black; 
-   border-right: 1px solid black; 
+   border-bottom: 2px solid black;
+   border-right: 1px solid black;
    border-radius: 10px;
    background: rgba(71, 103, 48, 1);
    color: white;
    font-size: 14px;
+
 }
 
-.logo{
-    width: 350px;
-    height: 350px;
-    display: flex;
-    padding-left: 100px;
+#alt-msg {
+   margin-top: 15px;
+   margin-bottom: 100px;
 }
 
-.shopName{
+.logo {
+   width: 350px;
+   height: 350px;
+   display: flex;
+   object-fit: contain;
+   margin-left: 100px;
+   border-radius: 15px;
+}
+
+.shopName {
    font-size: 30px;
    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-} 
+}
 
-#top-half{
+#top-half {
    display: flex;
    margin-top: 10px;
    margin-bottom: 15px;
 }
 
 
-.back{
+.back {
    margin-left: 30px;
    margin-top: 15px;
    margin-bottom: 15px;
    width: fit-content;
-   border-bottom: 2px solid black; 
-   border-right: 1px solid black; 
+   border-bottom: 2px solid black;
+   border-right: 1px solid black;
    border-radius: 10px;
    background: rgba(71, 103, 48, 1);
    padding: 8px;
@@ -55,24 +65,26 @@
    font-size: 14px;
 }
 
-.top-right{
+.top-right {
    display: flex;
    flex-direction: column;
 }
-#a-link{
+
+#a-link {
    text-decoration: underline;
    color: rgb(85, 153, 37);
 
 }
+
 .top-left {
    display: flex;
    flex-direction: column;
 }
 
-.reviews{
+.reviews {
    padding-left: 5px;
    padding-right: 5px;
-   border: 3px solid black;
+   border: 2px solid black;
    border-radius: 20px;
    margin-left: 88px;
    margin-right: 88px;
@@ -81,6 +93,6 @@
    background-color: rgba(209, 187, 162, .25);
 }
 
-#review-form-popup{
+#review-form-popup {
    padding-left: 70px;
 }

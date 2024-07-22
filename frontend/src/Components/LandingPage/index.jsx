@@ -2,6 +2,8 @@ import "./LandingPage.css"
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+   window.scrollTo(0, 0);
+
    return (
       <div id="landing-page">
          <h1 id="slogan">Welcome to the Tower Grove Farmers Market!<br /> We're <em>farmers, purveyors,</em> and <em>eaters</em> of locally grown food.</h1>

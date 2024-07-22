@@ -17,39 +17,39 @@ function EditButtonComponent(args) {
 
   //Open/Close Modal
   const toggle = () => setModal(!modal);
-  
+
   // get userId
   useEffect(() => {
     fetch("/pingauth")
-    .then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      }
-      else {
-        return null;
-      }
-    })
-    .then((data) => {
-          console.log(data);
-          setUserId(data.userId);
-    })
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        else {
+          return null;
+        }
+      })
+      .then((data) => {
+        // console.log(data);
+        setUserId(data.userId);
+      })
   }, []);
 
-//Fetch updated data
-const handleChange = (e) => {
-  const { name, value} = e.target;
-  if(name === "shopName") setShopName(value);
-  if(name === "logo") setLogo(value);
-  if(name === "website") setWebsite(value);
-  if(name === "description") setDescription(value);
-}
+  //Fetch updated data
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "shopName") setShopName(value);
+    if (name === "logo") setLogo(value);
+    if (name === "website") setWebsite(value);
+    if (name === "description") setDescription(value);
+  }
 
-//Form submission for updating profile
+  //Form submission for updating profile
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("HIT handlesubmit")
- 
-    //PATCH request 
+    // console.log("HIT handlesubmit")
+
+    //PATCH request
     fetch(`/api/shops/${vendorId}`, {
       method: 'PATCH',
       headers: {
@@ -63,12 +63,12 @@ const handleChange = (e) => {
         applicationUserId: userId,
       })
     })
-    .then((resp) => {
-      console.log(resp);
-      if (resp.ok){
-        setIsShopPageUpdated(true);
-      }
-    })
+      .then((resp) => {
+        // console.log(resp);
+        if (resp.ok) {
+          setIsShopPageUpdated(true);
+        }
+      })
   }
 
 
@@ -79,22 +79,22 @@ const handleChange = (e) => {
       <Modal isOpen={modal} toggle={toggle} {...args} unmountOnClose={false} className='modal'>
         <ModalHeader className='header'>Edit Content</ModalHeader>
         <ModalBody className='body'>
-            {/* Form for Vendor to update profile */}
-            <form onSubmit={handleFormSubmit} className='form'>
-                <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange} className='shop'></input> <br />
-                <input type="url" name="logo" placeholder="Logo URL"onChange={handleChange} className='lo'></input> <br />
-                <input type="url" name="website" placeholder="Website URL"onChange={handleChange} className='web'></input> <br />
-                <textarea type = "text" name = "description" placeholder = "Enter your description here..." rows = {7} cols={32} onChange={handleChange} className='area'></textarea> <br />
-                <div className='buttons'><Button onClick={handleFormSubmit} className='save'>{' '}Save{' '}</Button> {'   '}
-                <Button onClick={toggle} className='close' >{' '}Close{' '}</Button>
+          {/* Form for Vendor to update profile */}
+          <form onSubmit={handleFormSubmit} className='form'>
+            <input type="text" name="shopName" placeholder="Shop Name" onChange={handleChange} className='shop'></input> <br />
+            <input type="url" name="logo" placeholder="Logo URL" onChange={handleChange} className='lo'></input> <br />
+            <input type="url" name="website" placeholder="Website URL" onChange={handleChange} className='web'></input> <br />
+            <textarea type="text" name="description" placeholder="Enter your description here..." rows={7} cols={32} onChange={handleChange} className='area'></textarea> <br />
+            <div className='buttons'><Button onClick={handleFormSubmit} className='save'>{' '}Save{' '}</Button> {'   '}
+              <Button onClick={toggle} className='close' >{' '}Close{' '}</Button>
             </div>
-            </form>
+          </form>
         </ModalBody>
         <ModalFooter className='footer'>
-          {isShopPageUpdated ? <p className='success'>Shop page successfully updated!<br /> Refresh the page to see your changes.</p> : <p className='no-changes'>No changes made to this shop.</p> }
+          {isShopPageUpdated ? <p className='success'>Shop page successfully updated!<br /> Refresh the page to see your changes.</p> : <p className='no-changes'>No changes made to this shop.</p>}
         </ModalFooter>
       </Modal>
-    </div> 
+    </div>
   );
 
 }
