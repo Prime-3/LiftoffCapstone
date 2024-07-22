@@ -23,12 +23,14 @@ public class AcountsController : ControllerBase
         _context = context;
     }
 
- 
-    [HttpGet("{id}")]
-
+    [HttpGet("{id}"), Authorize]
     public async Task<ActionResult<ApplicationUser>> GetUserById(string id)
     {
+        if (id == null || id == "")
+            return BadRequest(new {message = "User ID is needed."});
         ApplicationUser? user = await _context.Users.FindAsync(id);
+        if (user == null)
+            return NotFound($"Could not find user({id})");
         bool isAdmin = await _userManager.IsInRoleAsync(user, Admin.ROLE);
         return Ok(new UserDTO(user, isAdmin));
     }
