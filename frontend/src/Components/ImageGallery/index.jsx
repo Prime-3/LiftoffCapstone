@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import "./ImageGallery.scss"
-import UploadImage from "./UploadImage";
 
 
 const ImageGallery = ({ shop, user }) => {
@@ -76,7 +75,7 @@ const ImageGallery = ({ shop, user }) => {
    return (
       <>
          <main className="carousel-container">
-            <UploadImage shop={shop} />
+
             <div className="carousel">
                <div className="item active">
                   <img src={testImages.shift()} />

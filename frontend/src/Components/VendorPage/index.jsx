@@ -7,6 +7,8 @@ import EditComponent from "../EditButton/EditComponent";
 import CreateReview from "../CreateReview"
 import ReviewCard from "../ReviewCard"
 import ImageGallery from "../ImageGallery";
+import UploadImage from "../ImageGallery/UploadImage";
+
 
 
 
@@ -88,7 +90,7 @@ const VendorDetailsPage = () => {
                     <h4 className="description">{selectedVendor.description}<EditComponent onClick={EditComponent} /></h4>
                 </div>
             </div>
-
+            <UploadImage shop={selectedVendor} />
             <div className="Photos"><ImageGallery shop={selectedVendor} user={user} /></div>
             <div id="review-form-popup">
                 {isReviewing ?
