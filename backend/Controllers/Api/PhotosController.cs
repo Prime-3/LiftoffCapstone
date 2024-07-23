@@ -10,7 +10,7 @@ namespace backend.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PhotosController: ControllerBase
+public class PhotosController : Controller
 {
     private readonly GooglePhotosService _photosSvc;
     private readonly ApplicationDbContext _context;
@@ -25,6 +25,13 @@ public class PhotosController: ControllerBase
         _context = context;
         _authz = authz;
     }
+
+    [HttpGet("upload")]
+    public IActionResult UploadView()
+    {
+        return View("index");
+    }
+
 
     // GET /api/photos/albums/{id}
     [HttpGet("albums/{id}")]
@@ -45,16 +52,16 @@ public class PhotosController: ControllerBase
     {
         Shop? shop = await _context.Shops.FindAsync(shopId);
         if (shop == null)
-            return NotFound(new {message = $"Not found: shop({shopId})."});
+            return NotFound(new { message = $"Not found: shop({shopId})." });
         if (shop.AlbumUniqueTitle == null)
-            return NotFound(new {message = $"Not found: album for shop({shopId})."});
+            return NotFound(new { message = $"Not found: album for shop({shopId})." });
 
         if (!await _photosSvc.LoginAsync())
             return Problem(detail: "Could not access Photos.", statusCode: 503);
         var album = await _photosSvc.GetAlbumByTitleAsync(shop.AlbumUniqueTitle);
         // TODO: go ahead create an album if shop doesn't have one?
         if (album == null)
-            return NotFound(new {message = $"Not found: album for shop({shopId})."});
+            return NotFound(new { message = $"Not found: album for shop({shopId})." });
 
         album.title = $"{shop.ShopName}'s album";
         return Ok(new AlbumDTO(album));
@@ -66,7 +73,7 @@ public class PhotosController: ControllerBase
     {
         Shop? shop = await _context.Shops.FindAsync(shopId);
         if (shop == null)
-            return NotFound(new {message = $"Not found: shop({shopId})."});
+            return NotFound(new { message = $"Not found: shop({shopId})." });
 
         AuthorizationResult authzResult =
             await _authz.AuthorizeAsync(User, shop, new OwnerOnlyRequirement());
@@ -95,15 +102,15 @@ public class PhotosController: ControllerBase
     {
         Shop? shop = await _context.Shops.FindAsync(shopId);
         if (shop == null)
-            return NotFound(new {message = $"Not found: shop({shopId})."});
+            return NotFound(new { message = $"Not found: shop({shopId})." });
         if (shop.AlbumId == null)
-            return NotFound(new {message = $"Not found: album for shop({shopId})."});
+            return NotFound(new { message = $"Not found: album for shop({shopId})." });
 
         if (!await _photosSvc.LoginAsync())
             return Problem(detail: "Could not access Photos.", statusCode: 503);
         var media = _photosSvc.GetMediaItemsByAlbumAsync(shop.AlbumId);
         if (media == null)
-            return NotFound(new {message = $"Not found: no media for shop ({shopId})."});
+            return NotFound(new { message = $"Not found: no media for shop ({shopId})." });
 
         try
         {
@@ -130,7 +137,7 @@ public class PhotosController: ControllerBase
 
         Shop? shop = await _context.Shops.FindAsync(model.ShopId);
         if (shop == null)
-            return NotFound(new {message = $"Not found: shop({model.ShopId})."});
+            return NotFound(new { message = $"Not found: shop({model.ShopId})." });
 
         AuthorizationResult authzResult =
             await _authz.AuthorizeAsync(User, shop, new OwnerOnlyRequirement());
