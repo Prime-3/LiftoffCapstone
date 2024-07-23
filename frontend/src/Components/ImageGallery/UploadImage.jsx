@@ -15,11 +15,11 @@ const UploadImage = ({ shop }) => {
             createPortal(
                <div className="modal">
                   <div className="modal-content">
-                     <button onClick={handleUploadSel}>Close</button>
                      <iframe id="upload-view"
                         title="upload-view"
                         src="/api/photos/upload">
                      </iframe>
+                     <button onClick={handleUploadSel}>Close</button>
                   </div>
                </div>
                ,
