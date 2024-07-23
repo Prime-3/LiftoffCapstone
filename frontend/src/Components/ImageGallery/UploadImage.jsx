@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import "./UploadImage.css"
 
 
 const UploadImage = ({ shop }) => {
@@ -28,7 +29,7 @@ const UploadImage = ({ shop }) => {
          )
             :
             (
-               <button onClick={handleUploadSel}>Upload Photos</button>
+               <button onClick={handleUploadSel} id="open-upload">Upload Photos</button>
             )}
       </>
    )
